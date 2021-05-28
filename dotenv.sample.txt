@@ -1,0 +1,6 @@
+# Modify and save this file as ".env"
+PORT=3301
+REACT_APP_NAME=B1App
+REACT_APP_ACCESSMANAGEMENT_API_URL=http://localhost:8080
+REACT_APP_B1_API_URL=http://localhost:8081
+REACT_APP_WEB_URL=https://staging.b1.church
