@@ -1,22 +1,36 @@
 import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 import UserContext from "./UserContext"
 import { Authenticated } from "./Authenticated"
-import { Unauthenticated } from "./Unauthenticated"
 import { ApiHelper } from "./components";
-import { Switch, Route, useLocation } from "react-router-dom";
 import { Logout } from "./Logout";
+import { Login } from './Login';
+
+interface Props {
+    path?: string;
+}
 
 export const ControlPanel = () => {
-    const location = useLocation();
     var user = React.useContext(UserContext).userName; //to force rerender on login
     if (user === null) return null;
 
-
-    const getHandler = () => { return (!ApiHelper.isAuthenticated) ? <Unauthenticated /> : <Authenticated location={location.pathname}></Authenticated>; }
     return (
         <Switch>
             <Route path="/logout"><Logout /></Route>
-            <Route path="/">{getHandler()}</Route>
+            <Route path="/login" component={Login} />
+            <PrivateRoute path="/" />
         </Switch>
     );
 }
+
+const PrivateRoute: React.FC<Props> = ({ path }) => {
+    return (
+        <Route
+            path={path}
+            render={({ location }) => {
+                return ApiHelper.isAuthenticated ? (<Authenticated location={location.pathname} />) :
+                    (<Redirect to={{ pathname: "/login", state: { from: location } }} />);
+            }}
+        />
+    );
+};

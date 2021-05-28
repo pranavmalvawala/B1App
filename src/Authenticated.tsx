@@ -16,7 +16,7 @@ export const Authenticated: React.FC<Props> = (props) => {
             <div className="container">
                 <Switch>
                     <Route path="/login"><Redirect to={props.location} /></Route>
-                    <Route path="/admin/settings"><SettingsPage /></Route>
+                    <Route path="/settings"><SettingsPage /></Route>
                 </Switch>
 
             </div>
@@ -24,5 +24,4 @@ export const Authenticated: React.FC<Props> = (props) => {
         </>
     );
 }
-
 
