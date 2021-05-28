@@ -11,7 +11,7 @@ export const PageList: React.FC<Props> = (props) => {
     }
 
     const getRows = () => {
-        if (props.pages.length === 0) return (<tr><td>Pages are small pieces of information that you can include as a sidebar tab for your viewers to see.  Click the plus icon to add a page.</td></tr>);
+        if (props.pages.length === 0) return (<tr><td>Pages are small pieces of information that you can include add as a tab in the B1 app.  Click the plus icon to add a page.</td></tr>);
         else {
             var rows: JSX.Element[] = [];
             props.pages.forEach(page => {

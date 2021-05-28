@@ -1,13 +1,13 @@
 import React from "react";
-import { InputBox, LinkInterface, ApiHelper } from "."
-import { PageInterface } from "../../helpers";
+import { InputBox, LinkInterface, ApiHelper, UniqueIdHelper } from "."
+import { PageInterface, UserHelper, EnvironmentHelper } from "../../helpers";
 
 interface Props { currentTab: LinkInterface, updatedFunction?: () => void }
 
 export const TabEdit: React.FC<Props> = (props) => {
     const [currentTab, setCurrentTab] = React.useState<LinkInterface>(null);
     const [pages, setPages] = React.useState<PageInterface[]>(null);
-    const checkDelete = () => { if (currentTab?.id > 0) return handleDelete; else return null; }
+    const checkDelete = () => { if (!UniqueIdHelper.isMissing(currentTab?.id)) return handleDelete; else return null; }
     const handleCancel = () => { props.updatedFunction(); }
     const loadPages = () => { ApiHelper.get("/pages/", "B1Api").then((data: PageInterface[]) => setPages(data)) }
 
@@ -33,6 +33,10 @@ export const TabEdit: React.FC<Props> = (props) => {
         //if (currentTab.linkType === "page") currentTab.url = "/data/" + UserHelper.currentSettings.keyName + "/page" + currentTab.linkData + ".html";
         //else 
         if (currentTab.linkType !== "url") currentTab.url = "";
+        if (currentTab.linkType === "page") {
+            const rnd = Math.floor(Math.random() * 999999);
+            currentTab.url = EnvironmentHelper.ContentRoot + "/" + UserHelper.currentChurch.id + "/pages/" + currentTab.linkData + ".html?rnd=" + rnd.toString();
+        }
         ApiHelper.post("/links", [currentTab], "B1Api").then(props.updatedFunction);
     }
 
@@ -101,6 +105,9 @@ export const TabEdit: React.FC<Props> = (props) => {
                     <select className="form-control" name="type" value={currentTab?.linkType} onChange={handleChange}>
                         <option value="url">External Url</option>
                         <option value="page">Page</option>
+                        <option value="bible">Bible</option>
+                        <option value="stream">Live Stream</option>
+                        <option value="checkin">Checkin</option>
                         <option value="chat">Chat</option>
                         <option value="prayer">Prayer</option>
                     </select>

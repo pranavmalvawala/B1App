@@ -1,5 +1,5 @@
 import React from "react";
-import { PageInterface, ApiHelper, InputBox } from "."
+import { PageInterface, ApiHelper, InputBox, UniqueIdHelper, EnvironmentHelper } from "."
 import { FormGroup } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -18,7 +18,7 @@ export const PageEdit: React.FC<Props> = (props) => {
             ApiHelper.delete("/pages/" + page.id, "B1Api").then(() => { setPage(null); props.updatedFunction(); });
         }
     }
-    const checkDelete = () => { if (page?.id > 0) return handleDelete; else return null; }
+    const checkDelete = () => { if (!UniqueIdHelper.isMissing(page?.id)) return handleDelete; else return null; }
     const handleCancel = () => { props.updatedFunction(); }
 
 
@@ -46,12 +46,18 @@ export const PageEdit: React.FC<Props> = (props) => {
 
     const init = () => {
         setPage(props.page);
-        const content = props.page?.content;
-        if (content !== undefined && content !== null) {
-            const draft = htmlToDraft(props.page?.content)
-            setEditorState(EditorState.createWithContent(ContentState.createFromBlockArray(draft.contentBlocks)));
+        if (UniqueIdHelper.isMissing(props.page.id)) setEditorState(EditorState.createWithContent(ContentState.createFromText("")));
+        else {
+            const path = `${EnvironmentHelper.ContentRoot}/${props.page.churchId}/pages/${props.page.id}.html`;
+            console.log(path);
+            fetch(path)
+                .then(response => response.text())
+                .then(content => {
+                    console.log(content);
+                    const draft = htmlToDraft(content)
+                    setEditorState(EditorState.createWithContent(ContentState.createFromBlockArray(draft.contentBlocks)));
+                })
         }
-        else setEditorState(EditorState.createWithContent(ContentState.createFromText("")));
     }
 
     React.useEffect(init, [props.page]);

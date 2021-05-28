@@ -20,7 +20,7 @@ export class EnvironmentHelper {
     }
 
     static initDev = () => {
-        EnvironmentHelper.AccessApi = process.env.REACT_APP_ACCESSMANAGEMENT_API_URL || "";
+        EnvironmentHelper.AccessApi = process.env.REACT_APP_ACCESS_API || "";
         EnvironmentHelper.B1Api = process.env.REACT_APP_B1_API_URL || "";
         EnvironmentHelper.WebUrl = process.env.REACT_APP_WEB_URL || "";
         EnvironmentHelper.ContentRoot = process.env.REACT_APP_CONTENT_ROOT || "";

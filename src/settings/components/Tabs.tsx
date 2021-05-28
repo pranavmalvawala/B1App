@@ -6,7 +6,7 @@ export const Tabs: React.FC<Props> = (props) => {
     const [tabs, setTabs] = React.useState<LinkInterface[]>([]);
     const [currentTab, setCurrentTab] = React.useState<LinkInterface>(null);
 
-    const handleUpdated = () => { setCurrentTab(null); loadData(); props.updatedFunction(); }
+    const handleUpdated = () => { setCurrentTab(null); loadData(); if (props.updatedFunction !== undefined) props.updatedFunction(); }
     const getEditContent = () => { return <a href="about:blank" onClick={handleAdd}><i className="fas fa-plus"></i></a> }
     const loadData = () => { ApiHelper.get("/links?category=tab", "B1Api").then(data => setTabs(data)); }
     const saveChanges = () => { ApiHelper.post("/links", tabs, "B1Api").then(loadData); }
