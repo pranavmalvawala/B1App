@@ -121,3 +121,4 @@ button.datetime-local-datepicker-button {background-color:#FFF;border:0px;width:
 #sideNav .nav-item { border-bottom: 1px solid #EEE;padding-top: 5px; padding-bottom: 5px; }
 #sideNav .nav-item:first-child { border-top: 1px solid #EEE;}
 #sideNav a.nav-link {font-size:18px;}
+#userName { padding:15px; white-space: nowrap; overflow-x: hidden; padding-bottom: 0px; font-size: 18px; }

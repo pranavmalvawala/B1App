@@ -34,10 +34,19 @@ export const Sidebar: React.FC<Props> = (props) => {
                 tabs.push(getTab(t))
             });
         }
+        if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(<li key="settings" className="nav-item"><Link className={getClass("settings")} to="/admin/settings"><i className="fas fa-cog"></i> Settings</Link></li>);
+
+        tabs.push()
         return tabs;
     }
 
     return (
-        <ul className="nav flex-column" id="sideNav" >{getTabs()}</ul>
+        <>
+            <div id="userName"><i className="fas fa-user" /> &nbsp; {UserHelper.user.displayName}</div>
+            <ul className="nav flex-column" id="sideNav" >
+                {getTabs()}
+                <li key="logout" className="nav-item" ><a className="nav-link" href="about:blank"><i className="fas fa-sign-out-alt"></i> Log out</a></li>
+            </ul>
+        </>
     );
 }
