@@ -1,6 +1,7 @@
 import React from "react";
 import { ApiHelper, Tabs, PageList, PageEdit, PageInterface, UserHelper } from "./components"
 import { Row, Col } from "react-bootstrap"
+import { Header } from "../../components";
 
 export const SettingsPage = () => {
 
@@ -22,15 +23,19 @@ export const SettingsPage = () => {
 
     return (
         <>
-            <Row>
-                <Col md={8}>
-                    <PageList pages={pages} addFunction={handleAdd} editFunction={handleEdit} />
-                </Col>
-                <Col md={4}>
-                    <Tabs />
-                    {getEdit()}
-                </Col>
-            </Row>
+            <Header></Header>
+            <div className="container">
+
+                <Row>
+                    <Col md={8}>
+                        <PageList pages={pages} addFunction={handleAdd} editFunction={handleEdit} />
+                    </Col>
+                    <Col md={4}>
+                        <Tabs />
+                        {getEdit()}
+                    </Col>
+                </Row>
+            </div>
         </>
     );
 }

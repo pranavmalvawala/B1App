@@ -99,3 +99,25 @@ button.datetime-local-datepicker-button {background-color:#FFF;border:0px;width:
 @media (min-width: 1200px) {
     .col-lg-2-5 {flex: 0 0 20.8%; max-width: 20.8%; position: relative; width:100%; padding-left:15px;padding-right: 15px;}
 }
+
+
+
+
+/*b1*/
+
+#root {height:100vh;}
+#appWrapper 
+{
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    width:100%;
+}
+#headerFlex {flex: 0 0 55px;overflow: hidden;}
+#bodyFlex {flex:9; display:flex;overflow: hidden;}
+#sidebarFlex {flex:1; background-color: #FFF; }
+#contentFlex {flex:3; display:flex }
+#sideNav {margin-top:20px;}
+#sideNav .nav-item { border-bottom: 1px solid #EEE;padding-top: 5px; padding-bottom: 5px; }
+#sideNav .nav-item:first-child { border-top: 1px solid #EEE;}
+#sideNav a.nav-link {font-size:18px;}

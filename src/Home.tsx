@@ -2,6 +2,7 @@ import React from "react";
 import { ConfigHelper, ConfigurationInterface, Loading, Theme } from "./components"
 import { Row, Col } from "react-bootstrap"
 import { Sidebar } from "./components/Sidebar";
+import { Header } from "./components";
 
 export const Home = () => {
 
@@ -26,17 +27,20 @@ export const Home = () => {
 
     if (config.keyName === undefined) return <Loading config={config} />
     else return (
-        <>
-            <Theme config={config} />
-            <Row>
-                <Col xl={3} >
-                    <Sidebar config={config} />
-                </Col>
-                <Col xl={9}>
-                    Content
-            </Col>
-            </Row>
-        </>
+        <div id="root">
+            <div id="appWrapper" className="container" >
+                <Theme config={config} />
+                <div id="headerFlex"><Header /></div>
+                <div id="bodyFlex">
+                    <div id="sidebarFlex">
+                        <Sidebar config={config} />
+                    </div>
+                    <div id="contentFlex">
+                        <iframe src="https://biblia.com/api/plugins/embeddedbible?layout=normal&historyButtons=false&resourcePicker=false&shareButton=false&textSizeButton=false&startingReference=Ge1.1&resourceName=nirv" style={{ flex: 1 }} />
+                    </div>
+                </div>
+            </div>
+        </div>
 
     );
 }

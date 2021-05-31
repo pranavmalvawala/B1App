@@ -37,5 +37,7 @@ export const Sidebar: React.FC<Props> = (props) => {
         return tabs;
     }
 
-    return (<ul>{getTabs()}</ul>);
+    return (
+        <ul className="nav flex-column" id="sideNav" >{getTabs()}</ul>
+    );
 }
