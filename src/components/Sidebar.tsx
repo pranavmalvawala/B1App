@@ -27,6 +27,14 @@ export const Sidebar: React.FC<Props> = (props) => {
         return (<li key={tab.id} className="nav-item" id={tab.id}><Link className={getClass("tab")} to={tab.url}><i className={tab.icon}></i> {tab.text}</Link></li>);
     }
 
+    const getUserTabs = () => {
+        var tabs: JSX.Element[] = [];
+        tabs.push(<li key="bible" className="nav-item"><Link className={getClass("bible")} to="/bible/"><i className="fas fa-bible"></i> Bible</Link></li>);
+
+        if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(<li key="settings" className="nav-item"><Link className={getClass("settings")} to="/admin/settings"><i className="fas fa-cog"></i> Settings</Link></li>);
+        return tabs;
+    }
+
     const getTabs = () => {
         var tabs: JSX.Element[] = [];
         if (props.config?.tabs) {
@@ -34,18 +42,20 @@ export const Sidebar: React.FC<Props> = (props) => {
                 tabs.push(getTab(t))
             });
         }
-        if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(<li key="settings" className="nav-item"><Link className={getClass("settings")} to="/admin/settings"><i className="fas fa-cog"></i> Settings</Link></li>);
-
-        tabs.push()
         return tabs;
     }
 
     return (
         <>
             <div id="userName"><i className="fas fa-user" /> &nbsp; {UserHelper.user.displayName}</div>
-            <ul className="nav flex-column" id="sideNav" >
-                {getTabs()}
+            <ul className="nav flex-column sideNav" >
+                {getUserTabs()}
                 <li key="logout" className="nav-item" ><a className="nav-link" href="about:blank"><i className="fas fa-sign-out-alt"></i> Log out</a></li>
+            </ul>
+            <br />
+            <div className="sidebarChurch">{props.config?.church.name}</div>
+            <ul className="nav flex-column sideNav" id="sideNav" >
+                {getTabs()}
             </ul>
         </>
     );

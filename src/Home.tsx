@@ -30,7 +30,7 @@ export const Home = () => {
         <div id="root">
             <div id="appWrapper" className="container" >
                 <Theme config={config} />
-                <div id="headerFlex"><Header /></div>
+                <div id="headerFlex"><Header config={config} /></div>
                 <div id="bodyFlex">
                     <div id="sidebarFlex">
                         <Sidebar config={config} />
