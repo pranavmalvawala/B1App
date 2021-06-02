@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useCookies } from 'react-cookie';
-import { ApiHelper, UserHelper } from "./components";
+import { ApiHelper, PersonHelper, UserHelper } from "./components";
 import { Authenticated } from "./Authenticated";
 import UserContext from "./UserContext";
 import { LoginPage } from "./appBase/pageComponents/LoginPage";
@@ -10,7 +10,8 @@ export const Login: React.FC = (props: any) => {
     const [cookies] = useCookies(['jwt']);
     let { from } = (useLocation().state as any) || { from: { pathname: "/" } };
 
-    const successCallback = () => {
+    const successCallback = async () => {
+        PersonHelper.person = await ApiHelper.get("/people/userId/" + UserHelper.user.id, "MembershipApi");
         context.setUserName(UserHelper.currentChurch.id.toString());
     }
 

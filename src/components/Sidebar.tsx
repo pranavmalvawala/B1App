@@ -2,7 +2,8 @@ import React from "react";
 import { UserHelper } from "."
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { ConfigurationInterface, LinkInterface, Permissions } from "../helpers"
+import { ConfigurationInterface, EnvironmentHelper, LinkInterface, Permissions } from "../helpers"
+import { PersonHelper } from "../helpers";
 
 interface Props { config: ConfigurationInterface }
 
@@ -45,12 +46,21 @@ export const Sidebar: React.FC<Props> = (props) => {
         return tabs;
     }
 
+    const getUser = () => {
+        var photo = <i className="fas fa-user" />;
+        var name = UserHelper.user.displayName;
+        if (PersonHelper.person?.name) name = PersonHelper.person.name.display;
+        if (PersonHelper.person?.photo) photo = <img src={EnvironmentHelper.ContentRoot + PersonHelper.person.photo} />
+        return <div id="userName">{photo} {name}</div>
+    }
+
     return (
         <>
-            <div id="userName"><i className="fas fa-user" /> &nbsp; {UserHelper.user.displayName}</div>
+            {getUser()}
             <ul className="nav flex-column sideNav" >
                 {getUserTabs()}
-                <li key="logout" className="nav-item" ><a className="nav-link" href="about:blank"><i className="fas fa-sign-out-alt"></i> Log out</a></li>
+                <li key="logout" className="nav-item" >
+                    <Link className={getClass("logout")} to="/logout"><i className="fas fa-sign-out-alt"></i> Log out</Link></li>
             </ul>
             <br />
             <div className="sidebarChurch">{props.config?.church.name}</div>
