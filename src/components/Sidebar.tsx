@@ -48,10 +48,17 @@ export const Sidebar: React.FC<Props> = (props) => {
 
     const getUser = () => {
         var photo = <i className="fas fa-user" />;
-        var name = UserHelper.user.displayName;
+        var name = "Anonymous";
+        if (UserHelper.user?.displayName) name = UserHelper.user.displayName;
         if (PersonHelper.person?.name) name = PersonHelper.person.name.display;
-        if (PersonHelper.person?.photo) photo = <img src={EnvironmentHelper.ContentRoot + PersonHelper.person.photo} />
+        if (PersonHelper.person?.photo) photo = <img src={EnvironmentHelper.ContentRoot + PersonHelper.person.photo} alt="avatar" />
         return <div id="userName">{photo} {name}</div>
+    }
+
+    const getLoginLink = () => {
+        if (UserHelper.user) return (<Link className={getClass("logout")} to="/logout"><i className="fas fa-sign-out-alt"></i> Log out</Link>);
+        else return (<Link className={getClass("login")} to="/login"><i className="fas fa-sign-in-alt"></i> Log in</Link>);
+
     }
 
     return (
@@ -60,7 +67,8 @@ export const Sidebar: React.FC<Props> = (props) => {
             <ul className="nav flex-column sideNav" >
                 {getUserTabs()}
                 <li key="logout" className="nav-item" >
-                    <Link className={getClass("logout")} to="/logout"><i className="fas fa-sign-out-alt"></i> Log out</Link></li>
+                    {getLoginLink()}
+                </li>
             </ul>
             <br />
             <div className="sidebarChurch">{props.config?.church.name}</div>

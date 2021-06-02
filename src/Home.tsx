@@ -1,6 +1,5 @@
 import React from "react";
 import { ConfigHelper, ConfigurationInterface, Loading, Theme } from "./components"
-import { Row, Col } from "react-bootstrap"
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components";
 
@@ -36,7 +35,7 @@ export const Home = () => {
                         <Sidebar config={config} />
                     </div>
                     <div id="contentFlex">
-                        <iframe src="https://biblia.com/api/plugins/embeddedbible?layout=normal&historyButtons=false&resourcePicker=false&shareButton=false&textSizeButton=false&startingReference=Ge1.1&resourceName=nirv" style={{ flex: 1 }} />
+                        <iframe title="Content" src="https://biblia.com/api/plugins/embeddedbible?layout=normal&historyButtons=false&resourcePicker=false&shareButton=false&textSizeButton=false&startingReference=Ge1.1&resourceName=nirv" style={{ flex: 1 }} />
                     </div>
                 </div>
             </div>

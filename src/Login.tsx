@@ -35,7 +35,7 @@ export const Login: React.FC = (props: any) => {
             />
         );
     } else {
-        let path = from.pathname === from.pathname;
+        let path = from.pathname;
         return <Authenticated location={path}></Authenticated>;
     }
 };

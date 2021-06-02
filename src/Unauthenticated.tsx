@@ -1,13 +1,14 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { Login } from "./Login"
+import { Home } from "./Home";
 
 export const Unauthenticated = () => {
     return (
         <>
             <Switch>
                 <Route path="/login" component={Login} ></Route>
-                <Route path="/"  ><Redirect to="/login" /></Route>
+                <Route path="/"><Home /></Route>
             </Switch>
         </>
     )

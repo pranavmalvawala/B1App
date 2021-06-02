@@ -1,7 +1,8 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import UserContext from "./UserContext"
 import { Authenticated } from "./Authenticated"
+import { Unauthenticated } from "./Unauthenticated"
 import { ApiHelper } from "./components";
 import { Logout } from "./Logout";
 import { Login } from './Login';
@@ -29,7 +30,7 @@ const PrivateRoute: React.FC<Props> = ({ path }) => {
             path={path}
             render={({ location }) => {
                 return ApiHelper.isAuthenticated ? (<Authenticated location={location.pathname} />) :
-                    (<Redirect to={{ pathname: "/login", state: { from: location } }} />);
+                    (<Unauthenticated />);
             }}
         />
     );
