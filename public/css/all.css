@@ -124,3 +124,6 @@ button.datetime-local-datepicker-button {background-color:#FFF;border:0px;width:
 #userName { padding:15px; white-space: nowrap; overflow-x: hidden; padding-bottom: 0px; font-size: 18px; }
 #hamburger {padding-left: 10px; padding-right: 20px; font-size: 30px;display: inline-block;margin-top:10px; color:#000;}
 #userName img {width: 30px; height: 30px; object-fit: cover; border-radius: 15px; margin-right:5px;}
+
+.bigLinkButton{background-color: #FFF;color:#24b9ff;font-weight: bold;text-align: center;font-size: 35px;padding:10px;border:2px solid #999; border-radius: 5px;width:100%;margin-top:30px;display: block;}
+.bigLinkButton:hover {text-decoration: none;}

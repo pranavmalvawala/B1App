@@ -2,6 +2,7 @@ import React from "react";
 import { ConfigHelper, ConfigurationInterface, LinkInterface, Loading, Theme } from "./components"
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components";
+import { CheckinPage } from "./checkin/CheckinPage";
 
 export const Home = () => {
 
@@ -27,7 +28,7 @@ export const Home = () => {
             case "bible": setIframeSrc(bibleUrl); break;
             case "page": setIframeSrc("/pages/" + ConfigHelper.current.church.id + "/" + linkData); break;
             case "url": setIframeSrc(url); break;
-            case "checkin": setIframeSrc(bibleUrl); break;
+            case "checkin": setIframeSrc("/checkin/"); break;
         }
 
 
@@ -37,6 +38,19 @@ export const Home = () => {
     React.useEffect(() => {
         loadConfig();
     }, [loadConfig]);
+
+    const getContentComponent = () => {
+        var result = (<></>);
+        switch (iframeSrc) {
+            case "/checkin/":
+                result = (<div style={{ flex: 1 }}> <CheckinPage /></div>)
+                break;
+            default:
+                result = (<iframe title="Content" src={iframeSrc} style={{ flex: 1 }} />);
+                break;
+        }
+        return result;
+    }
 
 
     if (config.keyName === undefined) return <Loading config={config} />
@@ -50,7 +64,7 @@ export const Home = () => {
                         <Sidebar config={config} tabClickHandler={handleTabClick} />
                     </div>
                     <div id="contentFlex">
-                        <iframe title="Content" src={iframeSrc} style={{ flex: 1 }} />
+                        {getContentComponent()}
                     </div>
                 </div>
             </div>
