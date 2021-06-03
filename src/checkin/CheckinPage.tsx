@@ -31,7 +31,7 @@ export const CheckinPage = () => {
     return (
         <div style={{ height: "100vh" }}>
             <div style={{ backgroundColor: "#FFF", textAlign: "center" }}>
-                <img src="https://app.chums.org/images/logo-login.png" alt="logo" />
+                <img src="https://app.chums.org/images/logo-login.png" alt="logo" style={{ maxHeight: 300 }} />
             </div>
             <div style={{ maxWidth: 600, marginLeft: "auto", marginRight: "auto", paddingTop: 20 }}>
                 {getContent()}

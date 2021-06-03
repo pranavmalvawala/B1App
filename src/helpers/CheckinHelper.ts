@@ -12,6 +12,8 @@ export class CheckinHelper {
     static groups: GroupInterface[];
     static householdMembers: PersonInterface[];
 
+    static selectedServiceTime: ServiceTimeInterface;
+
 
 
 }

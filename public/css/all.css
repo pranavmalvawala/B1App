@@ -127,3 +127,9 @@ button.datetime-local-datepicker-button {background-color:#FFF;border:0px;width:
 
 .bigLinkButton{background-color: #FFF;color:#24b9ff;font-weight: bold;text-align: center;font-size: 35px;padding:10px;border:2px solid #999; border-radius: 5px;width:100%;margin-top:30px;display: block;}
 .bigLinkButton:hover {text-decoration: none;}
+.checkinPerson {text-align: left;}
+.checkinPerson .col-1 {text-align: center; margin-right: 0px;}
+.checkinPerson i {font-size: 50px;line-height: 60px; color:#CCC; vertical-align: middle;}
+.checkinServiceTime { color:#24b9ff; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #CCC;}
+.checkinServiceTime .col-4 { line-height: 60px; vertical-align: middle; font-size:25px;}
+.serviceTimeButton { margin-top:0px; background-color: #24b9ff; color:#FFF; font-size:25px; }
