@@ -1,11 +1,13 @@
 import React from "react";
-import { ConfigHelper, ConfigurationInterface, Loading, Theme } from "./components"
+import { ConfigHelper, ConfigurationInterface, LinkInterface, Loading, Theme } from "./components"
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components";
 
 export const Home = () => {
 
+    const bibleUrl = "https://biblia.com/api/plugins/embeddedbible?layout=normal&historyButtons=false&resourcePicker=false&shareButton=false&textSizeButton=false&startingReference=Ge1.1&resourceName=nirv";
     const [config, setConfig] = React.useState<ConfigurationInterface>({} as ConfigurationInterface);
+    const [iframeSrc, setIframeSrc] = React.useState(bibleUrl);
 
     const loadConfig = React.useCallback(async () => {
         const keyName = window.location.hostname.split(".")[0];
@@ -17,6 +19,15 @@ export const Home = () => {
             setConfig(d);
         });
     }, []);
+
+    const handleTabClick = (linkType: string) => {
+        switch (linkType) {
+            case "stream": setIframeSrc("https://" + ConfigHelper.current.church.subDomain + ".streaminglive.church/"); break;
+            case "bible": setIframeSrc(bibleUrl); break;
+        }
+
+
+    }
 
 
     React.useEffect(() => {
@@ -32,10 +43,10 @@ export const Home = () => {
                 <div id="headerFlex"><Header config={config} /></div>
                 <div id="bodyFlex">
                     <div id="sidebarFlex">
-                        <Sidebar config={config} />
+                        <Sidebar config={config} tabClickHandler={handleTabClick} />
                     </div>
                     <div id="contentFlex">
-                        <iframe title="Content" src="https://biblia.com/api/plugins/embeddedbible?layout=normal&historyButtons=false&resourcePicker=false&shareButton=false&textSizeButton=false&startingReference=Ge1.1&resourceName=nirv" style={{ flex: 1 }} />
+                        <iframe title="Content" src={iframeSrc} style={{ flex: 1 }} />
                     </div>
                 </div>
             </div>

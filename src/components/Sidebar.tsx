@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { ConfigurationInterface, EnvironmentHelper, LinkInterface, Permissions } from "../helpers"
 import { PersonHelper } from "../helpers";
 
-interface Props { config: ConfigurationInterface }
+interface Props { config: ConfigurationInterface, tabClickHandler: (linkType: string) => void }
 
 export const Sidebar: React.FC<Props> = (props) => {
 
@@ -25,12 +25,12 @@ export const Sidebar: React.FC<Props> = (props) => {
     }
 
     const getTab = (tab: LinkInterface) => {
-        return (<li key={tab.id} className="nav-item" id={tab.id}><Link className={getClass("tab")} to={tab.url}><i className={tab.icon}></i> {tab.text}</Link></li>);
+        return (<li key={tab.id} className="nav-item" id={tab.id}><a href="about:blank" onClick={(e) => { e.preventDefault(); props.tabClickHandler(tab.linkType) }} className={getClass("tab")} ><i className={tab.icon}></i> {tab.text}</a></li>);
     }
 
     const getUserTabs = () => {
         var tabs: JSX.Element[] = [];
-        tabs.push(<li key="bible" className="nav-item"><Link className={getClass("bible")} to="/bible/"><i className="fas fa-bible"></i> Bible</Link></li>);
+        tabs.push(<li key="bible" className="nav-item"><a href="about:blank" onClick={(e) => { e.preventDefault(); props.tabClickHandler("bible") }} className={getClass("bible")} ><i className="fas fa-bible"></i> Bible</a></li>);
 
         if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(<li key="settings" className="nav-item"><Link className={getClass("settings")} to="/admin/settings"><i className="fas fa-cog"></i> Settings</Link></li>);
         return tabs;
@@ -58,7 +58,6 @@ export const Sidebar: React.FC<Props> = (props) => {
     const getLoginLink = () => {
         if (UserHelper.user) return (<Link className={getClass("logout")} to="/logout"><i className="fas fa-sign-out-alt"></i> Log out</Link>);
         else return (<Link className={getClass("login")} to="/login"><i className="fas fa-sign-in-alt"></i> Log in</Link>);
-
     }
 
     return (
