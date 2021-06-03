@@ -2,8 +2,9 @@ import React from "react";
 import { ApiHelper, CheckinHelper } from "../../components";
 import { Spinner } from "react-activity";
 import { ServiceInterface } from "../../appBase/interfaces";
-import { GroupInterface, GroupServiceTimeInterface, ServiceTimeInterface } from '../../appBase/interfaces';
+import { GroupInterface, GroupServiceTimeInterface } from '../../appBase/interfaces';
 import { ArrayHelper } from '../../appBase/helpers';
+import { PersonHelper } from "../../helpers"
 
 interface Props { selectedHandler: () => void }
 
@@ -35,30 +36,33 @@ export const Services: React.FC<Props> = (props) => {
         }
     }
 
-    const selectService = (serviceId: string) => {
+    const selectService = async (serviceId: string) => {
         setIsLoading(true);
 
         const promises: Promise<any>[] = [
             ApiHelper.get("/servicetimes?serviceId=" + serviceId, "AttendanceApi").then(times => { CheckinHelper.serviceId = serviceId; CheckinHelper.serviceTimes = times; }),
             ApiHelper.get("/groupservicetimes", "AttendanceApi").then(groupServiceTimes => { CheckinHelper.groupServiceTimes = groupServiceTimes }),
-            ApiHelper.get("/groups", "MembershipApi").then(groups => { CheckinHelper.groups = groups })
+            ApiHelper.get("/groups", "MembershipApi").then(groups => { CheckinHelper.groups = groups }),
+            ApiHelper.get("/people/household/" + PersonHelper.person.householdId, "MembershipApi").then(members => { CheckinHelper.householdMembers = members })
         ];
+        await Promise.all(promises);
+        const peopleIds: number[] = ArrayHelper.getUniqueValues(CheckinHelper.householdMembers, "id");
+        const url = "/visits/checkin?serviceId=" + CheckinHelper.serviceId + "&peopleIds=" + escape(peopleIds.join(",")) + "&include=visitSessions"
+        CheckinHelper.existingVisits = await ApiHelper.get(url, "AttendanceApi");
+        CheckinHelper.pendingVisits = [...CheckinHelper.existingVisits];
 
-        Promise.all(promises).then(() => {
-            //for simplicity, iterate the group service times and add groups to the services.
-            CheckinHelper.serviceTimes.forEach(st => {
-                st.groups = [];
-                ArrayHelper.getAll(CheckinHelper.groupServiceTimes, "serviceTimeId", st.id).forEach((gst: GroupServiceTimeInterface) => {
-                    const g: GroupInterface = ArrayHelper.getOne(CheckinHelper.groups, "id", gst.groupId);
-                    st.groups?.push(g);
-                })
-            });
-            console.log(JSON.stringify(CheckinHelper.serviceTimes));
-
-            setIsLoading(false);
-            props.selectedHandler();
+        //for simplicity, iterate the group service times and add groups to the services.
+        CheckinHelper.serviceTimes.forEach(st => {
+            st.groups = [];
+            ArrayHelper.getAll(CheckinHelper.groupServiceTimes, "serviceTimeId", st.id).forEach((gst: GroupServiceTimeInterface) => {
+                const g: GroupInterface = ArrayHelper.getOne(CheckinHelper.groups, "id", gst.groupId);
+                st.groups?.push(g);
+            })
         });
+        console.log(JSON.stringify(CheckinHelper.serviceTimes));
 
+        setIsLoading(false);
+        props.selectedHandler();
     }
 
 

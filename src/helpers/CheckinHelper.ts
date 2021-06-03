@@ -1,12 +1,17 @@
-import { GroupInterface, GroupServiceTimeInterface, ServiceTimeInterface } from '../appBase/interfaces';
-import { ApiHelper, UniqueIdHelper, LinkInterface } from '../components';
+import { GroupInterface, GroupServiceTimeInterface, PersonInterface, ServiceTimeInterface, VisitInterface } from '../appBase/interfaces';
+
 
 
 export class CheckinHelper {
+    static pendingVisits: VisitInterface[] = [];
+    static existingVisits: VisitInterface[] = [];
+
     static serviceId: string;
     static serviceTimes: ServiceTimeInterface[];
     static groupServiceTimes: GroupServiceTimeInterface[];
     static groups: GroupInterface[];
+    static householdMembers: PersonInterface[];
+
 
 
 }

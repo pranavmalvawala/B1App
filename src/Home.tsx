@@ -1,5 +1,5 @@
 import React from "react";
-import { ConfigHelper, ConfigurationInterface, LinkInterface, Loading, Theme } from "./components"
+import { ConfigHelper, ConfigurationInterface, Loading, Theme } from "./components"
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components";
 import { CheckinPage } from "./checkin/CheckinPage";
