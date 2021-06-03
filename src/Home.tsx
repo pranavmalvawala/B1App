@@ -20,10 +20,14 @@ export const Home = () => {
         });
     }, []);
 
-    const handleTabClick = (linkType: string) => {
+    const handleTabClick = (linkType: string, linkData: string, url: string) => {
+        console.log(linkData);
         switch (linkType) {
             case "stream": setIframeSrc("https://" + ConfigHelper.current.church.subDomain + ".streaminglive.church/"); break;
             case "bible": setIframeSrc(bibleUrl); break;
+            case "page": setIframeSrc("/pages/" + ConfigHelper.current.church.id + "/" + linkData); break;
+            case "url": setIframeSrc(url); break;
+            case "checkin": setIframeSrc(bibleUrl); break;
         }
 
 

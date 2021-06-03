@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { ConfigurationInterface, EnvironmentHelper, LinkInterface, Permissions } from "../helpers"
 import { PersonHelper } from "../helpers";
 
-interface Props { config: ConfigurationInterface, tabClickHandler: (linkType: string) => void }
+interface Props { config: ConfigurationInterface, tabClickHandler: (linkType: string, linkData: string, url: string) => void }
 
 export const Sidebar: React.FC<Props> = (props) => {
 
@@ -25,12 +25,12 @@ export const Sidebar: React.FC<Props> = (props) => {
     }
 
     const getTab = (tab: LinkInterface) => {
-        return (<li key={tab.id} className="nav-item" id={tab.id}><a href="about:blank" onClick={(e) => { e.preventDefault(); props.tabClickHandler(tab.linkType) }} className={getClass("tab")} ><i className={tab.icon}></i> {tab.text}</a></li>);
+        return (<li key={tab.id} className="nav-item" id={tab.id}><a href="about:blank" onClick={(e) => { e.preventDefault(); props.tabClickHandler(tab.linkType, tab.linkData, tab.url) }} className={getClass("tab")} ><i className={tab.icon}></i> {tab.text}</a></li>);
     }
 
     const getUserTabs = () => {
         var tabs: JSX.Element[] = [];
-        tabs.push(<li key="bible" className="nav-item"><a href="about:blank" onClick={(e) => { e.preventDefault(); props.tabClickHandler("bible") }} className={getClass("bible")} ><i className="fas fa-bible"></i> Bible</a></li>);
+        tabs.push(<li key="bible" className="nav-item"><a href="about:blank" onClick={(e) => { e.preventDefault(); props.tabClickHandler("bible", "", "") }} className={getClass("bible")} ><i className="fas fa-bible"></i> Bible</a></li>);
 
         if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(<li key="settings" className="nav-item"><Link className={getClass("settings")} to="/admin/settings"><i className="fas fa-cog"></i> Settings</Link></li>);
         return tabs;
