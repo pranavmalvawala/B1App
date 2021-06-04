@@ -137,3 +137,7 @@ button.datetime-local-datepicker-button {background-color:#FFF;border:0px;width:
 .serviceTimeButton { margin-top:0px; background-color: #24b9ff; color:#FFF; font-size:25px; }
 .checkinGroup { color:#24b9ff; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #CCC;}
 .checkinGroup a {padding-left:20px; font-size: 25px;}
+
+.personPhoto { width: 60px; height: 45px; border-radius: 5px; }
+#peopleTable img { width: 60px; height: 45px; border-radius: 5px; }
+#peopleTable td { vertical-align: middle; }

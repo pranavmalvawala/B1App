@@ -105,11 +105,9 @@ export const TabEdit: React.FC<Props> = (props) => {
                     <select className="form-control" name="type" value={currentTab?.linkType} onChange={handleChange}>
                         <option value="url">External Url</option>
                         <option value="page">Page</option>
-                        <option value="bible">Bible</option>
+                        <option value="directory">Member Directory</option>
                         <option value="stream">Live Stream</option>
                         <option value="checkin">Checkin</option>
-                        <option value="chat">Chat</option>
-                        <option value="prayer">Prayer</option>
                     </select>
                 </div>
                 {getUrl()}

@@ -3,6 +3,7 @@ import { ConfigHelper, ConfigurationInterface, Loading, Theme } from "./componen
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components";
 import { CheckinPage } from "./checkin/CheckinPage";
+import { DirectoryPage } from "./directory/DirectoryPage";
 
 export const Home = () => {
 
@@ -29,6 +30,7 @@ export const Home = () => {
             case "page": setIframeSrc("/pages/" + ConfigHelper.current.church.id + "/" + linkData); break;
             case "url": setIframeSrc(url); break;
             case "checkin": setIframeSrc("/checkin/"); break;
+            case "directory": setIframeSrc("/directory/"); break;
         }
 
 
@@ -44,6 +46,9 @@ export const Home = () => {
         switch (iframeSrc) {
             case "/checkin/":
                 result = (<div style={{ flex: 1 }}> <CheckinPage /></div>)
+                break;
+            case "/directory/":
+                result = (<div style={{ flex: 1 }}> <DirectoryPage /></div>)
                 break;
             default:
                 result = (<iframe title="Content" src={iframeSrc} style={{ flex: 1 }} />);
