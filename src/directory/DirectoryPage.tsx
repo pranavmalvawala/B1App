@@ -1,24 +1,24 @@
 import React from "react";
 import { UserHelper } from "../helpers";
 import { DirectorySearch } from "./components/DirectorySearch";
+import { Person } from "./components/Person";
 
 
 export const DirectoryPage = () => {
 
-    const [currentStep, setCurrentStep] = React.useState<string>("");
+    const [personId, setPersonId] = React.useState("");
 
     const handlePersonSelected = (personId: string) => {
-        setCurrentStep("person");
+        console.log("PERSON SELECTED: " + personId)
+        setPersonId(personId);
     }
+    const handleBack = () => { setPersonId(""); }
 
     const getContent = () => {
         var result = <h1 style={{ textAlign: "center" }}>Please login</h1>
         if (UserHelper.user?.displayName) {
-            switch (currentStep) {
-                default:
-                    result = <DirectorySearch selectedHandler={handlePersonSelected} />
-                    break;
-            }
+            if (personId) result = <Person personId={personId} backHandler={handleBack} selectedHandler={handlePersonSelected} />
+            else result = <DirectorySearch selectedHandler={handlePersonSelected} />
         }
         return result;
     }
