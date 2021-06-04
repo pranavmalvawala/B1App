@@ -1,15 +1,13 @@
 import React from "react";
-import { CheckinHelper, ConfigHelper, EnvironmentHelper } from "../../components";
-import { Spinner } from "react-activity";
-import { PersonInterface, ServiceTimeInterface, GroupInterface } from "../../appBase/interfaces";
-import { Row, Col } from "react-bootstrap";
+import { CheckinHelper } from "../../components";
+import { GroupInterface } from "../../appBase/interfaces";
+import { Row, Col, Button } from "react-bootstrap";
 
 interface GroupCategoryInterface { key: number, name: string, items: GroupInterface[] }
 
-interface Props { }
+interface Props { selectedHandler: (group: GroupInterface) => void }
 
 export const Groups: React.FC<Props> = (props) => {
-    const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [selectedCategory, setSelectedCategory] = React.useState<GroupCategoryInterface>(null);
     const [groupTree, setGroupTree] = React.useState<GroupCategoryInterface[]>([]);
 
@@ -31,10 +29,6 @@ export const Groups: React.FC<Props> = (props) => {
     }
 
 
-    const selectGroup = (group: GroupInterface) => {
-
-    }
-
 
     const selectCategory = (category: GroupCategoryInterface) => {
         if (selectedCategory === category) setSelectedCategory(null);
@@ -42,14 +36,11 @@ export const Groups: React.FC<Props> = (props) => {
     }
 
     const getCategories = () => {
-        if (isLoading) return (<Spinner />)
-        else {
-            var result: JSX.Element[] = [];
-            groupTree.forEach(c => {
-                result.push(getCategory(c));
-            });
-            return (result);
-        }
+        var result: JSX.Element[] = [];
+        groupTree.forEach(c => {
+            result.push(getCategory(c));
+        });
+        return (result);
     }
 
     const getCategory = (category: GroupCategoryInterface) => {
@@ -77,8 +68,8 @@ export const Groups: React.FC<Props> = (props) => {
     }
 
     const getGroup = (g: GroupInterface) => {
-        return (<div className="checkinServiceTime" >
-            <a href="about:blank" onClick={(e) => { e.preventDefault(); selectGroup(g) }}>{g.name}</a>
+        return (<div className="checkinGroup" >
+            <a href="about:blank" onClick={(e) => { e.preventDefault(); props.selectedHandler(g) }}>{g.name}</a>
         </div>);
     }
 
@@ -89,7 +80,8 @@ export const Groups: React.FC<Props> = (props) => {
 
     return (
         <>
-            {getCategories()}
+            {getCategories()}<br />
+            <Button variant="danger" block onClick={(e) => { e.preventDefault(); props.selectedHandler({ id: "", name: "NONE" }) }} >NONE</Button>
         </>
     )
 }

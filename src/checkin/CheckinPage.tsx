@@ -29,7 +29,7 @@ export const CheckinPage = () => {
 
 
     return (
-        <div style={{ height: "100vh" }}>
+        <div style={{ height: "100vh", backgroundColor: "#F9F9F9" }}>
             <div style={{ backgroundColor: "#FFF", textAlign: "center" }}>
                 <img src="https://app.chums.org/images/logo-login.png" alt="logo" style={{ maxHeight: 300 }} />
             </div>
