@@ -2,6 +2,7 @@ import React from "react";
 import { UserHelper } from "../helpers";
 import { Household } from "./components/Household";
 import { Services } from "./components/Services";
+import { CheckinComplete } from "./components/CheckinComplete";
 
 
 export const CheckinPage = () => {
@@ -12,12 +13,19 @@ export const CheckinPage = () => {
         setCurrentStep("household");
     }
 
+    const handleCheckinComplete = () => {
+        setCurrentStep("complete");
+    }
+
     const getContent = () => {
         var result = <h1 style={{ textAlign: "center" }}>Please login</h1>
         if (UserHelper.user?.displayName) {
             switch (currentStep) {
                 case "household":
-                    result = <Household />
+                    result = <Household completeHandler={handleCheckinComplete} />
+                    break;
+                case "complete":
+                    result = <CheckinComplete />
                     break;
                 default:
                     result = <Services selectedHandler={handleServiceSelected} />;

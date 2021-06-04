@@ -1,12 +1,12 @@
 import React from "react";
-import { CheckinHelper, EnvironmentHelper } from "../../components";
+import { CheckinHelper, EnvironmentHelper, ApiHelper } from "../../components";
 import { Spinner } from "react-activity";
 import { GroupInterface, PersonInterface, ServiceTimeInterface, VisitInterface, VisitSessionInterface } from "../../appBase/interfaces";
 import { Row, Col, Button } from "react-bootstrap";
 import { Groups } from "./Groups";
 import { ArrayHelper } from "../../appBase/helpers";
 
-interface Props { }
+interface Props { completeHandler: () => void }
 
 export const Household: React.FC<Props> = (props) => {
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -139,7 +139,12 @@ export const Household: React.FC<Props> = (props) => {
     }, []);
 
     const handleCheckin = () => {
-
+        setIsLoading(true);
+        const peopleIds: number[] = ArrayHelper.getUniqueValues(CheckinHelper.householdMembers, "id");
+        const url = '/visits/checkin?serviceId=' + CheckinHelper.serviceId + '&peopleIds=' + escape(peopleIds.join(","));
+        ApiHelper.post(url, CheckinHelper.pendingVisits, "AttendanceApi").then(() => {
+            props.completeHandler();
+        });
     }
 
 
