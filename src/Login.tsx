@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useCookies } from 'react-cookie';
-import { ApiHelper, PersonHelper, UserHelper } from "./components";
+import { ApiHelper, ConfigHelper, PersonHelper, UserHelper } from "./components";
 import { Authenticated } from "./Authenticated";
 import UserContext from "./UserContext";
 import { LoginPage } from "./appBase/pageComponents/LoginPage";
@@ -32,6 +32,7 @@ export const Login: React.FC = (props: any) => {
                 successCallback={successCallback}
                 requiredKeyName={false}
                 appName="B1"
+                logoSquare={ConfigHelper.current?.logoSquare || null}
             />
         );
     } else {

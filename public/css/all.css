@@ -16,9 +16,9 @@ h2 span { color: #24b9ff; }
 
 
 
-#navbar {background-color: #FFF !important;height:55px;margin-bottom: 20px;box-shadow: 0px 3px 3px 0px #999;}
+#navbar {background-color:var(--primaryColor) !important;height:55px;margin-bottom: 20px;box-shadow: 0px 3px 3px 0px #999;}
 #navbar .nav-item {font-size:14px;}
-#navbar .nav-link {color:#555;height:55px;vertical-align: middle;line-height: 45px; max-width:150px; margin-left:auto; margin-right:auto;}
+#navbar .nav-link {color:var(--primaryContrast);height:55px;vertical-align: middle;line-height: 45px; max-width:150px; margin-left:auto; margin-right:auto;}
 #navbar .active {border-bottom: 2px solid #03a9f4;}
 .navbar-brand {padding-top:0px;padding-bottom:0px;}
 .navbar-brand img {max-height:35px;max-width:100%;margin-top:-10px;}
@@ -37,7 +37,7 @@ h2 span { color: #24b9ff; }
 
 
 
-.sidebar { position: fixed; top: 0px; bottom: 0; left: 0; z-index: 1000; padding: 0px; overflow-x: hidden; overflow-y: auto; border-right: 1px solid #eee; background-color:#FDFDFD !important; }
+.sidebar { position: fixed; top: 0px; bottom: 0; left: 0; z-index: 1000; padding: 0px; overflow-x: hidden; overflow-y: auto; border-right: 1px solid #eee;  }
 .sidebar .nav { margin-bottom: 20px; margin-top:20px; }
 .sidebar .nav-item { width: 100%; height:30px; overflow:hidden; text-wrap:none; }
 .sidebar .nav-item + .nav-item { margin-left: 0; }
@@ -115,14 +115,14 @@ button.datetime-local-datepicker-button {background-color:#FFF;border:0px;width:
 }
 #headerFlex {flex: 0 0 55px;overflow: hidden;}
 #bodyFlex {flex:9; display:flex;overflow: hidden;}
-#sidebarFlex {flex:1; background-color: #FFF; }
+#sidebarFlex {flex:1; background-color: var(--secondaryColor);  }
 #contentFlex {flex:3; display:flex }
 
 .sideNav .nav-item { padding-top: 1px; padding-bottom: 1px; }
-.sideNav a.nav-link {font-size:18px;}
+.sideNav a.nav-link {font-size:18px; color:var(--secondaryContrast)}
 .sidebarChurch {margin-left:15px; margin-right:15px; padding-top:10px;padding-bottom:5px;border-bottom: 1px solid #EEE;font-weight: bold; font-size: 16px; white-space: nowrap; overflow: hidden;}
 #userName { padding:15px; white-space: nowrap; overflow-x: hidden; padding-bottom: 0px; font-size: 18px; }
-#hamburger {padding-left: 10px; padding-right: 20px; font-size: 30px;display: inline-block;margin-top:10px; color:#000;}
+#hamburger {padding-left: 10px; padding-right: 20px; font-size: 30px;display: inline-block;margin-top:10px; color:var(--primaryContrast);}
 #userName img {width: 30px; height: 30px; object-fit: cover; border-radius: 15px; margin-right:5px;}
 
 .bigLinkButton{background-color: #FFF;color:#24b9ff;font-weight: bold;text-align: center;font-size: 35px;padding:10px;border:2px solid #999; border-radius: 5px;width:100%;margin-top:30px;display: block;}

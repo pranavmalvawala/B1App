@@ -45,7 +45,7 @@ export const Home = () => {
         var result = (<></>);
         switch (iframeSrc) {
             case "/checkin/":
-                result = (<div style={{ flex: 1 }}> <CheckinPage /></div>)
+                result = (<div style={{ flex: 1 }}> <CheckinPage config={ConfigHelper.current} /></div>)
                 break;
             case "/directory/":
                 result = (<div style={{ flex: 1 }}> <DirectoryPage /></div>)

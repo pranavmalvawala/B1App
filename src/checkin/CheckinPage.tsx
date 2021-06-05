@@ -3,9 +3,11 @@ import { UserHelper } from "../helpers";
 import { Household } from "./components/Household";
 import { Services } from "./components/Services";
 import { CheckinComplete } from "./components/CheckinComplete";
+import { ConfigurationInterface } from "../components";
 
+interface Props { config?: ConfigurationInterface }
 
-export const CheckinPage = () => {
+export const CheckinPage: React.FC<Props> = (props) => {
 
     const [currentStep, setCurrentStep] = React.useState<string>("");
 
@@ -38,8 +40,8 @@ export const CheckinPage = () => {
 
     return (
         <div style={{ height: "100vh", backgroundColor: "#F9F9F9" }}>
-            <div style={{ backgroundColor: "#FFF", textAlign: "center" }}>
-                <img src="https://app.chums.org/images/logo-login.png" alt="logo" style={{ maxHeight: 300 }} />
+            <div style={{ backgroundColor: "var(--primaryColor)", textAlign: "center", padding: 20 }}>
+                <img src={props.config?.logoHeader || "https://app.chums.org/images/logo-login.png"} alt="logo" style={{ maxHeight: 300 }} />
             </div>
             <div style={{ maxWidth: 600, marginLeft: "auto", marginRight: "auto", paddingTop: 20 }}>
                 {getContent()}

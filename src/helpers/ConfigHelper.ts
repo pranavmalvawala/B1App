@@ -13,11 +13,13 @@ export class ConfigHelper {
 
     static async load(keyName: string) {
         const churchId = await ConfigHelper.loadChurchId(keyName);
-        const result: ConfigurationInterface = await ApiHelper.getAnonymous("/settings/public/" + churchId, "AccessApi");
+        var result: ConfigurationInterface = await ApiHelper.getAnonymous("/settings/public/" + churchId, "AccessApi");
         const tabs: LinkInterface[] = await ApiHelper.getAnonymous("/links/church/" + churchId + "?category=tab", "B1Api");
         const church = await ApiHelper.getAnonymous("/churches/lookup/?id=" + churchId, "AccessApi")
+        const appearanceConfigs: ConfigurationInterface = await ApiHelper.getAnonymous("/settings/public/" + churchId, "AccessApi");
         result.church = church;
         result.tabs = tabs;
+        result = { ...result, ...appearanceConfigs };
         localStorage.setItem(`b1theme_${keyName}`, JSON.stringify(result));
         result.keyName = keyName;
         ConfigHelper.current = result;
