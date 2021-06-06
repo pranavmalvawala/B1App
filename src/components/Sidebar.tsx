@@ -2,10 +2,10 @@ import React from "react";
 import { UserHelper } from "."
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { ConfigurationInterface, EnvironmentHelper, LinkInterface, Permissions } from "../helpers"
+import { EnvironmentHelper, LinkInterface, Permissions, ConfigHelper } from "../helpers"
 import { PersonHelper } from "../helpers";
 
-interface Props { config: ConfigurationInterface, tabClickHandler: (linkType: string, linkData: string, url: string) => void }
+interface Props { tabClickHandler: (linkType: string, linkData: string, url: string) => void }
 
 export const Sidebar: React.FC<Props> = (props) => {
 
@@ -38,8 +38,8 @@ export const Sidebar: React.FC<Props> = (props) => {
 
     const getTabs = () => {
         var tabs: JSX.Element[] = [];
-        if (props.config?.tabs) {
-            props.config.tabs.forEach(t => {
+        if (ConfigHelper.current?.tabs) {
+            ConfigHelper.current.tabs.forEach(t => {
                 tabs.push(getTab(t))
             });
         }
@@ -70,7 +70,7 @@ export const Sidebar: React.FC<Props> = (props) => {
                 </li>
             </ul>
             <br />
-            <div className="sidebarChurch">{props.config?.church.name}</div>
+            <div className="sidebarChurch">{ConfigHelper.current?.church.name}</div>
             <ul className="nav flex-column sideNav" id="sideNav" >
                 {getTabs()}
             </ul>

@@ -1,5 +1,5 @@
 import React from "react";
-import { ConfigHelper, ConfigurationInterface, Loading, Theme } from "./components"
+import { ConfigHelper } from "./components"
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components";
 import { CheckinPage } from "./checkin/CheckinPage";
@@ -8,19 +8,8 @@ import { DirectoryPage } from "./directory/DirectoryPage";
 export const Home = () => {
 
     const bibleUrl = "https://biblia.com/api/plugins/embeddedbible?layout=normal&historyButtons=false&resourcePicker=false&shareButton=false&textSizeButton=false&startingReference=Ge1.1&resourceName=nirv";
-    const [config, setConfig] = React.useState<ConfigurationInterface>({} as ConfigurationInterface);
     const [iframeSrc, setIframeSrc] = React.useState(bibleUrl);
 
-    const loadConfig = React.useCallback(async () => {
-        const keyName = window.location.hostname.split(".")[0];
-        const localThemeConfig = localStorage.getItem(`b1theme_${keyName}`);
-        setConfig(JSON.parse(localThemeConfig) || {});
-
-        ConfigHelper.load(keyName).then(data => {
-            var d: ConfigurationInterface = data;
-            setConfig(d);
-        });
-    }, []);
 
     const handleTabClick = (linkType: string, linkData: string, url: string) => {
         console.log(linkData);
@@ -35,11 +24,6 @@ export const Home = () => {
 
 
     }
-
-
-    React.useEffect(() => {
-        loadConfig();
-    }, [loadConfig]);
 
     const getContentComponent = () => {
         var result = (<></>);
@@ -58,15 +42,13 @@ export const Home = () => {
     }
 
 
-    if (config.keyName === undefined) return <Loading config={config} />
-    else return (
+    return (
         <div id="root">
             <div id="appWrapper" className="container" >
-                <Theme config={config} />
-                <div id="headerFlex"><Header config={config} /></div>
+                <div id="headerFlex"><Header /></div>
                 <div id="bodyFlex">
                     <div id="sidebarFlex">
-                        <Sidebar config={config} tabClickHandler={handleTabClick} />
+                        <Sidebar tabClickHandler={handleTabClick} />
                     </div>
                     <div id="contentFlex">
                         {getContentComponent()}
@@ -74,6 +56,5 @@ export const Home = () => {
                 </div>
             </div>
         </div>
-
     );
 }

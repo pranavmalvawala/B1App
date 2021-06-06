@@ -5,6 +5,7 @@ import { ApiHelper, ConfigHelper, PersonHelper, UserHelper } from "./components"
 import { Authenticated } from "./Authenticated";
 import UserContext from "./UserContext";
 import { LoginPage } from "./appBase/pageComponents/LoginPage";
+import { AppearanceHelper } from "./appBase/helpers/AppearanceHelper";
 
 export const Login: React.FC = (props: any) => {
     const [cookies] = useCookies(['jwt']);
@@ -32,7 +33,7 @@ export const Login: React.FC = (props: any) => {
                 successCallback={successCallback}
                 requiredKeyName={false}
                 appName="B1"
-                logoSquare={ConfigHelper.current?.logoSquare || null}
+                logoSquare={AppearanceHelper.getLogoSquare(ConfigHelper.current?.appearance, null)}
             />
         );
     } else {

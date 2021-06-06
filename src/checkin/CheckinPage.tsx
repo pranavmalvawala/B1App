@@ -4,6 +4,7 @@ import { Household } from "./components/Household";
 import { Services } from "./components/Services";
 import { CheckinComplete } from "./components/CheckinComplete";
 import { ConfigurationInterface } from "../components";
+import { AppearanceHelper } from "../appBase/helpers/AppearanceHelper";
 
 interface Props { config?: ConfigurationInterface }
 
@@ -41,7 +42,7 @@ export const CheckinPage: React.FC<Props> = (props) => {
     return (
         <div style={{ height: "100vh", backgroundColor: "#F9F9F9" }}>
             <div style={{ backgroundColor: "var(--primaryColor)", textAlign: "center", padding: 20 }}>
-                <img src={props.config?.logoHeader || "https://app.chums.org/images/logo-login.png"} alt="logo" style={{ maxHeight: 300 }} />
+                <img src={AppearanceHelper.getLogoHeader(props.config?.appearance, "https://app.chums.org/images/logo-login.png")} alt="logo" style={{ maxHeight: 300 }} />
             </div>
             <div style={{ maxWidth: 600, marginLeft: "auto", marginRight: "auto", paddingTop: 20 }}>
                 {getContent()}
