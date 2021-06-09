@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from 'react-helmet'
+import { Helmet } from "react-helmet"
 import { ConfigHelper } from "../helpers";
 
 export const Theme = () => {
@@ -8,9 +8,8 @@ export const Theme = () => {
     primaryColor: "#08A0CC",
     primaryContrast: "#FFFFFF",
     secondaryColor: "#FFBA1A",
-    secondaryContrast: "#000000"
+    secondaryContrast: "#000000",
   }
-
 
   let css = null;
   if (ConfigHelper.current.keyName) {
@@ -26,7 +25,4 @@ export const Theme = () => {
 
   return (<Helmet>{css}</Helmet>);
 }
-
-
-
 

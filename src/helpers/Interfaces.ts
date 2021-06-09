@@ -5,8 +5,8 @@ export interface PageInterface { id?: string, churchId?: string, name?: string, 
 
 export class Permissions extends BasePermissions {
     static b1Api = {
-        settings: {
-            edit: { api: "B1Api", contentType: "Settings", action: "Edit" }
-        }
+      settings: {
+        edit: { api: "B1Api", contentType: "Settings", action: "Edit" },
+      },
     };
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { CookiesProvider } from 'react-cookie';
+import { CookiesProvider } from "react-cookie";
 import { UserProvider } from "./UserContext"
 import { ControlPanel } from "./ControlPanel"
 import { ConfigHelper, ConfigurationInterface, Loading, Theme } from "./components"
@@ -14,7 +14,7 @@ const App: React.FC = () => {
     setConfig(JSON.parse(localThemeConfig) || {});
 
     ConfigHelper.load(keyName).then(data => {
-      var d: ConfigurationInterface = data;
+      let d: ConfigurationInterface = data;
       setConfig(d);
     });
   }, []);
