@@ -44,10 +44,13 @@
     "exec-deploy-prod": "aws s3 sync build/ s3://b1-app",
     "postdeploy-prod": "aws cloudfront create-invalidation --distribution-id E1V6RNCVYH9TAQ --paths /*",
     "deploy-prod": "npm run predeploy-prod && npm run exec-deploy-prod && npm run postdeploy-prod",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "npm run lint:fix"
+    ]
   },
   "browserslist": {
     "production": [
@@ -68,6 +71,8 @@
     "@types/react-csv": "^1.1.1",
     "@types/react-draft-wysiwyg": "^1.13.2",
     "@types/react-helmet": "^6.1.1",
-    "google-charts": "^2.0.0"
+    "google-charts": "^2.0.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0"
   }
 }
