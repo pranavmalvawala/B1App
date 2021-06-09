@@ -5,37 +5,36 @@ import { Header } from "../../components";
 
 export const SettingsPage = () => {
 
-    const [pages, setPages] = React.useState<PageInterface[]>([]);
-    const [currentPage, setCurrentPage] = React.useState<PageInterface>(null);
+  const [pages, setPages] = React.useState<PageInterface[]>([]);
+  const [currentPage, setCurrentPage] = React.useState<PageInterface>(null);
 
-    const loadData = () => { ApiHelper.get("/pages", "B1Api").then(data => setPages(data)); }
-    const loadPage = (id: string) => { ApiHelper.get("/pages/" + id + "?include=content", "B1Api").then(data => setCurrentPage(data)); }
-    const handleUpdate = () => { setCurrentPage(null); loadData(); }
-    const handleAdd = () => { setCurrentPage({ churchId: UserHelper.currentChurch.id, lastModified: new Date(), name: "" }) }
-    const handleEdit = (page: PageInterface) => { loadPage(page.id); }
+  const loadData = () => { ApiHelper.get("/pages", "B1Api").then(data => setPages(data)); }
+  const loadPage = (id: string) => { ApiHelper.get("/pages/" + id + "?include=content", "B1Api").then(data => setCurrentPage(data)); }
+  const handleUpdate = () => { setCurrentPage(null); loadData(); }
+  const handleAdd = () => { setCurrentPage({ churchId: UserHelper.currentChurch.id, lastModified: new Date(), name: "" }) }
+  const handleEdit = (page: PageInterface) => { loadPage(page.id); }
 
-    React.useEffect(() => { loadData(); }, []);
+  React.useEffect(() => { loadData(); }, []);
 
-    const getEdit = () => {
-        if (currentPage !== null) return <PageEdit page={currentPage} updatedFunction={handleUpdate} />;
-    }
+  const getEdit = () => {
+    if (currentPage !== null) return <PageEdit page={currentPage} updatedFunction={handleUpdate} />;
+  }
 
+  return (
+    <>
+      <Header></Header>
+      <div className="container">
 
-    return (
-        <>
-            <Header></Header>
-            <div className="container">
-
-                <Row>
-                    <Col md={8}>
-                        <PageList pages={pages} addFunction={handleAdd} editFunction={handleEdit} />
-                    </Col>
-                    <Col md={4}>
-                        <Tabs />
-                        {getEdit()}
-                    </Col>
-                </Row>
-            </div>
-        </>
-    );
+        <Row>
+          <Col md={8}>
+            <PageList pages={pages} addFunction={handleAdd} editFunction={handleEdit} />
+          </Col>
+          <Col md={4}>
+            <Tabs />
+            {getEdit()}
+          </Col>
+        </Row>
+      </div>
+    </>
+  );
 }

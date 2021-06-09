@@ -1,7 +1,5 @@
-import { ArrayHelper } from '../appBase/helpers';
-import { GroupInterface, GroupServiceTimeInterface, PersonInterface, ServiceTimeInterface, VisitInterface, VisitSessionInterface } from '../appBase/interfaces';
-
-
+import { ArrayHelper } from "../appBase/helpers";
+import { GroupInterface, GroupServiceTimeInterface, PersonInterface, ServiceTimeInterface, VisitInterface, VisitSessionInterface } from "../appBase/interfaces";
 
 export class CheckinHelper {
     static pendingVisits: VisitInterface[] = [];
@@ -16,23 +14,22 @@ export class CheckinHelper {
     static selectedServiceTime: ServiceTimeInterface;
 
     public static getVisitByPersonId(visits: VisitInterface[], personId: string): VisitInterface | null {
-        var result: VisitInterface | null = null;
+      let result: VisitInterface | null = null;
         visits?.forEach(v => { if (v.personId === personId) result = v });
         return result;
     }
 
     public static setGroup(visitSessions: VisitSessionInterface[], serviceTimeId: string, groupId: string, displayName: string) {
-        for (let i = visitSessions.length - 1; i >= 0; i--) {
-            if (visitSessions[i].session?.serviceTimeId === serviceTimeId) visitSessions.splice(i, 1);
-        }
-        if (groupId !== "") visitSessions.push({ session: { serviceTimeId: serviceTimeId, groupId: groupId, displayName: displayName } });
+      for (let i = visitSessions.length - 1; i >= 0; i--) {
+        if (visitSessions[i].session?.serviceTimeId === serviceTimeId) visitSessions.splice(i, 1);
+      }
+      if (groupId !== "") visitSessions.push({ session: { serviceTimeId: serviceTimeId, groupId: groupId, displayName: displayName } });
     }
 
     public static getDisplayGroup = (visitSession: VisitSessionInterface) => {
-        const st: ServiceTimeInterface = ArrayHelper.getOne(CheckinHelper.serviceTimes, "id", visitSession.session?.serviceTimeId || "");
-        const group: GroupInterface = ArrayHelper.getOne(st?.groups || [], "id", visitSession.session?.groupId || "");
-        return st.name + " - " + group.name;
+      const st: ServiceTimeInterface = ArrayHelper.getOne(CheckinHelper.serviceTimes, "id", visitSession.session?.serviceTimeId || "");
+      const group: GroupInterface = ArrayHelper.getOne(st?.groups || [], "id", visitSession.session?.groupId || "");
+      return st.name + " - " + group.name;
     }
-
 
 }
