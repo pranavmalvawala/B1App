@@ -34,6 +34,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "lint:only": "eslint --ext ts,tsx",
+    "lint:fix": "npm run lint:only -- --fix",
     "predeploy-staging": "export REACT_APP_STAGE=staging&& npm run build",
     "exec-deploy-staging": "aws s3 sync build/ s3://staging-b1-app",
     "postdeploy-staging": "aws cloudfront create-invalidation --distribution-id E3ERNV877LLCXW --paths /*",
