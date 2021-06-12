@@ -5,7 +5,7 @@ import { AppearanceHelper } from "../appBase/helpers/AppearanceHelper";
 interface Props { config: ConfigurationInterface }
 
 export const Loading: React.FC<Props> = (props) => {
-  const imgSrc = AppearanceHelper.getLogoSquare(props.config?.appearance, "/images/logo-login.png")
+  const imgSrc = AppearanceHelper.getLogoLight(props.config?.appearance, "/images/logo.png")
   return (
     <div className="smallCenterBlock" style={{ marginTop: 100 }}>
       <img src={imgSrc} alt="logo" className="img-fluid" style={{ marginBottom: 50 }} />

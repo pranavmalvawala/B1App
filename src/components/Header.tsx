@@ -16,7 +16,7 @@ export const Header = () => {
           <Row>
             <Col>
               <a href="about:blank" onClick={toggleSidebar} id="hamburger"><i className="fas fa-bars"></i></a>
-              <a className="navbar-brand" href="/"><img src={AppearanceHelper.getLogoHeader(ConfigHelper.current?.appearance, "/images/logo.png")} alt="logo" /></a>
+              <a className="navbar-brand" href="/"><img src={AppearanceHelper.getLogoLight(ConfigHelper.current?.appearance, "/images/logo.png")} alt="logo" /></a>
             </Col>
           </Row>
         </Container>

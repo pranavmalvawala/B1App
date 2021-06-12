@@ -120,8 +120,8 @@ button.datetime-local-datepicker-button {background-color:#FFF;border:0px;width:
 
 .sideNav .nav-item { padding-top: 1px; padding-bottom: 1px; }
 .sideNav a.nav-link {font-size:18px; color:var(--secondaryContrast)}
-.sidebarChurch {margin-left:15px; margin-right:15px; padding-top:10px;padding-bottom:5px;border-bottom: 1px solid #EEE;font-weight: bold; font-size: 16px; white-space: nowrap; overflow: hidden;}
-#userName { padding:15px; white-space: nowrap; overflow-x: hidden; padding-bottom: 0px; font-size: 18px; }
+.sidebarChurch {margin-left:15px; margin-right:15px; padding-top:10px;padding-bottom:5px;border-bottom: 1px solid #DDD;font-weight: bold; font-size: 16px; white-space: nowrap; overflow: hidden; color:#DDD;}
+#userName { padding:15px; white-space: nowrap; overflow-x: hidden; padding-bottom: 0px; font-size: 18px; color:var(--secondaryContrast); }
 #hamburger {padding-left: 10px; padding-right: 20px; font-size: 30px;display: inline-block;margin-top:10px; color:var(--primaryContrast);}
 #userName img {width: 30px; height: 30px; object-fit: cover; border-radius: 15px; margin-right:5px;}
 

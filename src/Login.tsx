@@ -33,7 +33,7 @@ export const Login: React.FC = (props: any) => {
         successCallback={successCallback}
         requiredKeyName={false}
         appName="B1"
-        logoSquare={AppearanceHelper.getLogoSquare(ConfigHelper.current?.appearance, null)}
+        logo={AppearanceHelper.getLogoLight(ConfigHelper.current?.appearance, null)}
       />
     );
   } else {
