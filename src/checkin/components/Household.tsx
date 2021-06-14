@@ -1,6 +1,5 @@
 import React from "react";
-import { CheckinHelper, EnvironmentHelper, ApiHelper } from "../../components";
-import { Spinner } from "react-activity";
+import { CheckinHelper, EnvironmentHelper, ApiHelper, Loading } from "../../components";
 import { GroupInterface, PersonInterface, ServiceTimeInterface, VisitInterface, VisitSessionInterface } from "../../appBase/interfaces";
 import { Row, Col, Button } from "react-bootstrap";
 import { Groups } from "./Groups";
@@ -26,23 +25,23 @@ export const Household: React.FC<Props> = (props) => {
       if (visit?.visitSessions?.length === 0) return (null);
       else {
         const groups: JSX.Element[] = [];
-                visit?.visitSessions?.forEach((vs: VisitSessionInterface) => {
-                  const st: ServiceTimeInterface | null = ArrayHelper.getOne(CheckinHelper.serviceTimes, "id", vs.session?.serviceTimeId || "");
-                  const group: GroupInterface = ArrayHelper.getOne(st?.groups || [], "id", vs.session?.groupId || "");
-                  //const group: GroupInterface = ArrayHelper.getOne()
-                  let name = group.name || "none";
-                  if (st != null) name = (st.name || "") + " - " + name;
-                  // if (groups.length > 0) groups.push(<Text key={vs.id?.toString() + "comma"} style={{ color: StyleConstants.grayColor }}>, </Text>);
-                  groups.push(<span key={vs.id?.toString()}>{name}</span>);
-                });
-                return (<div className="groups">{groups}</div>);
+        visit?.visitSessions?.forEach((vs: VisitSessionInterface) => {
+          const st: ServiceTimeInterface | null = ArrayHelper.getOne(CheckinHelper.serviceTimes, "id", vs.session?.serviceTimeId || "");
+          const group: GroupInterface = ArrayHelper.getOne(st?.groups || [], "id", vs.session?.groupId || "");
+          //const group: GroupInterface = ArrayHelper.getOne()
+          let name = group.name || "none";
+          if (st != null) name = (st.name || "") + " - " + name;
+          // if (groups.length > 0) groups.push(<Text key={vs.id?.toString() + "comma"} style={{ color: StyleConstants.grayColor }}>, </Text>);
+          groups.push(<span key={vs.id?.toString()}>{name}</span>);
+        });
+        return (<div className="groups">{groups}</div>);
       }
     }
   }
 
   const getMembers = () => {
     if (showGroups) return (<Groups selectedHandler={handleGroupSelected} />)
-    else if (isLoading) return (<Spinner />)
+    else if (isLoading) return (<Loading />)
     else {
       let result: JSX.Element[] = [];
       CheckinHelper.householdMembers.forEach(m => {

@@ -1,8 +1,7 @@
 import React from "react";
-import { ApiHelper, EnvironmentHelper } from "../../components";
+import { ApiHelper, EnvironmentHelper, Loading } from "../../components";
 import { Row, Col } from "react-bootstrap"
 import { PersonInterface } from "../../appBase/interfaces"
-import { Spinner } from "react-activity";
 
 interface Props { person: PersonInterface, selectedHandler: (personId: string) => void }
 
@@ -24,13 +23,13 @@ export const Household: React.FC<Props> = (props) => {
   }
 
   const getMembers = () => {
-    if (isLoading) return (<Spinner />)
+    if (isLoading) return (<Loading size="sm" />)
     else {
       let result: JSX.Element[] = [];
-            members?.forEach(m => {
-              if (m.id !== props.person.id) result.push(getMember(m))
-            });
-            return (result);
+      members?.forEach(m => {
+        if (m.id !== props.person.id) result.push(getMember(m))
+      });
+      return (result);
     }
   }
 

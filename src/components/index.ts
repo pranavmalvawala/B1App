@@ -1,5 +1,5 @@
 export * from "../helpers"
-export { ErrorMessages, DisplayBox, InputBox } from "../appBase/components"
+export { ErrorMessages, DisplayBox, InputBox, Loading } from "../appBase/components"
 export { Header } from "./Header"
-export { Loading } from "./Loading"
+export { LoadingPage } from "./LoadingPage"
 export { Theme } from "./Theme"

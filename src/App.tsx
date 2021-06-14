@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
 import { UserProvider } from "./UserContext"
 import { ControlPanel } from "./ControlPanel"
-import { ConfigHelper, ConfigurationInterface, Loading, Theme } from "./components"
+import { ConfigHelper, ConfigurationInterface, LoadingPage, Theme } from "./components"
 
 const App: React.FC = () => {
   const [config, setConfig] = React.useState<ConfigurationInterface>({} as ConfigurationInterface);
@@ -23,7 +23,7 @@ const App: React.FC = () => {
     loadConfig();
   }, [loadConfig]);
 
-  if (config.keyName === undefined) return <Loading config={config} />
+  if (config.keyName === undefined) return <LoadingPage config={config} />
   else return (
     <UserProvider>
       <CookiesProvider>

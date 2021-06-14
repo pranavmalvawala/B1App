@@ -1,6 +1,5 @@
 import React from "react";
-import { ApiHelper, CheckinHelper } from "../../components";
-import { Spinner } from "react-activity";
+import { ApiHelper, CheckinHelper, Loading } from "../../components";
 import { ServiceInterface } from "../../appBase/interfaces";
 import { GroupInterface, GroupServiceTimeInterface } from "../../appBase/interfaces";
 import { ArrayHelper } from "../../appBase/helpers";
@@ -23,7 +22,7 @@ export const Services: React.FC<Props> = (props) => {
   }
 
   const getResults = () => {
-    if (isLoading) return (<Spinner />)
+    if (isLoading) return (<Loading />)
     else {
       let result: JSX.Element[] = [];
       services.forEach(s => {
@@ -56,7 +55,7 @@ export const Services: React.FC<Props> = (props) => {
       st.groups = [];
       ArrayHelper.getAll(CheckinHelper.groupServiceTimes, "serviceTimeId", st.id).forEach((gst: GroupServiceTimeInterface) => {
         const g: GroupInterface = ArrayHelper.getOne(CheckinHelper.groups, "id", gst.groupId);
-                st.groups?.push(g);
+        st.groups?.push(g);
       })
     });
     console.log(JSON.stringify(CheckinHelper.serviceTimes));
@@ -72,7 +71,7 @@ export const Services: React.FC<Props> = (props) => {
   return (
     <>
       <h2>Select a service:</h2>
-      { getResults()}
+      {getResults()}
     </>
   )
 }
