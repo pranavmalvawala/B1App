@@ -6,6 +6,7 @@ import { Authenticated } from "./Authenticated";
 import UserContext from "./UserContext";
 import { LoginPage } from "./appBase/pageComponents/LoginPage";
 import { AppearanceHelper } from "./appBase/helpers/AppearanceHelper";
+import { ChurchInterface, LoginResponseInterface, PersonInterface } from "./appBase/interfaces";
 
 export const Login: React.FC = (props: any) => {
   const [cookies] = useCookies(["jwt"]);
@@ -14,6 +15,15 @@ export const Login: React.FC = (props: any) => {
   const successCallback = async () => {
     PersonHelper.person = await ApiHelper.get(`/people/${UserHelper.currentChurch.personId}`, "MembershipApi");
     context.setUserName(UserHelper.currentChurch.id.toString());
+  }
+
+  const performGuestLogin = async (loginResponse: LoginResponseInterface) => {
+    //const displayName = await UserHelper.loginAsGuest(churches, context);
+    const response: { church: ChurchInterface, person: PersonInterface } = await UserHelper.loginAsGuest(loginResponse);
+    UserHelper.selectChurch(context, undefined, response.church.subDomain);
+    context.setUserName(UserHelper.currentChurch.id.toString());
+
+    context.setUserName(response.person.name.display);
   }
 
   const context = React.useContext(UserContext);
@@ -34,6 +44,9 @@ export const Login: React.FC = (props: any) => {
         requiredKeyName={false}
         appName="B1"
         logo={AppearanceHelper.getLogoLight(ConfigHelper.current?.appearance, null)}
+        performGuestLogin={performGuestLogin}
+        allowRegister={true}
+        appUrl={window.location.href}
       />
     );
   } else {
