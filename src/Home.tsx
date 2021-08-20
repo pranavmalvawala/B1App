@@ -12,7 +12,6 @@ export const Home = () => {
   const [iframeSrc, setIframeSrc] = React.useState(bibleUrl);
 
   const handleTabClick = (linkType: string, linkData: string, url: string) => {
-    console.log(linkData);
     switch (linkType) {
       case "stream": setIframeSrc("https://" + ConfigHelper.current.church.subDomain + ".streaminglive.church/"); break;
       case "bible": setIframeSrc(bibleUrl); break;
