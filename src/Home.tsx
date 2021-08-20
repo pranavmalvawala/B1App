@@ -1,9 +1,10 @@
 import React from "react";
-import { ConfigHelper } from "./components"
+import { ConfigHelper, PersonHelper } from "./components"
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components";
 import { CheckinPage } from "./checkin/CheckinPage";
 import { DirectoryPage } from "./directory/DirectoryPage";
+import { DonationPages } from "./donation/DonationPage";
 
 export const Home = () => {
 
@@ -11,7 +12,6 @@ export const Home = () => {
   const [iframeSrc, setIframeSrc] = React.useState(bibleUrl);
 
   const handleTabClick = (linkType: string, linkData: string, url: string) => {
-    console.log(linkData);
     switch (linkType) {
       case "stream": setIframeSrc("https://" + ConfigHelper.current.church.subDomain + ".streaminglive.church/"); break;
       case "bible": setIframeSrc(bibleUrl); break;
@@ -19,6 +19,7 @@ export const Home = () => {
       case "url": setIframeSrc(url); break;
       case "checkin": setIframeSrc("/checkin/"); break;
       case "directory": setIframeSrc("/directory/"); break;
+      case "donation": setIframeSrc("/donation/"); break;
     }
 
   }
@@ -31,6 +32,9 @@ export const Home = () => {
         break;
       case "/directory/":
         result = (<div style={{ flex: 1 }}> <DirectoryPage /></div>)
+        break;
+      case "/donation/":
+        result = (<div style={{ flex: 1 }}> <DonationPages /></div>)
         break;
       default:
         result = (<iframe title="Content" src={iframeSrc} style={{ flex: 1 }} />);

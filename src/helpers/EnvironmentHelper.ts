@@ -5,6 +5,7 @@ export class EnvironmentHelper {
     private static B1Api = "";
     private static MembershipApi = "";
     private static AttendanceApi = "";
+    private static GivingApi = "";
     static ContentRoot = "";
     static ChurchAppsUrl = "";
 
@@ -18,7 +19,8 @@ export class EnvironmentHelper {
         { keyName: "AccessApi", url: EnvironmentHelper.AccessApi, jwt: "", permisssions: [] },
         { keyName: "AttendanceApi", url: EnvironmentHelper.AttendanceApi, jwt: "", permisssions: [] },
         { keyName: "MembershipApi", url: EnvironmentHelper.MembershipApi, jwt: "", permisssions: [] },
-        { keyName: "B1Api", url: EnvironmentHelper.B1Api, jwt: "", permisssions: [] }
+        { keyName: "B1Api", url: EnvironmentHelper.B1Api, jwt: "", permisssions: [] },
+        { keyName: "GivingApi", url: EnvironmentHelper.GivingApi, jwt: "", permisssions: [] }
       ];
     }
 
@@ -27,6 +29,7 @@ export class EnvironmentHelper {
       EnvironmentHelper.MembershipApi = process.env.REACT_APP_MEMBERSHIP_API || "";
       EnvironmentHelper.AttendanceApi = process.env.REACT_APP_ATTENDANCE_API || "";
       EnvironmentHelper.B1Api = process.env.REACT_APP_B1_API || "";
+      EnvironmentHelper.GivingApi = process.env.REACT_APP_GIVING_API || "";
       EnvironmentHelper.ContentRoot = process.env.REACT_APP_CONTENT_ROOT || "";
       EnvironmentHelper.ChurchAppsUrl = process.env.REACT_APP_CHURCH_APPS_URL || "";
     }
@@ -37,6 +40,7 @@ export class EnvironmentHelper {
       EnvironmentHelper.AttendanceApi = "https://attendanceapi.staging.churchapps.org";
       EnvironmentHelper.MembershipApi = "https://membershipapi.staging.churchapps.org";
       EnvironmentHelper.B1Api = "https://api.staging.b1.church";
+      EnvironmentHelper.GivingApi ="https://givingapi.staging.churchapps.org";
       EnvironmentHelper.ContentRoot = "https://content.staging.churchapps.org";
       EnvironmentHelper.ChurchAppsUrl = "https://staging.churchapps.org";
     }
@@ -47,6 +51,7 @@ export class EnvironmentHelper {
       EnvironmentHelper.AttendanceApi = "https://attendanceapi.churchapps.org";
       EnvironmentHelper.MembershipApi = "https://membershipapi.churchapps.org";
       EnvironmentHelper.B1Api = "https://api.b1.church";
+      EnvironmentHelper.GivingApi = "https://givingapi.churchapps.org";
       EnvironmentHelper.ContentRoot = "https://content.churchapps.org";
       EnvironmentHelper.ChurchAppsUrl = "https://churchapps.org"
     }
