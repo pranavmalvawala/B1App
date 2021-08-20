@@ -108,6 +108,7 @@ export const TabEdit: React.FC<Props> = (props) => {
             <option value="directory">Member Directory</option>
             <option value="stream">Live Stream</option>
             <option value="checkin">Checkin</option>
+            <option value="donation">Donation</option>
           </select>
         </div>
         {getUrl()}
