@@ -46,8 +46,8 @@ export const Header = () => {
           </NavDropdown>
           <div className="d-md-none">
             <Nav.Link disabled><b className="text-muted">{personTitle}</b></Nav.Link>
-            <Nav.Link>Profile</Nav.Link>
-            <Nav.Link>Sign out</Nav.Link>
+            <Nav.Link href={UserHelper.createAppUrl(EnvironmentHelper.AccountsAppUrl, "/profile")} target="_blank">Profile</Nav.Link>
+            <Nav.Link href="/logout">Sign out</Nav.Link>
           </div>
         </>
       );
