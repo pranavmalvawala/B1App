@@ -33,6 +33,7 @@ export const Login: React.FC = (props: any) => {
     let search = new URLSearchParams(props.location.search);
     let jwt = search.get("jwt") || cookies.jwt;
     let auth = search.get("auth");
+    let returnUrl = search.get("returnUrl") || "";
     if (!jwt) jwt = "";
     if (!auth) auth = "";
 
@@ -48,6 +49,7 @@ export const Login: React.FC = (props: any) => {
         appName="B1"
         logo={AppearanceHelper.getLogoLight(ConfigHelper.current?.appearance, null)}
         appUrl={window.location.href}
+        returnUrl={returnUrl}
       />
     );
   } else {
