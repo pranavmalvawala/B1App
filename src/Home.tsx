@@ -49,7 +49,7 @@ export const Home = () => {
   return (
     <div id="root">
       <div id="appWrapper" className="container">
-        <div id="headerFlex"><Header /></div>
+        {/* <div id="headerFlex"><Header /></div> */}
         <div id="bodyFlex">
           <div id="sidebarFlex">
             <Sidebar tabClickHandler={handleTabClick} />

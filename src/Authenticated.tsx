@@ -5,6 +5,7 @@ import { Home } from "./Home";
 import { Page } from "./Page";
 import { CheckinPage } from "./checkin/CheckinPage";
 import UserContext from "./UserContext";
+import { Header } from "./components";
 import { Donation } from "./donation/Donation";
 
 interface Props {
@@ -15,6 +16,8 @@ export const Authenticated: React.FC<Props> = (props) => {
   let user = React.useContext(UserContext)?.userName; //to force rerender on login
   if (user || true) return (
     <>
+      <Header />
+      <div id="navSpacer"></div>
       <Switch>
         <Route path="/login"><Redirect to={props.location} /></Route>
         <Route path="/admin/settings"><SettingsPage /></Route>
