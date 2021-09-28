@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ConfigHelper, LinkInterface, UserHelper, PersonHelper, EnvironmentHelper, Permissions } from ".";
-import { Row, Col, Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { AppearanceHelper } from "../appBase/helpers/AppearanceHelper";
 import { Link } from "react-router-dom"
 
@@ -13,10 +13,10 @@ export const Header = () => {
     }
   }, [])
 
-  const toggleSidebar = (e: React.MouseEvent) => {
-    e.preventDefault();
-    $("#sidebarFlex").toggle();
-  }
+  // const toggleSidebar = (e: React.MouseEvent) => {
+  //   e.preventDefault();
+  //   $("#sidebarFlex").toggle();
+  // }
 
   const getLinks = tabs.length > 0 && (
     <NavDropdown title="Links" id="basic-nav-dropdown" className="links-dropdown">
@@ -77,7 +77,7 @@ export const Header = () => {
           <Nav className="mr-auto">
             {getUserTabs()}
             {getLinks}
-            <hr className="dropdown-divider d-md-hidden" role="separator" />
+            <hr className="dropdown-divider d-md-hidden" />
           </Nav>
           <Nav>
             {getLoginLink()}

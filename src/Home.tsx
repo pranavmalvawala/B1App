@@ -1,7 +1,7 @@
 import React from "react";
 import { ConfigHelper } from "./components"
 import { Sidebar } from "./components/Sidebar";
-import { Header } from "./components";
+// import { Header } from "./components";
 import { CheckinPage } from "./checkin/CheckinPage";
 import { DirectoryPage } from "./directory/DirectoryPage";
 import { Donation } from "./donation/Donation";
