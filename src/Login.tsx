@@ -45,7 +45,7 @@ export const Login: React.FC = (props: any) => {
         loginSuccessOverride={successCallback}
         churchRegisteredCallback={trackChurchRegister}
         userRegisteredCallback={trackUserRegister}
-        requiredKeyName={false}
+        keyName={window.location.hostname.split(".")[0]}
         appName="B1"
         logo={AppearanceHelper.getLogoLight(ConfigHelper.current?.appearance, null)}
         appUrl={window.location.href}
