@@ -4,12 +4,15 @@ import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components";
 import { CheckinPage } from "./checkin/CheckinPage";
 import { DirectoryPage } from "./directory/DirectoryPage";
-import { DonationPages } from "./donation/DonationPage";
+import { Donation } from "./donation/Donation";
 
 export const Home = () => {
 
   const bibleUrl = "https://biblia.com/api/plugins/embeddedbible?layout=normal&historyButtons=false&resourcePicker=false&shareButton=false&textSizeButton=false&startingReference=Ge1.1&resourceName=nirv";
-  const [iframeSrc, setIframeSrc] = React.useState(bibleUrl);
+  const qs = new URLSearchParams(window.location.search);
+  const hasTab = qs.has("tab");
+  const defaultTab = hasTab ? "/" + qs.get("tab") + "/" : bibleUrl;
+  const [iframeSrc, setIframeSrc] = React.useState(defaultTab);
 
   const handleTabClick = (linkType: string, linkData: string, url: string) => {
     switch (linkType) {
@@ -20,8 +23,8 @@ export const Home = () => {
       case "checkin": setIframeSrc("/checkin/"); break;
       case "directory": setIframeSrc("/directory/"); break;
       case "donation": setIframeSrc("/donation/"); break;
+      default: setIframeSrc(bibleUrl); break;
     }
-
   }
 
   const getContentComponent = () => {
@@ -34,7 +37,7 @@ export const Home = () => {
         result = (<div style={{ flex: 1 }}> <DirectoryPage /></div>)
         break;
       case "/donation/":
-        result = (<div style={{ flex: 1 }}> <DonationPages /></div>)
+        result = (<div style={{ flex: 1 }}> <Donation /></div>)
         break;
       default:
         result = (<iframe title="Content" src={iframeSrc} style={{ flex: 1 }} />);
