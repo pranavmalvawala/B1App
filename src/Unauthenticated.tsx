@@ -10,7 +10,6 @@ import { Donation } from "./donation/Donation";
 export const Unauthenticated = () => (
   <>
     <Header />
-    <div id="navSpacer"></div>
     <Switch>
       <Route path="/login" component={Login}></Route>
       <Route path="/pages/:churchId/:id" component={Page}></Route>

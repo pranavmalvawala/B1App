@@ -17,7 +17,6 @@ export const Authenticated: React.FC<Props> = (props) => {
   if (user || true) return (
     <>
       <Header />
-      <div id="navSpacer"></div>
       <Switch>
         <Route path="/login"><Redirect to={props.location} /></Route>
         <Route path="/admin/settings"><SettingsPage /></Route>

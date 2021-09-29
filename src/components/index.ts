@@ -3,3 +3,4 @@ export { ErrorMessages, DisplayBox, InputBox, Loading } from "../appBase/compone
 export { Header } from "./Header"
 export { LoadingPage } from "./LoadingPage"
 export { Theme } from "./Theme"
+export { NavItems } from "./NavItems"

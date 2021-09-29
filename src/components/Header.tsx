@@ -1,89 +1,76 @@
-import React, { useEffect, useState } from "react";
-import { ConfigHelper, LinkInterface, UserHelper, PersonHelper, EnvironmentHelper, Permissions } from ".";
-import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import React from "react";
+import { ConfigHelper, UserHelper, NavItems } from ".";
+import { Container, Col } from "react-bootstrap";
 import { AppearanceHelper } from "../appBase/helpers/AppearanceHelper";
 import { Link } from "react-router-dom"
 
 export const Header = () => {
-  const [tabs, setTabs] = useState<LinkInterface[]>([])
+  const getLogin = () => {
+    const { firstName, lastName } = UserHelper.user || {}
+    if (UserHelper.user) return (
+      <a href="about:blank" id="userMenuLink" data-toggle="collapse" data-target="#userMenu" aria-controls="navbarToggleMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="/images/sample-profile.png" alt="user" />
+        {firstName} {lastName} <i className="fas fa-caret-down"></i>
+      </a>
+    )
 
-  useEffect(() => {
-    if (ConfigHelper.current?.tabs) {
-      setTabs(ConfigHelper.current?.tabs)
-    }
-  }, [])
+    return <Link to="/login"><i className="fas fa-sign-in-alt"></i> Log in</Link>
+  }
 
-  // const toggleSidebar = (e: React.MouseEvent) => {
-  //   e.preventDefault();
-  //   $("#sidebarFlex").toggle();
-  // }
-
-  const getLinks = tabs.length > 0 && (
-    <NavDropdown title="Links" id="basic-nav-dropdown" className="links-dropdown">
-      {
-        tabs.map((t) => (
-          <NavDropdown.Item href={t.id} disabled key={t.id}><i className={t.icon}></i> {t.text}</NavDropdown.Item>
-        ))
+  const toggleMenuItems = () => {
+    const { firstName, lastName } = UserHelper.user || {}
+    const userName = `${firstName} ${lastName}`
+    let menuNav = document.getElementById("nav-menu");
+    let listItems = Array.from(menuNav.children);
+    listItems.forEach((_, i) => {
+      if (i < (userName?.length <= 5 ? 3 : userName?.length < 24 ? 2 : 1)) {
+        if (listItems[i].getAttribute("aria-label") !== "logoutBtn") {
+          listItems[i].classList.add("d-md-none");
+        }
+      } else if (
+        i < (userName?.length <= 5 ? 5 : userName?.length < 24 ? 4 : 3)
+      ) {
+        listItems[i].classList.add("d-lg-none");
+      } else if (i < (userName?.length < 24 ? 6 : 5)) {
+        listItems[i].classList.add("d-xl-none");
       }
-    </NavDropdown>
-  )
+    });
+  };
 
-  const getLoginLink = () => {
-    if (UserHelper.user) {
-      let photo = <i className="fas fa-user" />
-      let name: string = ""
-      const { firstName, lastName } = UserHelper.user
-      if (firstName) name = `${firstName} ${lastName}`
-      if (PersonHelper.person?.name) name = PersonHelper.person.name.display
-      if (PersonHelper.person?.photo) photo = <img src={EnvironmentHelper.ContentRoot + PersonHelper.person.photo} alt="avatar" />
-
-      const personTitle = <>{photo} {name}</>
-      return (
-        <>
-          <NavDropdown title={personTitle} id="basic-nav-dropdown" className="d-none d-md-block">
-            <NavDropdown.Item href={UserHelper.createAppUrl(EnvironmentHelper.AccountsAppUrl, "/profile")} target="_blank">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="/logout">Sign out</NavDropdown.Item>
-          </NavDropdown>
-          <div className="d-md-none">
-            <Nav.Link disabled><b className="text-muted">{personTitle}</b></Nav.Link>
-            <Nav.Link href={UserHelper.createAppUrl(EnvironmentHelper.AccountsAppUrl, "/profile")} target="_blank">Profile</Nav.Link>
-            <Nav.Link href="/logout">Sign out</Nav.Link>
-          </div>
-        </>
-      );
-    }
-
-    return (<Nav.Link href="/login" className="btn sign-in-btn">Sign in</Nav.Link>);
-  }
-
-  const getUserTabs = () => {
-    let tabs: JSX.Element[] = [];
-    tabs.push(<Nav.Link>Bible</Nav.Link>)
-    if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(<Nav.Link as={Link} to="/admin/settings">Settings</Nav.Link>)
-
-    return tabs
-  }
+  React.useEffect(() => { toggleMenuItems(); });
 
   return (
-    <Navbar bg="light" expand="md" fixed="top" className="w-100">
-      <Container>
-        <Navbar.Brand href="#home">
-          <Link className="navbar-brand" to="/">
-            <img src={AppearanceHelper.getLogoLight(ConfigHelper.current?.appearance, "/images/logo.png")} alt="logo" />
-          </Link>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="hamburger" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            {getUserTabs()}
-            {getLinks}
-            <hr className="dropdown-divider d-md-hidden" />
-          </Nav>
-          <Nav>
-            {getLoginLink()}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <>
+      <div id="navbar" className=" fixed-top">
+        <Container>
+          <div className="d-flex justify-content-between">
+            <div className="app-logo">
+              <Link className="navbar-brand" to="/">
+                <img src={AppearanceHelper.getLogoLight(ConfigHelper.current?.appearance, "/images/logo.png")} alt="logo" />
+              </Link>
+            </div>
+
+            <Col className="d-none d-md-block" style={{ borderLeft: "2px solid #EEE", borderRight: "2px solid #EEE", maxWidth: "703px", margin: "0 15px" }}>
+              <ul id="nav-main" className="nav nav-fill d-flex overflow-hidden" style={{ height: "55px" }}>
+                <NavItems prefix="main" />
+              </ul>
+            </Col>
+
+            <div className="d-flex align-items-center" id="navRight">
+              {getLogin()}
+            </div>
+          </div>
+        </Container>
+        <div className="container collapse" id="userMenu">
+          <div>
+            <ul id="nav-menu" className="nav d-flex flex-column">
+              <NavItems />
+              <Link to="/logout" aria-label="logoutBtn"><i className="fas fa-lock"></i> Logout</Link>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="navSpacer" />
+    </>
   )
 }
