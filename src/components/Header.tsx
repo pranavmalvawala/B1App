@@ -19,19 +19,19 @@ export const Header = () => {
 
   const toggleMenuItems = () => {
     const { firstName, lastName } = UserHelper.user || {}
-    const userName = `${firstName} ${lastName}`
+    const userName = `${firstName || ""} ${lastName || ""}`
+    const usernameLength = userName.length
     let menuNav = document.getElementById("nav-menu");
     let listItems = Array.from(menuNav.children);
+    listItems.pop()
     listItems.forEach((_, i) => {
-      if (i < (userName?.length <= 5 ? 3 : userName?.length < 24 ? 2 : 1)) {
-        if (listItems[i].getAttribute("aria-label") !== "logoutBtn") {
-          listItems[i].classList.add("d-md-none");
-        }
+      if (i < (usernameLength <= 5 ? 3 : usernameLength < 24 ? 2 : 1)) {
+        listItems[i].classList.add("d-md-none");
       } else if (
-        i < (userName?.length <= 5 ? 5 : userName?.length < 24 ? 4 : 3)
+        i < (usernameLength <= 5 ? 5 : usernameLength < 24 ? 4 : 3)
       ) {
         listItems[i].classList.add("d-lg-none");
-      } else if (i < (userName?.length < 24 ? 6 : 5)) {
+      } else if (i < (usernameLength < 24 ? 6 : 5)) {
         listItems[i].classList.add("d-xl-none");
       }
     });
