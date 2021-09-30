@@ -165,3 +165,6 @@ button.datetime-local-datepicker-button {background-color:#FFF;border:0px;width:
 .tab-type-select option:disabled {
   background-color: #eee;
 }
+.vh-85 {
+  height: 85vh;
+}

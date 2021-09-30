@@ -7,6 +7,7 @@ import { CheckinPage } from "./checkin/CheckinPage";
 import { Header } from "./components";
 import { DonationPage } from "./donation/DonationPage";
 import { DirectoryPage } from "./directory/DirectoryPage"
+import { StreamPage } from "./stream/StreamPage"
 
 export const Unauthenticated = () => (
   <>
@@ -16,7 +17,7 @@ export const Unauthenticated = () => (
       <Route path="/pages/:churchId/:id" component={Page} />
       <Route path="/checkin" component={CheckinPage} />
       <Route path="/donate" component={DonationPage} />
-      <Route path="/stream" component={() => <h1>Stream Page</h1>} />
+      <Route path="/stream" component={StreamPage} />
       <Route path="/directory" component={DirectoryPage} />
       <Route path="/"><Home /></Route>
     </Switch>
