@@ -5,16 +5,19 @@ import { Home } from "./Home";
 import { Page } from "./Page"
 import { CheckinPage } from "./checkin/CheckinPage";
 import { Header } from "./components";
-import { Donation } from "./donation/Donation";
+import { DonationPage } from "./donation/DonationPage";
+import { DirectoryPage } from "./directory/DirectoryPage"
 
 export const Unauthenticated = () => (
   <>
     <Header />
     <Switch>
-      <Route path="/login" component={Login}></Route>
-      <Route path="/pages/:churchId/:id" component={Page}></Route>
-      <Route path="/checkin/" component={CheckinPage}></Route>
-      <Route path="/donate" component={Donation}></Route>
+      <Route path="/login" component={Login} />
+      <Route path="/pages/:churchId/:id" component={Page} />
+      <Route path="/checkin" component={CheckinPage} />
+      <Route path="/donate" component={DonationPage} />
+      <Route path="/stream" component={() => <h1>Stream Page</h1>} />
+      <Route path="/directory" component={DirectoryPage} />
       <Route path="/"><Home /></Route>
     </Switch>
   </>

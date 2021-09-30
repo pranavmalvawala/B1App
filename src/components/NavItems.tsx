@@ -14,14 +14,23 @@ interface Tab {
   outsideLink?: boolean;
 }
 
+const LINK_TYPE: { [key: string]: string } = {
+  donation: "/donate",
+  stream: "/stream",
+  checkin: "/checkin",
+  directory: "/directory"
+}
+
 export function NavItems({ prefix }: Props) {
   const location = useLocation()
 
   const getSelected = (): string => {
     let url = location.pathname;
-    let result = "Bible";
-    if (url.indexOf("/bible") > -1) result = "Bible";
-    if (url.indexOf("/admin/settings") > -1) result ="Settings"
+    let result = ""
+    if (url.indexOf("/admin/settings") > -1) result = "Settings"
+    for (let i in LINK_TYPE) {
+      if (url.indexOf(LINK_TYPE[i]) > -1) result = ConfigHelper.current.tabs.filter(t => t.linkType === i)[0]?.text
+    }
 
     return result;
   };
@@ -48,11 +57,33 @@ export function NavItems({ prefix }: Props) {
   const getTabs = () => {
     let tabs: any = []
 
-    tabs.push(getTab({ key: "Bible", url: "/bible", icon: "fas fa-bible", label: "Bible" }))
     if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(getTab({ key: "Settings", url: "/admin/settings", icon: "fas fa-cog", label: "Settings" }));
-
+    console.log(ConfigHelper.current.tabs)
     ConfigHelper.current.tabs.forEach(t => {
-      tabs.push(getTab({ key: t.text, url: t.url, icon: t.icon, label: t.text}))
+      tabs.push(getTab({
+        key: t.text,
+        url: LINK_TYPE[t.linkType] || t.url,
+        icon: t.icon,
+        label: t.text
+      }))
+
+      // switch (t.linkType) {
+      //   case "donation":
+      //     tabs.push(getTab({ key: t.text, url: "/donate", icon: t.icon, label: t.text }))
+      //     break;
+      //   case "checkin":
+      //     tabs.push(getTab({ key: t.text, url: "/checkin", icon: t.icon, label: t.text }))
+      //     break
+      //   case "stream":
+      //     tabs.push(getTab({ key: t.text, url: "/stream", icon: t.icon, label: t.text }))
+      //     break
+      //   case "directory":
+      //     tabs.push(getTab({ key: t.text, url: "/directory", icon: t.icon, label: t.text }))
+      //     break
+      //   default:
+      //     tabs.push(getTab({ key: t.text, url: t.url, icon: t.icon, label: t.text}))
+      //     break
+      // }
     })
 
     return tabs

@@ -4,7 +4,7 @@ import { Sidebar } from "./components/Sidebar";
 // import { Header } from "./components";
 import { CheckinPage } from "./checkin/CheckinPage";
 import { DirectoryPage } from "./directory/DirectoryPage";
-import { Donation } from "./donation/Donation";
+import { DonationPage } from "./donation/DonationPage";
 
 export const Home = () => {
 
@@ -37,7 +37,7 @@ export const Home = () => {
         result = (<div style={{ flex: 1 }}> <DirectoryPage /></div>)
         break;
       case "/donation/":
-        result = (<div style={{ flex: 1 }}> <Donation /></div>)
+        result = (<div style={{ flex: 1 }}> <DonationPage /></div>)
         break;
       default:
         result = (<iframe title="Content" src={iframeSrc} style={{ flex: 1 }} />);

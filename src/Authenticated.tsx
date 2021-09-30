@@ -6,7 +6,8 @@ import { Page } from "./Page";
 import { CheckinPage } from "./checkin/CheckinPage";
 import UserContext from "./UserContext";
 import { Header } from "./components";
-import { Donation } from "./donation/Donation";
+import { DonationPage } from "./donation/DonationPage";
+import { DirectoryPage } from "./directory/DirectoryPage"
 
 interface Props {
     location: any;
@@ -21,8 +22,10 @@ export const Authenticated: React.FC<Props> = (props) => {
         <Route path="/login"><Redirect to={props.location} /></Route>
         <Route path="/admin/settings"><SettingsPage /></Route>
         <Route path="/pages/:churchId/:id" component={Page}></Route>
-        <Route path="/checkin/" component={CheckinPage}></Route>
-        <Route path="/donate" component={Donation}></Route>
+        <Route path="/checkin" component={CheckinPage} />
+        <Route path="/donate" component={DonationPage} />
+        <Route path="/stream" component={() => <h1>Stream Page</h1>} />
+        <Route path="/directory" component={DirectoryPage} />
         <Route path="/"><Home /></Route>
       </Switch>
     </>
