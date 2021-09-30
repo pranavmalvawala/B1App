@@ -1,5 +1,5 @@
 import React from "react";
-import { InputBox, LinkInterface, ApiHelper, UniqueIdHelper } from "."
+import { InputBox, LinkInterface, ApiHelper, UniqueIdHelper, ConfigHelper } from "."
 import { PageInterface, UserHelper, EnvironmentHelper } from ".";
 
 interface Props { currentTab: LinkInterface, updatedFunction?: () => void }
@@ -82,6 +82,14 @@ export const TabEdit: React.FC<Props> = (props) => {
     } else return null;
   }
 
+  const isDisabled = (tabName: string) => {
+    console.log(ConfigHelper.current.tabs)
+    if (ConfigHelper.current.tabs.some(t => t.linkType === tabName)) {
+      return true
+    }
+    return false
+  }
+
   React.useEffect(() => { setCurrentTab(props.currentTab); }, [props.currentTab]);
 
   return (
@@ -102,13 +110,13 @@ export const TabEdit: React.FC<Props> = (props) => {
         </div>
         <div className="form-group">
           <label>Type</label>
-          <select className="form-control" name="type" value={currentTab?.linkType} onChange={handleChange}>
+          <select className="form-control tab-type-select" name="type" value={currentTab?.linkType} onChange={handleChange}>
             <option value="url">External Url</option>
             <option value="page">Page</option>
-            <option value="directory">Member Directory</option>
-            <option value="stream">Live Stream</option>
-            <option value="checkin">Checkin</option>
-            <option value="donation">Donation</option>
+            <option value="directory" disabled={isDisabled("directory")}>Member Directory</option>
+            <option value="stream" disabled={isDisabled("stream")}>Live Stream</option>
+            <option value="checkin" disabled={isDisabled("checkin")}>Checkin</option>
+            <option value="donation" disabled={isDisabled("donation")}>Donation</option>
           </select>
         </div>
         {getUrl()}

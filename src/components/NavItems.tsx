@@ -50,7 +50,7 @@ export function NavItems({ prefix }: Props) {
 
     tabs.push(getTab({ key: "Bible", url: "/bible", icon: "fas fa-bible", label: "Bible" }))
     if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(getTab({ key: "Settings", url: "/admin/settings", icon: "fas fa-cog", label: "Settings" }));
-    console.log(ConfigHelper.current.tabs)
+
     ConfigHelper.current.tabs.forEach(t => {
       tabs.push(getTab({ key: t.text, url: t.url, icon: t.icon, label: t.text}))
     })
