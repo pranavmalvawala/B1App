@@ -8,6 +8,7 @@ import { Header } from "./components";
 import { DonationPage } from "./donation/DonationPage";
 import { DirectoryPage } from "./directory/DirectoryPage"
 import { StreamPage } from "./stream/StreamPage"
+import { UrlPage } from "./url/UrlPage"
 
 export const Unauthenticated = () => (
   <>
@@ -19,6 +20,7 @@ export const Unauthenticated = () => (
       <Route path="/donate" component={DonationPage} />
       <Route path="/stream" component={StreamPage} />
       <Route path="/directory" component={DirectoryPage} />
+      <Route path="/url" component={UrlPage} />
       <Route path="/"><Home /></Route>
     </Switch>
   </>
