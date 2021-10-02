@@ -8,3 +8,7 @@ REACT_APP_GIVING_API=http://localhost:8084
 REACT_APP_ATTENDANCE_API=http://localhost:8085
 REACT_APP_ACCOUNTS_APP_URL=https://accounts.staging.churchapps.org
 REACT_APP_STREAMINGLIVE_URL=https://{key}.staging.streaminglive.church
+REACT_APP_CONTENT_ROOT=https://content.staging.churchapps.org
+REACT_APP_CHURCH_APPS_URL=https://staging.churchapps.org
+
+# REACT_APP_GOOGLE_ANALYTICS_TAG=
