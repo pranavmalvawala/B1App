@@ -26,7 +26,7 @@ export function NavItems({ prefix }: Props) {
     let tabs: any = []
 
     if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(getTab({ key: "Settings", url: "/admin/settings", icon: "fas fa-cog", label: "Settings" }));
-    console.log(ConfigHelper.current.tabs)
+
     ConfigHelper.current.tabs.forEach(t => {
       switch (t.linkType) {
         case "donation":
@@ -44,8 +44,10 @@ export function NavItems({ prefix }: Props) {
         case "url":
           tabs.push(getTab({ key: t.text, url: `/url/${t.id}`, icon: t.icon, label: t.text }))
           break
+        case "page":
+          tabs.push(getTab({ key: t.text, url: `/pages/${t.churchId}/${t.linkData}`, icon: t.icon, label: t.text }))
+          break
         default:
-          tabs.push(getTab({ key: t.text, url: t.url, icon: t.icon, label: t.text}))
           break
       }
     })

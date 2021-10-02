@@ -9,7 +9,14 @@ export const TabEdit: React.FC<Props> = (props) => {
   const [pages, setPages] = React.useState<PageInterface[]>(null);
   const checkDelete = () => { if (!UniqueIdHelper.isMissing(currentTab?.id)) return handleDelete; else return null; }
   const handleCancel = () => { props.updatedFunction(); }
-  const loadPages = () => { ApiHelper.get("/pages/", "B1Api").then((data: PageInterface[]) => setPages(data)) }
+  const loadPages = () => { ApiHelper.get("/pages/", "B1Api").then((data: PageInterface[]) => {
+    setPages(data)
+
+    if (!currentTab?.linkData) {
+      const linkData = data[data.length - 1]?.id || ""
+      setCurrentTab({ ...currentTab, linkData: linkData })
+    }
+  }) }
 
   const handleDelete = () => {
     if (window.confirm("Are you sure you wish to delete this tab?")) {
