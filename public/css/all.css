@@ -168,3 +168,8 @@ button.datetime-local-datepicker-button {background-color:#FFF;border:0px;width:
 .vh-85 {
   height: 85vh;
 }
+.full-frame {
+  width: 100%;
+  height: calc(100vh - 62px);
+  margin-top: -27px;
+}
