@@ -2,9 +2,11 @@ import React from "react";
 import { ConfigHelper, UserHelper, NavItems } from ".";
 import { Container, Col } from "react-bootstrap";
 import { AppearanceHelper } from "../appBase/helpers/AppearanceHelper";
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 export const Header = () => {
+  const location = useLocation()
+
   const getLogin = () => {
     const { firstName, lastName } = UserHelper.user || {}
     if (UserHelper.user) return (
@@ -39,9 +41,12 @@ export const Header = () => {
 
   React.useEffect(() => { toggleMenuItems(); });
 
+  const routes: string[] = ["/url", "/stream"]
+  const applyClass = routes.some(r => location.pathname.includes(r))
+
   return (
     <>
-      <div id="navbar" className=" fixed-top">
+      <div id="navbar" className={`fixed-top ${applyClass ? "shadow-none" : ""}`}>
         <Container>
           <div className="d-flex justify-content-between">
             <div className="app-logo">

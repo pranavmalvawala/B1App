@@ -20,7 +20,7 @@ export const Unauthenticated = () => (
       <Route path="/donate" component={DonationPage} />
       <Route path="/stream" component={StreamPage} />
       <Route path="/directory" component={DirectoryPage} />
-      <Route path="/url" component={UrlPage} />
+      <Route path="/url/:id" component={UrlPage} />
       <Route path="/"><Home /></Route>
     </Switch>
   </>

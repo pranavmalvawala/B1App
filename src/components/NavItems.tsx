@@ -1,7 +1,6 @@
 import * as React from "react"
-import { NavLink, Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { UserHelper, Permissions, ConfigHelper } from "."
-import { useQuery } from "../hooks/useQuery"
 
 interface Props {
   prefix?: string
@@ -15,26 +14,11 @@ interface Tab {
 }
 
 export function NavItems({ prefix }: Props) {
-  const query = useQuery()
-
-  const getClass = (url: string): string => {
-    if (url === query.get("link")) return prefix === "main" ? "nav-link active" : "active";
-    else return prefix === "main" ? "nav-link" : "";
-  };
-
   const getTab = ({ key, url, icon, label }: Tab) => (
     <li key={key} className="nav-item" data-toggle={prefix === "main" ? null : "collapse"} data-target={prefix === "main" ? null : "#userMenu"} id={(prefix || "") + key + "Tab"}>
       <NavLink className="nav-link" to={url}>
         <i className={icon}></i> {label}
       </NavLink>
-    </li>
-  )
-
-  const getUrlTabs = ({ key, url, icon, label }: Tab) => (
-    <li key={key} className="nav-item" data-toggle={prefix === "main" ? null : "collapse"} data-target={prefix === "main" ? null : "#userMenu"} id={(prefix || "") + key + "Tab"}>
-      <Link className={getClass(url.replace("/url?link=", ""))} to={url}>
-        <i className={icon}></i> {label}
-      </Link>
     </li>
   )
 
@@ -58,7 +42,7 @@ export function NavItems({ prefix }: Props) {
           tabs.push(getTab({ key: t.text, url: "/directory", icon: t.icon, label: t.text }))
           break
         case "url":
-          tabs.push(getUrlTabs({ key: t.text, url: `/url?link=${t.url}`, icon: t.icon, label: t.text }))
+          tabs.push(getTab({ key: t.text, url: `/url/${t.id}`, icon: t.icon, label: t.text }))
           break
         default:
           tabs.push(getTab({ key: t.text, url: t.url, icon: t.icon, label: t.text}))
