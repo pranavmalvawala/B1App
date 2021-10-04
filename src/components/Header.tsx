@@ -41,7 +41,7 @@ export const Header = () => {
 
   React.useEffect(() => { toggleMenuItems(); });
 
-  const routes: string[] = ["/url", "/stream"]
+  const routes: string[] = ["/url", "/stream", "/bible"]
   const applyClass = routes.some(r => location.pathname.includes(r))
 
   return (

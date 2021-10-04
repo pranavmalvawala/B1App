@@ -9,6 +9,7 @@ import { DonationPage } from "./donation/DonationPage";
 import { DirectoryPage } from "./directory/DirectoryPage"
 import { StreamPage } from "./stream/StreamPage"
 import { UrlPage } from "./url/UrlPage"
+import { BiblePage } from "./bible/BiblePage"
 
 export const Unauthenticated = () => (
   <>
@@ -20,6 +21,7 @@ export const Unauthenticated = () => (
       <Route path="/donate" component={DonationPage} />
       <Route path="/stream" component={StreamPage} />
       <Route path="/directory" component={DirectoryPage} />
+      <Route path="/bible" component={BiblePage} />
       <Route path="/url/:id" component={UrlPage} />
       <Route path="/"><Home /></Route>
     </Switch>

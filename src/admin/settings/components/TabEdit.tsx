@@ -90,7 +90,6 @@ export const TabEdit: React.FC<Props> = (props) => {
   }
 
   const isDisabled = (tabName: string) => {
-    console.log(ConfigHelper.current.tabs)
     if (ConfigHelper.current.tabs.some(t => t.linkType === tabName)) {
       return true
     }
@@ -124,6 +123,7 @@ export const TabEdit: React.FC<Props> = (props) => {
             <option value="stream" disabled={isDisabled("stream")}>Live Stream</option>
             <option value="checkin" disabled={isDisabled("checkin")}>Checkin</option>
             <option value="donation" disabled={isDisabled("donation")}>Donation</option>
+            <option value="bible" disabled={isDisabled("bible")}>Bible</option>
           </select>
         </div>
         {getUrl()}

@@ -44,6 +44,9 @@ export function NavItems({ prefix }: Props) {
         case "url":
           tabs.push(getTab({ key: t.text, url: `/url/${t.id}`, icon: t.icon, label: t.text }))
           break
+        case "bible":
+          tabs.push(getTab({ key: t.text, url: "/bible", icon: t.icon, label: t.text }))
+          break
         case "page":
           tabs.push(getTab({ key: t.text, url: `/pages/${t.churchId}/${t.linkData}`, icon: t.icon, label: t.text }))
           break
