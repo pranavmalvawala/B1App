@@ -1,11 +1,10 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { SettingsPage } from "./admin/settings/SettingsPage";
-import { Home } from "./Home";
 import { Page } from "./Page";
 import { CheckinPage } from "./checkin/CheckinPage";
 import UserContext from "./UserContext";
-import { Header } from "./components";
+import { Header, ConfigHelper } from "./components";
 import { DonationPage } from "./donation/DonationPage";
 import { DirectoryPage } from "./directory/DirectoryPage"
 import { StreamPage } from "./stream/StreamPage"
@@ -18,6 +17,8 @@ interface Props {
 
 export const Authenticated: React.FC<Props> = (props) => {
   let user = React.useContext(UserContext)?.userName; //to force rerender on login
+  const firstTabRoute = ConfigHelper.getFirstRoute()
+
   if (user || true) return (
     <>
       <Header />
@@ -31,7 +32,7 @@ export const Authenticated: React.FC<Props> = (props) => {
         <Route path="/directory" component={DirectoryPage} />
         <Route path="/bible" component={BiblePage} />
         <Route path="/url/:id" component={UrlPage} />
-        <Route path="/"><Home /></Route>
+        <Route path="/"><Redirect to={firstTabRoute} /></Route>
       </Switch>
     </>
   );

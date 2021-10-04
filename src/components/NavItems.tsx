@@ -25,8 +25,6 @@ export function NavItems({ prefix }: Props) {
   const getTabs = () => {
     let tabs: any = []
 
-    if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(getTab({ key: "Settings", url: "/admin/settings", icon: "fas fa-cog", label: "Settings" }));
-
     ConfigHelper.current.tabs.forEach(t => {
       switch (t.linkType) {
         case "donation":
@@ -54,6 +52,8 @@ export function NavItems({ prefix }: Props) {
           break
       }
     })
+
+    if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(getTab({ key: "Settings", url: "/admin/settings", icon: "fas fa-cog", label: "Settings" }));
 
     return tabs
   }

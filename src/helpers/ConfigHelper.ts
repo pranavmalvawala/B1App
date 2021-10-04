@@ -1,6 +1,6 @@
 import { AppearanceHelper, AppearanceInterface } from "../appBase/helpers/AppearanceHelper";
 import { ChurchInterface } from "../appBase/interfaces";
-import { ApiHelper, LinkInterface } from "../components";
+import { ApiHelper, LinkInterface, Permissions, UserHelper } from "../components";
 export interface ColorsInterface { primary: string, contrast: string, header: string }
 export interface LogoInterface { url: string, image: string }
 export interface ButtonInterface { text: string, url: string }
@@ -30,6 +30,43 @@ export class ConfigHelper {
         ConfigHelper.churchId = church.id;
       }
       return ConfigHelper.churchId;
+    }
+
+    static getFirstRoute() {
+      const firstTab = ConfigHelper.current.tabs[0]
+
+      if (!firstTab) {
+        return UserHelper.checkAccess(Permissions.b1Api.settings.edit) ? "/admin/settings" : "/"
+      }
+
+      let route = ""
+      switch (firstTab.linkType) {
+        case "donation":
+          route = "/donate"
+          break
+        case "checkin":
+          route = "/checkin"
+          break
+        case "stream":
+          route = "/stream"
+          break
+        case "directory":
+          route = "/directory"
+          break
+        case "bible":
+          route = "/bible"
+          break
+        case "url":
+          route = `/url/${firstTab.id}`
+          break
+        case "page":
+          route = `/pages/${firstTab.churchId}/${firstTab.linkData}`
+          break
+        default:
+          break
+      }
+
+      return route
     }
 
 }
