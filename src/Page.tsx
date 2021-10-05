@@ -9,7 +9,7 @@ export const Page = ({ match }: RouteComponentProps<TParams>) => {
   const [content, setContent] = React.useState("");
 
   const init = React.useCallback(async () => {
-    const path = `${EnvironmentHelper.ContentRoot}/${match.params.churchId}/pages/${match.params.id}.html`;
+    const path = `${EnvironmentHelper.ContentRoot}/${match.params.churchId}/pages/${match.params.id}.html?ts=${new Date().getTime().toString()}`;
     fetch(path)
       .then(response => response.text())
       .then(c => { setContent(c) });
