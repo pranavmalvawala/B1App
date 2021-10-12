@@ -11,7 +11,7 @@ export const DonationPage = () => (
         ? (
           <Row>
             <Col lg={9}>
-              <BaseDonationPage personId={PersonHelper.person.id} />
+              <BaseDonationPage personId={PersonHelper.person.id} appName="B1App" />
             </Col>
           </Row>
         )
