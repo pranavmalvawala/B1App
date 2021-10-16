@@ -16,7 +16,15 @@ export const Header = () => {
       </a>
     )
 
-    return <Link to="/login"><i className="fas fa-sign-in-alt"></i> Log in</Link>
+    return (
+      <>
+        <Link to="/login" className={ConfigHelper.current.tabs.length > 6 ? "d-none" : "d-none d-lg-block"}><i className="fas fa-sign-in-alt"></i> Log in</Link>
+        <a href="about:blank" id="userMenuLink" className={ConfigHelper.current.tabs.length > 6 ? "" : "d-lg-none"} data-toggle="collapse" data-target="#userMenu" aria-controls="navbarToggleMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <i className="fas fa-bars fa-lg" />
+        </a>
+      </>
+
+    )
   }
 
   const toggleMenuItems = () => {
@@ -40,6 +48,8 @@ export const Header = () => {
   };
 
   React.useEffect(() => { toggleMenuItems(); });
+
+  const userAction = UserHelper.user ? (<Link to="/logout" aria-label="logoutBtn"><i className="fas fa-lock"></i> Logout</Link>) : (<Link to="/login"><i className="fas fa-sign-in-alt"></i> Log in</Link>)
 
   const routes: string[] = ["/url", "/stream", "/bible"]
   const applyClass = routes.some(r => location.pathname.includes(r))
@@ -70,7 +80,7 @@ export const Header = () => {
           <div>
             <ul id="nav-menu" className="nav d-flex flex-column">
               <NavItems />
-              <Link to="/logout" aria-label="logoutBtn"><i className="fas fa-lock"></i> Logout</Link>
+              {userAction}
             </ul>
           </div>
         </div>

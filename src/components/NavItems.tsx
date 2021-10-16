@@ -16,7 +16,7 @@ interface Tab {
 export function NavItems({ prefix }: Props) {
   const getTab = ({ key, url, icon, label }: Tab) => (
     <li key={key} className="nav-item" data-toggle={prefix === "main" ? null : "collapse"} data-target={prefix === "main" ? null : "#userMenu"} id={(prefix || "") + key + "Tab"}>
-      <NavLink className="nav-link" to={url}>
+      <NavLink className={prefix === "main" ? "nav-link" : ""} to={url}>
         <i className={icon}></i> {label}
       </NavLink>
     </li>
