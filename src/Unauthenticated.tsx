@@ -9,6 +9,7 @@ import { DirectoryPage } from "./directory/DirectoryPage"
 import { StreamPage } from "./stream/StreamPage"
 import { UrlPage } from "./url/UrlPage"
 import { BiblePage } from "./bible/BiblePage"
+import { FormPage } from "./form/FormPage";
 
 export const Unauthenticated = () => {
   const firstTabRoute = ConfigHelper.getFirstRoute()
@@ -25,6 +26,7 @@ export const Unauthenticated = () => {
         <Route path="/directory" component={DirectoryPage} />
         <Route path="/bible" component={BiblePage} />
         <Route path="/url/:id" component={UrlPage} />
+        <Route path="/forms/:id" component={FormPage}></Route>
         <Route path="/"><Redirect to={firstTabRoute} /></Route>
       </Switch>
     </>
