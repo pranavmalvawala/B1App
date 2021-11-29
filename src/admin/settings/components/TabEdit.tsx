@@ -9,14 +9,16 @@ export const TabEdit: React.FC<Props> = (props) => {
   const [pages, setPages] = React.useState<PageInterface[]>(null);
   const checkDelete = () => { if (!UniqueIdHelper.isMissing(currentTab?.id)) return handleDelete; else return null; }
   const handleCancel = () => { props.updatedFunction(); }
-  const loadPages = () => { ApiHelper.get("/pages/", "B1Api").then((data: PageInterface[]) => {
-    setPages(data)
+  const loadPages = () => {
+    ApiHelper.get("/pages/", "B1Api").then((data: PageInterface[]) => {
+      setPages(data)
 
-    if (!currentTab?.linkData) {
-      const linkData = data[data.length - 1]?.id || ""
-      setCurrentTab({ ...currentTab, linkData: linkData })
-    }
-  }) }
+      if (!currentTab?.linkData) {
+        const linkData = data[data.length - 1]?.id || ""
+        setCurrentTab({ ...currentTab, linkData: linkData })
+      }
+    })
+  }
 
   const handleDelete = () => {
     if (window.confirm("Are you sure you wish to delete this tab?")) {
@@ -117,13 +119,14 @@ export const TabEdit: React.FC<Props> = (props) => {
         <div className="form-group">
           <label>Type</label>
           <select className="form-control tab-type-select" name="type" value={currentTab?.linkType} onChange={handleChange}>
-            <option value="url">External Url</option>
-            <option value="page">Page</option>
-            <option value="directory" disabled={isDisabled("directory")}>Member Directory</option>
-            <option value="stream" disabled={isDisabled("stream")}>Live Stream</option>
+            <option value="bible" disabled={isDisabled("bible")}>Bible</option>
             <option value="checkin" disabled={isDisabled("checkin")}>Checkin</option>
             <option value="donation" disabled={isDisabled("donation")}>Donation</option>
-            <option value="bible" disabled={isDisabled("bible")}>Bible</option>
+            <option value="directory" disabled={isDisabled("directory")}>Member Directory</option>
+            <option value="stream" disabled={isDisabled("stream")}>Live Stream</option>
+            <option value="lessons" disabled={isDisabled("lessons")}>Lessons.church</option>
+            <option value="url">External Url</option>
+            <option value="page">Page</option>
           </select>
         </div>
         {getUrl()}

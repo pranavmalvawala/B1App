@@ -10,6 +10,7 @@ export class EnvironmentHelper {
   static ChurchAppsUrl = "";
   static AccountsAppUrl = "";
   static StreamingLiveAppUrl = "";
+  static LessonsAppUrl = "";
   static GoogleAnalyticsTag = "";
 
   static init = () => {
@@ -37,6 +38,7 @@ export class EnvironmentHelper {
     EnvironmentHelper.ChurchAppsUrl = process.env.REACT_APP_CHURCH_APPS_URL || "";
     EnvironmentHelper.AccountsAppUrl = process.env.REACT_APP_ACCOUNTS_APP_URL || "";
     EnvironmentHelper.StreamingLiveAppUrl = process.env.REACT_APP_STREAMINGLIVE_URL || "";
+    EnvironmentHelper.LessonsAppUrl = process.env.REACT_APP_LESSONS_URL || "";
     EnvironmentHelper.GoogleAnalyticsTag = process.env.REACT_APP_GOOGLE_ANALYTICS_TAG || "";
   }
 
@@ -51,6 +53,7 @@ export class EnvironmentHelper {
     EnvironmentHelper.ChurchAppsUrl = "https://staging.churchapps.org";
     EnvironmentHelper.AccountsAppUrl = "https://accounts.staging.churchapps.org";
     EnvironmentHelper.StreamingLiveAppUrl = "https://{key}.staging.streaminglive.church"
+    EnvironmentHelper.LessonsAppUrl = "https://staging.lessons.church"
     EnvironmentHelper.GoogleAnalyticsTag = "";
   }
 
@@ -65,6 +68,7 @@ export class EnvironmentHelper {
     EnvironmentHelper.ChurchAppsUrl = "https://churchapps.org";
     EnvironmentHelper.AccountsAppUrl = "https://accounts.churchapps.org";
     EnvironmentHelper.StreamingLiveAppUrl = "https://{key}.streaminglive.church"
+    EnvironmentHelper.LessonsAppUrl = "https://lessons.church"
     EnvironmentHelper.GoogleAnalyticsTag = "UA-164774603-8";
   }
 

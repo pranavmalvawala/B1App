@@ -10,7 +10,7 @@ import { StreamPage } from "./stream/StreamPage"
 import { UrlPage } from "./url/UrlPage"
 import { BiblePage } from "./bible/BiblePage"
 import { FormPage } from "./form/FormPage";
-
+import { LessonsPage } from "./lessons/LessonsPage";
 export const Unauthenticated = () => {
   const firstTabRoute = ConfigHelper.getFirstRoute()
 
@@ -23,6 +23,7 @@ export const Unauthenticated = () => {
         <Route path="/checkin" component={CheckinPage} />
         <Route path="/donate" component={DonationPage} />
         <Route path="/stream" component={StreamPage} />
+        <Route path="/lessons" component={LessonsPage} />
         <Route path="/directory" component={DirectoryPage} />
         <Route path="/bible" component={BiblePage} />
         <Route path="/url/:id" component={UrlPage} />

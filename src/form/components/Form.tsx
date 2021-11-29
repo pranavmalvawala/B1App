@@ -20,11 +20,11 @@ export const Form: React.FC<Props> = (props) => {
   const loadData = () => {
     setLoading(true);
     ApiHelper.get("/forms/standalone/" + props.formId + "?churchId=" + ConfigHelper.churchId, "MembershipApi").then(data => {
-      let now = new Date().setHours(0,0,0,0);
+      let now = new Date().setHours(0, 0, 0, 0);
       let start = data.accessStartTime ? new Date(data.accessStartTime) : null;
       let end = data.accessEndTime ? new Date(data.accessEndTime) : null;
-      if (start && start.setHours(0,0,0,0) > now) setEarly(start);
-      if (end && end.setHours(0,0,0,0) < now) setLate(end);
+      if (start && start.setHours(0, 0, 0, 0) > now) setEarly(start);
+      if (end && end.setHours(0, 0, 0, 0) < now) setLate(end);
       setRestrictedForm(data.restricted);
       if (data.restricted) setAddFormId(props.formId);
       else setUnRestrictedFormId(props.formId);
@@ -33,7 +33,7 @@ export const Form: React.FC<Props> = (props) => {
   }
 
   const handleUpdate = () => setFormSubmitted(true);
-  const showForm = () => <FormSubmissionEdit churchId={ConfigHelper.churchId} addFormId={addFormId} unRestrictedFormId={unRestrictedFormId} contentType="form" contentId={props.formId} formSubmissionId="" personId={PersonHelper?.person?.id} updatedFunction={handleUpdate} cancelFunction={ () => setRedirectTo("/")} />
+  const showForm = () => <FormSubmissionEdit churchId={ConfigHelper.churchId} addFormId={addFormId} unRestrictedFormId={unRestrictedFormId} contentType="form" contentId={props.formId} formSubmissionId="" personId={PersonHelper?.person?.id} updatedFunction={handleUpdate} cancelFunction={() => setRedirectTo("/")} />
   const getForm = () => {
     if (loading) return <Loading />;
     if (early) return <h3 className="text-center">This form isn't available until {DateHelper.prettyDateTime(early)}</h3>
@@ -43,10 +43,10 @@ export const Form: React.FC<Props> = (props) => {
     return <></>;
   }
 
-  React.useEffect(() => loadData(), [loadData, props.formId]);
+  React.useEffect(() => loadData(), [props.formId]); //eslint-disable-line
 
   if (redirectTo) return <Redirect to={redirectTo} />;
   else return (
-    <>{ formSubmitted ? <h3 className="text-center">Your form has been successfully submitted.</h3> : getForm() }</>
+    <>{formSubmitted ? <h3 className="text-center">Your form has been successfully submitted.</h3> : getForm()}</>
   );
 }
