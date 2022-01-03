@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { SettingsPage } from "./admin/settings/SettingsPage";
 import { Page } from "./Page";
 import { CheckinPage } from "./checkin/CheckinPage";
@@ -13,31 +13,27 @@ import { BiblePage } from "./bible/BiblePage"
 import { FormPage } from "./form/FormPage";
 import { LessonsPage } from "./lessons/LessonsPage";
 
-interface Props {
-  location: any;
-}
-
-export const Authenticated: React.FC<Props> = (props) => {
+export const Authenticated = () => {
   let user = React.useContext(UserContext)?.userName; //to force rerender on login
   const firstTabRoute = ConfigHelper.getFirstRoute()
 
   if (user || true) return (
     <>
       <Header />
-      <Switch>
-        <Route path="/login"><Redirect to={props.location} /></Route>
-        <Route path="/admin/settings"><SettingsPage /></Route>
-        <Route path="/pages/:churchId/:id" component={Page}></Route>
-        <Route path="/checkin" component={CheckinPage} />
-        <Route path="/donate" component={DonationPage} />
-        <Route path="/stream" component={StreamPage} />
-        <Route path="/lessons" component={LessonsPage} />
-        <Route path="/directory" component={DirectoryPage} />
-        <Route path="/bible" component={BiblePage} />
-        <Route path="/url/:id" component={UrlPage} />
-        <Route path="/forms/:id" component={FormPage}></Route>
-        <Route path="/"><Redirect to={firstTabRoute} /></Route>
-      </Switch>
+      <Routes>
+        <Route path="/login" element={<Navigate to={firstTabRoute} />} />
+        <Route path="/admin/settings" element={<SettingsPage />} />
+        <Route path="/pages/:churchId/:id" element={<Page />} />
+        <Route path="/checkin" element={<CheckinPage />} />
+        <Route path="/donate" element={<DonationPage />} />
+        <Route path="/stream" element={<StreamPage />} />
+        <Route path="/lessons" element={<LessonsPage />} />
+        <Route path="/directory" element={<DirectoryPage />} />
+        <Route path="/bible" element={<BiblePage />} />
+        <Route path="/url/:id" element={<UrlPage />} />
+        <Route path="/forms/:id" element={<FormPage />} />
+        <Route path="/" element={<Navigate to={firstTabRoute} />} />
+      </Routes>
     </>
   );
 }

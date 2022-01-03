@@ -1,7 +1,7 @@
 import React from "react";
 import { PersonHelper, ConfigHelper } from "../../helpers";
 import { ApiHelper } from "../../components";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FormSubmissionEdit, Loading } from "../../appBase/components";
 import { DateHelper } from "../../appBase/helpers";
 
@@ -45,7 +45,7 @@ export const Form: React.FC<Props> = (props) => {
 
   React.useEffect(() => loadData(), [props.formId]); //eslint-disable-line
 
-  if (redirectTo) return <Redirect to={redirectTo} />;
+  if (redirectTo) return <Navigate to={redirectTo} />;
   else return (
     <>{formSubmitted ? <h3 className="text-center">Your form has been successfully submitted.</h3> : getForm()}</>
   );

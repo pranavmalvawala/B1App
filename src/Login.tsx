@@ -1,5 +1,4 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { ApiHelper, ConfigHelper, PersonHelper, UserHelper } from "./components";
 import { Authenticated } from "./Authenticated";
@@ -12,7 +11,6 @@ import ReactGA from "react-ga";
 
 export const Login: React.FC = (props: any) => {
   const [cookies] = useCookies(["jwt"]);
-  let { from } = (useLocation().state as any) || { from: { pathname: "/" } };
 
   const successCallback = async () => {
     PersonHelper.person = await ApiHelper.get(`/people/${UserHelper.currentChurch.personId}`, "MembershipApi");
@@ -53,7 +51,6 @@ export const Login: React.FC = (props: any) => {
       />
     );
   } else {
-    let path = from.pathname;
-    return <Authenticated location={path}></Authenticated>;
+    return <Authenticated />;
   }
 };

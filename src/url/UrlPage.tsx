@@ -1,14 +1,9 @@
 import * as React from "react"
-import { RouteComponentProps } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { ConfigHelper } from "../components"
 
-interface Props extends RouteComponentProps<{ id: string }> {}
-
-export function UrlPage(props: Props) {
-  const { id } = props.match.params
-
-  const linkObject = ConfigHelper.current.tabs.filter(t => t.id === id)[0]
-  return (
-    <iframe title="content" className="full-frame" src={linkObject.url} />
-  )
+export function UrlPage() {
+  const params = useParams();
+  const linkObject = ConfigHelper.current.tabs.filter(t => t.id === params.id)[0]
+  return (<iframe title="content" className="full-frame" src={linkObject.url} />);
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import UserContext from "./UserContext"
 import { Authenticated } from "./Authenticated"
 import { Unauthenticated } from "./Unauthenticated"
@@ -8,10 +8,6 @@ import { Logout } from "./Logout";
 import { Login } from "./Login";
 import { EnvironmentHelper } from "./helpers"
 import ReactGA from "react-ga";
-
-interface Props {
-  path?: string;
-}
 
 export const ControlPanel = () => {
   const location = useLocation();
@@ -25,17 +21,15 @@ export const ControlPanel = () => {
   if (user === null) return null;
 
   return (
-    <Switch>
-      <Route path="/logout"><Logout /></Route>
-      <Route path="/login" component={Login} />
-      <PrivateRoute path="/" />
-    </Switch>
+    <Routes>
+      <Route path="/logout" element={<Logout />} />
+      <Route path="/login" element={<Login />} />
+      {getAuth()}
+    </Routes>
   );
 }
 
-const PrivateRoute: React.FC<Props> = ({ path }) => (
-  <Route
-    path={path}
-    render={({ location }) => ApiHelper.isAuthenticated ? (<Authenticated location={location.pathname} />) : (<Unauthenticated />)}
-  />
-);
+const getAuth = () => {
+  if (ApiHelper.isAuthenticated) return <Route path="/*" element={<Authenticated />}></Route>
+  else return <Route path="/*" element={<Unauthenticated />}></Route>
+}

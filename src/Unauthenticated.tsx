@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Login } from "./Login"
 import { Page } from "./Page"
 import { CheckinPage } from "./checkin/CheckinPage";
@@ -17,19 +17,19 @@ export const Unauthenticated = () => {
   return (
     <>
       <Header />
-      <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/pages/:churchId/:id" component={Page} />
-        <Route path="/checkin" component={CheckinPage} />
-        <Route path="/donate" component={DonationPage} />
-        <Route path="/stream" component={StreamPage} />
-        <Route path="/lessons" component={LessonsPage} />
-        <Route path="/directory" component={DirectoryPage} />
-        <Route path="/bible" component={BiblePage} />
-        <Route path="/url/:id" component={UrlPage} />
-        <Route path="/forms/:id" component={FormPage}></Route>
-        <Route path="/"><Redirect to={firstTabRoute} /></Route>
-      </Switch>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/pages/:churchId/:id" element={<Page />} />
+        <Route path="/checkin" element={<CheckinPage />} />
+        <Route path="/donate" element={<DonationPage />} />
+        <Route path="/stream" element={<StreamPage />} />
+        <Route path="/lessons" element={<LessonsPage />} />
+        <Route path="/directory" element={<DirectoryPage />} />
+        <Route path="/bible" element={<BiblePage />} />
+        <Route path="/url/:id" element={<UrlPage />} />
+        <Route path="/forms/:id" element={<FormPage />} />
+        <Route path="/" element={<Navigate to={firstTabRoute} />} />
+      </Routes>
     </>
   )
 }

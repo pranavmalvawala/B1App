@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
 import { UserProvider } from "./UserContext"
 import { ControlPanel } from "./ControlPanel"
@@ -29,9 +29,9 @@ const App: React.FC = () => {
       <CookiesProvider>
         <Theme />
         <Router>
-          <Switch>
-            <Route path="/"><ControlPanel /></Route>
-          </Switch>
+          <Routes>
+            <Route path="/" element={<ControlPanel />} />
+          </Routes>
         </Router>
       </CookiesProvider>
     </UserProvider>
