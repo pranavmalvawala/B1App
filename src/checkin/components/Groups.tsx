@@ -17,12 +17,12 @@ export const Groups: React.FC<Props> = (props) => {
 
     const sortedGroups = CheckinHelper.selectedServiceTime?.groups?.sort((a, b) => ((a.categoryName || "") > (b.categoryName || "")) ? 1 : -1);
 
-        sortedGroups?.forEach(g => {
-          if (g.categoryName !== category) gt.push({ key: gt.length, name: g.categoryName || "", items: [] })
-          gt[gt.length - 1].items.push(g);
-          category = g.categoryName || "";
-        })
-        setGroupTree(gt);
+    sortedGroups?.forEach(g => {
+      if (g.categoryName !== category) gt.push({ key: gt.length, name: g.categoryName || "", items: [] })
+      gt[gt.length - 1].items.push(g);
+      category = g.categoryName || "";
+    })
+    setGroupTree(gt);
   }
 
   const selectCategory = (category: GroupCategoryInterface) => {
@@ -56,10 +56,10 @@ export const Groups: React.FC<Props> = (props) => {
 
   const getGroups = () => {
     let result: JSX.Element[] = [];
-        selectedCategory?.items?.forEach(g => {
-          result.push(getGroup(g));
-        })
-        return result;
+    selectedCategory?.items?.forEach(g => {
+      result.push(getGroup(g));
+    })
+    return result;
   }
 
   const getGroup = (g: GroupInterface) => (<div className="checkinGroup">

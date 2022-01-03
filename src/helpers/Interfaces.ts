@@ -4,9 +4,9 @@ export interface LinkInterface { id?: string, churchId: string, category: string
 export interface PageInterface { id?: string, churchId?: string, name?: string, lastModified?: Date, content?: string }
 
 export class Permissions extends BasePermissions {
-    static b1Api = {
-      settings: {
-        edit: { api: "B1Api", contentType: "Settings", action: "Edit" }
-      }
-    };
+  static b1Api = {
+    settings: {
+      edit: { api: "B1Api", contentType: "Settings", action: "Edit" }
+    }
+  };
 }
