@@ -10,6 +10,7 @@ const App: React.FC = () => {
 
   const loadConfig = React.useCallback(async () => {
     const keyName = window.location.hostname.split(".")[0];
+    console.log(keyName);
     const localThemeConfig = localStorage.getItem(`b1theme_${keyName}`);
     setConfig(JSON.parse(localThemeConfig) || {});
 
@@ -30,7 +31,7 @@ const App: React.FC = () => {
         <Theme />
         <Router>
           <Routes>
-            <Route path="/" element={<ControlPanel />} />
+            <Route path="/*" element={<ControlPanel />} />
           </Routes>
         </Router>
       </CookiesProvider>
