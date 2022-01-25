@@ -41,6 +41,9 @@ export class ConfigHelper {
 
     let route = ""
     switch (firstTab.linkType) {
+      case "lessons":
+        route = "/lessons"
+        break
       case "donation":
         route = "/donate"
         break
@@ -63,6 +66,7 @@ export class ConfigHelper {
         route = `/pages/${firstTab.churchId}/${firstTab.linkData}`
         break
       default:
+        route = "/"
         break
     }
 
