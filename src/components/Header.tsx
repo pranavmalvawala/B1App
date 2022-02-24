@@ -6,6 +6,8 @@ import { Link, useLocation } from "react-router-dom"
 
 export const Header = () => {
   const location = useLocation()
+  let search = new URLSearchParams(window.location.search);
+  const noHeader = search.get("noHeader") === "1";
 
   const getLogin = () => {
     const { firstName, lastName } = UserHelper.user || {}
@@ -28,6 +30,7 @@ export const Header = () => {
   }
 
   const toggleMenuItems = () => {
+    if (noHeader) return;
     const { firstName, lastName } = UserHelper.user || {}
     const userName = `${firstName || ""} ${lastName || ""}`
     const usernameLength = userName.length
@@ -54,7 +57,8 @@ export const Header = () => {
   const routes: string[] = ["/url", "/stream", "/bible"]
   const applyClass = routes.some(r => location.pathname.includes(r))
 
-  return (
+  if (noHeader) return <div style={{ marginTop: 20 }}></div>
+  else return (
     <>
       <div id="navbar" className={`fixed-top ${applyClass ? "shadow-none" : ""}`}>
         <Container>
