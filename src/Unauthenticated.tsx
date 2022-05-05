@@ -11,6 +11,7 @@ import { UrlPage } from "./url/UrlPage"
 import { BiblePage } from "./bible/BiblePage"
 import { FormPage } from "./form/FormPage";
 import { LessonsPage } from "./lessons/LessonsPage";
+import { VotdPage } from "./votd/VotdPage";
 export const Unauthenticated = () => {
   const firstTabRoute = ConfigHelper.getFirstRoute()
 
@@ -26,6 +27,7 @@ export const Unauthenticated = () => {
         <Route path="/lessons" element={<LessonsPage />} />
         <Route path="/directory" element={<DirectoryPage />} />
         <Route path="/bible" element={<BiblePage />} />
+        <Route path="/votd" element={<VotdPage />} />
         <Route path="/url/:id" element={<UrlPage />} />
         <Route path="/forms/:id" element={<FormPage />} />
         <Route path="/" element={<Navigate to={firstTabRoute} />} />

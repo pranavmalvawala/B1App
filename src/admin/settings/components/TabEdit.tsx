@@ -125,6 +125,7 @@ export const TabEdit: React.FC<Props> = (props) => {
             <option value="directory" disabled={isDisabled("directory")}>Member Directory</option>
             <option value="stream" disabled={isDisabled("stream")}>Live Stream</option>
             <option value="lessons" disabled={isDisabled("lessons")}>Lessons.church</option>
+            <option value="votd" disabled={isDisabled("votd")}>Verse of the Day</option>
             <option value="url">External Url</option>
             <option value="page">Page</option>
           </select>
