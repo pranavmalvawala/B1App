@@ -37,20 +37,18 @@ export const Header = () => {
     let menuNav = document.getElementById("nav-menu");
     let listItems = Array.from(menuNav.children);
     listItems.pop()
-    listItems.forEach((_, i) => {
-      if (i < (usernameLength <= 5 ? 3 : usernameLength < 24 ? 2 : 1)) {
-        listItems[i].classList.add("d-md-none");
-      } else if (
-        i < (usernameLength <= 5 ? 5 : usernameLength < 24 ? 4 : 3)
-      ) {
-        listItems[i].classList.add("d-lg-none");
-      } else if (i < (usernameLength < 24 ? 6 : 5)) {
-        listItems[i].classList.add("d-xl-none");
-      }
-    });
+
+    const navMain = document.getElementById("nav-main")
+    let mainLength = 0;
+    for (let i = 0; i < listItems.length; i++) {
+      mainLength += navMain.children[i].clientWidth;
+      if (mainLength + 150 < navMain.clientWidth) listItems[i].classList.add("d-none");
+      else listItems[i].classList.remove("d-none")
+    }
   };
 
   React.useEffect(() => { toggleMenuItems(); });
+  window.addEventListener("resize", toggleMenuItems)
 
   const userAction = UserHelper.user ? (<Link to="/logout" aria-label="logoutBtn"><i className="fas fa-lock"></i> Logout</Link>) : (<Link to="/login"><i className="fas fa-sign-in-alt"></i> Log in</Link>)
 
