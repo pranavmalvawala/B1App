@@ -31,9 +31,7 @@ export const Header = () => {
 
   const toggleMenuItems = () => {
     if (noHeader) return;
-    const { firstName, lastName } = UserHelper.user || {}
-    const userName = `${firstName || ""} ${lastName || ""}`
-    const usernameLength = userName.length
+
     let menuNav = document.getElementById("nav-menu");
     let listItems = Array.from(menuNav.children);
     listItems.pop()
