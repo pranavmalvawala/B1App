@@ -1,6 +1,5 @@
 export * from "../helpers"
 export { ErrorMessages, DisplayBox, InputBox, Loading } from "../appBase/components"
-export { Header } from "./Header"
 export { LoadingPage } from "./LoadingPage"
 export { Theme } from "./Theme"
 export { NavItems } from "./NavItems"

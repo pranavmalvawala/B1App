@@ -1,6 +1,6 @@
+import { Button, TextField } from "@mui/material";
 import React from "react";
 import { ApiHelper, DisplayBox } from "../../components";
-import { Row, Col, InputGroup, FormControl, Button } from "react-bootstrap"
 import { PeopleSearchResults } from "./PeopleSearchResults"
 
 interface Props { selectedHandler: (personId: string) => void }
@@ -29,18 +29,14 @@ export const DirectorySearch: React.FC<Props> = (props) => {
   return (
     <>
       <h1><i className="fas fa-user"></i> People</h1>
-      <Row>
-        <Col>
-          <DisplayBox id="peopleBox" headerIcon="fas fa-user" headerText="Search">
-            <InputGroup>
-              <FormControl id="searchText" data-cy="search-input" name="searchText" type="text" placeholder="Name" value={searchText} onChange={handleChange} onKeyDown={handleKeyDown} />
-              <InputGroup.Append><Button id="searchButton" data-cy="search-button" variant="primary" onClick={handleSubmit}>Search</Button></InputGroup.Append>
-            </InputGroup>
-            <br />
-            <PeopleSearchResults people={searchResults} selectedHandler={props.selectedHandler} />
-          </DisplayBox>
-        </Col>
-      </Row>
+      <DisplayBox id="peopleBox" headerIcon="fas fa-user" headerText="Search">
+        <TextField fullWidth label="Name" id="searchText" data-cy="search-input" name="searchText" type="text" placeholder="Name" value={searchText} onChange={handleChange} onKeyDown={handleKeyDown}
+          InputProps={{ endAdornment: <Button variant="contained" id="searchButton" data-cy="search-button" onClick={handleSubmit}>Search</Button> }}
+        />
+        <br />
+        <PeopleSearchResults people={searchResults} selectedHandler={props.selectedHandler} />
+      </DisplayBox>
+
     </>
   )
 }

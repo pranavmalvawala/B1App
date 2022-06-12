@@ -1,7 +1,7 @@
 import React from "react";
 import { ApiHelper, EnvironmentHelper, Loading } from "../../components";
-import { Row, Col } from "react-bootstrap"
 import { PersonInterface } from "../../appBase/interfaces"
+import { Grid } from "@mui/material";
 
 interface Props { person: PersonInterface, selectedHandler: (personId: string) => void }
 
@@ -12,13 +12,13 @@ export const Household: React.FC<Props> = (props) => {
   const getMember = (member: PersonInterface) => {
     const m = member;
     return (<a href="about:blank" className="bigLinkButton householdMember" onClick={(e) => { e.preventDefault(); props.selectedHandler(m.id) }}>
-      <Row>
-        <Col xs={2}><img src={EnvironmentHelper.ContentRoot + member?.photo} alt="avatar" className="img-fluid" /></Col>
-        <Col xs={10}>
+      <Grid container spacing={3}>
+        <Grid item xs={2}><img src={EnvironmentHelper.ContentRoot + member?.photo} alt="avatar" className="img-fluid" /></Grid>
+        <Grid item xs={10}>
           {member?.name?.display}
           <div><span>{member?.householdRole}</span></div>
-        </Col>
-      </Row>
+        </Grid>
+      </Grid>
     </a>);
   }
 
@@ -44,5 +44,5 @@ export const Household: React.FC<Props> = (props) => {
 
   React.useEffect(loadMembers, [props.person]);
 
-  return (<>{getMembers()}</>)
+  return (<><h4>Household</h4>{getMembers()}</>)
 }

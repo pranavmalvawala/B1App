@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Login } from "./Login"
 import { Page } from "./Page"
 import { CheckinPage } from "./checkin/CheckinPage";
-import { Header, ConfigHelper } from "./components";
+import { ConfigHelper } from "./components";
 import { DonationPage } from "./donation/DonationPage";
 import { DirectoryPage } from "./directory/DirectoryPage"
 import { StreamPage } from "./stream/StreamPage"
