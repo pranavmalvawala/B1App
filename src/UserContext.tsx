@@ -11,7 +11,7 @@ export const UserProvider = ({ children }: Props) => {
   //const [profilePicture, setProfilePicture] = React.useState(PersonHelper.getPhotoUrl(null));
   const [profilePicture, setProfilePicture] = React.useState("");
 
-  return <UserContext.Provider value={{ userName, setUserName, churchName, setChurchName, profilePicture, setProfilePicture, }}>{children} </UserContext.Provider>
+  return <UserContext.Provider value={{ userName, setUserName, churchName, setChurchName, profilePicture, setProfilePicture }}>{children}</UserContext.Provider>
 };
 
 export default UserContext;

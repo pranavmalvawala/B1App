@@ -25,7 +25,6 @@ const App: React.FC = () => {
     loadConfig();
   }, [loadConfig]);
 
-
   const mdTheme = createTheme({
     palette: {
       secondary: {
