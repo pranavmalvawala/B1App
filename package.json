@@ -27,7 +27,6 @@
     "nan": "^2.15.0",
     "react": "^17.0.2",
     "react-activity": "^2.1.1",
-    "react-bootstrap": "^1.6.0",
     "react-cookie": "^4.1.1",
     "react-cropper": "^2.1.8",
     "react-csv": "^2.2.1",
