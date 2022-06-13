@@ -12,11 +12,6 @@ import ReactGA from "react-ga";
 export const Login: React.FC = (props: any) => {
   const [cookies] = useCookies(["jwt"]);
 
-  const successCallback = async () => {
-    PersonHelper.person = await ApiHelper.get(`/people/${UserHelper.currentChurch.personId}`, "MembershipApi");
-    context.setUserName(UserHelper.currentChurch.id.toString());
-  }
-
   const trackChurchRegister = async (church: ChurchInterface) => {
     if (EnvironmentHelper.GoogleAnalyticsTag !== "") ReactGA.event({ category: "Church", action: "Register" });
   }
@@ -27,7 +22,7 @@ export const Login: React.FC = (props: any) => {
 
   const context = React.useContext(UserContext);
 
-  if (context.userName === "" || !ApiHelper.isAuthenticated) {
+  if (context.user === null || !ApiHelper.isAuthenticated) {
     let search = new URLSearchParams(window.location.search);
     let jwt = search.get("jwt") || cookies.jwt;
     let auth = search.get("auth");
@@ -40,7 +35,6 @@ export const Login: React.FC = (props: any) => {
         auth={auth}
         context={context}
         jwt={jwt}
-        loginSuccessOverride={successCallback}
         churchRegisteredCallback={trackChurchRegister}
         userRegisteredCallback={trackUserRegister}
         keyName={window.location.hostname.split(".")[0]}

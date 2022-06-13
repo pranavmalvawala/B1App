@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { SettingsPage } from "./admin/settings/SettingsPage";
 import { Page } from "./Page";
 import { CheckinPage } from "./checkin/CheckinPage";
-import UserContext from "./UserContext";
 import { ConfigHelper } from "./components";
 import { DonationPage } from "./donation/DonationPage";
 import { DirectoryPage } from "./directory/DirectoryPage"
@@ -17,10 +16,9 @@ import { Box } from "@mui/material";
 import { Wrapper } from "./components/Wrapper";
 
 export const Authenticated = () => {
-  let user = React.useContext(UserContext)?.userName; //to force rerender on login
   const firstTabRoute = ConfigHelper.getFirstRoute()
 
-  if (user || true) return (
+  return (
     <Box sx={{ display: "flex", backgroundColor: "#EEE" }}>
       <Wrapper>
         <Routes>

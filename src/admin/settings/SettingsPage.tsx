@@ -16,7 +16,7 @@ export const SettingsPage = () => {
     ConfigHelper.load(keyName).then(() => {
       setCurrentPage(null);
       loadData();
-      context.setUserName((new Date()).getTime().toString()); // hacky stuff to create navbar re-render. A better approach would be to make ConfigHelper a context instead of class.
+      context.setUser({ ...context.user }); // hacky stuff to create navbar re-render.
     })
   }
   const handleAdd = () => { setCurrentPage({ churchId: UserHelper.currentChurch.id, lastModified: new Date(), name: "" }) }
