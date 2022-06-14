@@ -1,6 +1,6 @@
 import React from "react";
 import { useCookies } from "react-cookie";
-import { ApiHelper, ConfigHelper, PersonHelper, UserHelper } from "./components";
+import { ApiHelper, ConfigHelper } from "./components";
 import { Authenticated } from "./Authenticated";
 import UserContext from "./UserContext";
 import { LoginPage } from "./appBase/pageComponents/LoginPage";
