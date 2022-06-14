@@ -1,20 +1,23 @@
 import React from "react"
-
-export interface UserContextInterface {
-    userName: string,
-    setUserName: (userName: string) => void,
-    churchName: string,
-    setChurchName: (churchName: string) => void,
-}
+import { ChurchInterface, PersonInterface, UserContextInterface, UserInterface } from "./appBase/interfaces";
 
 const UserContext = React.createContext<UserContextInterface | undefined>(undefined);
 interface Props { children: React.ReactNode; }
 
 export const UserProvider = ({ children }: Props) => {
-  const [userName, setUserName] = React.useState("");
-  const [churchName, setChurchName] = React.useState("");
-  return <UserContext.Provider value={{ userName, setUserName, churchName, setChurchName }}>{children} </UserContext.Provider>
+  const [user, setUser] = React.useState<UserInterface>(null);
+  const [person, setPerson] = React.useState<PersonInterface>(null);
+  const [church, setChurch] = React.useState<ChurchInterface>(null);
+  const [churches, setChurches] = React.useState<ChurchInterface[]>(null);
+
+  return <UserContext.Provider value={{
+    user, setUser,
+    church, setChurch,
+    churches, setChurches,
+    person, setPerson
+  }}>{children} </UserContext.Provider>
 };
 
 export default UserContext;
+
 

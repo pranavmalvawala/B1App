@@ -1,9 +1,9 @@
 import React from "react";
 import { CheckinHelper, EnvironmentHelper, ApiHelper, Loading } from "../../components";
 import { GroupInterface, PersonInterface, ServiceTimeInterface, VisitInterface, VisitSessionInterface } from "../../appBase/interfaces";
-import { Row, Col, Button } from "react-bootstrap";
 import { Groups } from "./Groups";
 import { ArrayHelper } from "../../appBase/helpers";
+import { Button, Grid } from "@mui/material";
 
 interface Props { completeHandler: () => void }
 
@@ -47,7 +47,7 @@ export const Household: React.FC<Props> = (props) => {
       CheckinHelper.householdMembers.forEach(m => {
         result.push(getMember(m));
       });
-      result.push(<><br /><Button variant="success" block onClick={handleCheckin}>Checkin</Button></>);
+      result.push(<><br /><Button fullWidth size="large" variant="contained" onClick={handleCheckin}>Checkin</Button></>);
       return (result);
     }
   }
@@ -57,16 +57,16 @@ export const Household: React.FC<Props> = (props) => {
     const serviceTimeList = (member === selectedMember) ? getMemberServiceTimes() : null;
     return (<>
       <a href="about:blank" className="bigLinkButton checkinPerson" onClick={(e) => { e.preventDefault(); selectMember(member) }}>
-        <Row>
-          <Col xs={1}>{arrow}</Col>
-          <Col xs={2}>
+        <Grid container spacing={3}>
+          <Grid item xs={1}>{arrow}</Grid>
+          <Grid item xs={2}>
             <img src={EnvironmentHelper.ContentRoot + member.photo} alt="avatar" className="img-fluid" />
-          </Col>
-          <Col xs={9}>
+          </Grid>
+          <Grid item xs={9}>
             {member.name.display}
             <div>{CheckinHelper.getDisplayGroup}</div>
-          </Col>
-        </Row>
+          </Grid>
+        </Grid>
         {getCondensedGroupList(member)}
       </a>
       {serviceTimeList}
@@ -98,14 +98,14 @@ export const Household: React.FC<Props> = (props) => {
     }
 
     return (<div className="checkinServiceTime">
-      <Row>
-        <Col xs={4}>
+      <Grid container spacing={3}>
+        <Grid item xs={4}>
           <i className="far fa-clock"></i> {st.name}
-        </Col>
-        <Col xs={8}>
+        </Grid>
+        <Grid item xs={8}>
           <a className="bigLinkButton serviceTimeButton" href="about:blank" onClick={(e) => { e.preventDefault(); selectServiceTime(st) }}>{selectedGroupName}</a>
-        </Col>
-      </Row>
+        </Grid>
+      </Grid>
     </div>);
   }
 

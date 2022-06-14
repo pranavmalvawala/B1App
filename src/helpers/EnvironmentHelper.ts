@@ -1,4 +1,5 @@
 import { ApiHelper } from "../appBase/helpers/ApiHelper";
+import { EnvironmentHelperBase } from "../appBase/helpers/EnvironmentHelperBase";
 
 export class EnvironmentHelper {
   private static AccessApi = "";
@@ -26,6 +27,8 @@ export class EnvironmentHelper {
       { keyName: "B1Api", url: EnvironmentHelper.B1Api, jwt: "", permisssions: [] },
       { keyName: "GivingApi", url: EnvironmentHelper.GivingApi, jwt: "", permisssions: [] }
     ];
+
+    EnvironmentHelperBase.ContentRoot = EnvironmentHelper.ContentRoot; //Need to find a better way to handle this.
   }
 
   static initDev = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckinHelper } from "../../components";
 import { GroupInterface } from "../../appBase/interfaces";
-import { Row, Col, Button } from "react-bootstrap";
+import { Button, Grid } from "@mui/material";
 
 interface GroupCategoryInterface { key: number, name: string, items: GroupInterface[] }
 
@@ -43,12 +43,12 @@ export const Groups: React.FC<Props> = (props) => {
     const groupList = (category === selectedCategory) ? getGroups() : null;
     return (<>
       <a href="about:blank" className="bigLinkButton checkinPerson" onClick={(e) => { e.preventDefault(); selectCategory(category) }}>
-        <Row>
-          <Col xs={1}>{arrow}</Col>
-          <Col xs={11}>
+        <Grid container spacing={3}>
+          <Grid item xs={1}>{arrow}</Grid>
+          <Grid item xs={11}>
             {category.name}
-          </Col>
-        </Row>
+          </Grid>
+        </Grid>
       </a>
       {groupList}
     </>);
@@ -73,7 +73,7 @@ export const Groups: React.FC<Props> = (props) => {
   return (
     <>
       {getCategories()}<br />
-      <Button variant="danger" block onClick={(e) => { e.preventDefault(); props.selectedHandler({ id: "", name: "NONE" }) }}>NONE</Button>
+      <Button color="error" variant="contained" fullWidth size="large" onClick={() => { props.selectedHandler({ id: "", name: "NONE" }) }}>NONE</Button>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { ApiHelper, Tabs, PageList, PageEdit, PageInterface, UserHelper, ConfigHelper } from "./components"
-import { Row, Col } from "react-bootstrap"
 import UserContext from "../../UserContext"
+import { Grid, Icon } from "@mui/material";
 
 export const SettingsPage = () => {
   const context = React.useContext(UserContext);
@@ -13,10 +13,10 @@ export const SettingsPage = () => {
   const handleUpdate = () => {
 
     const keyName = window.location.hostname.split(".")[0];
-    ConfigHelper.load(keyName).then(() =>{
+    ConfigHelper.load(keyName).then(() => {
       setCurrentPage(null);
       loadData();
-      context.setUserName((new Date()).getTime().toString()); // hacky stuff to create navbar re-render. A better approach would be to make ConfigHelper a context instead of class.
+      context.setUser({ ...context.user }); // hacky stuff to create navbar re-render.
     })
   }
   const handleAdd = () => { setCurrentPage({ churchId: UserHelper.currentChurch.id, lastModified: new Date(), name: "" }) }
@@ -28,17 +28,16 @@ export const SettingsPage = () => {
     if (currentPage !== null) return <PageEdit page={currentPage} updatedFunction={handleUpdate} />;
   }
 
-  return (
-    <div className="container">
-      <Row>
-        <Col md={8}>
-          <PageList pages={pages} addFunction={handleAdd} editFunction={handleEdit} />
-        </Col>
-        <Col md={4}>
-          <Tabs updatedFunction={handleUpdate} />
-          {getEdit()}
-        </Col>
-      </Row>
-    </div>
-  );
+  return (<>
+    <h1><Icon>settings</Icon> Settings</h1>
+    <Grid container spacing={3}>
+      <Grid item md={8} xs={12}>
+        <PageList pages={pages} addFunction={handleAdd} editFunction={handleEdit} />
+      </Grid>
+      <Grid item md={4} xs={12}>
+        <Tabs updatedFunction={handleUpdate} />
+        {getEdit()}
+      </Grid>
+    </Grid>
+  </>);
 }

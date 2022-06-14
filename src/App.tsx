@@ -4,6 +4,7 @@ import { CookiesProvider } from "react-cookie";
 import { UserProvider } from "./UserContext"
 import { ControlPanel } from "./ControlPanel"
 import { ConfigHelper, ConfigurationInterface, LoadingPage, Theme } from "./components"
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
 const App: React.FC = () => {
   const [config, setConfig] = React.useState<ConfigurationInterface>({} as ConfigurationInterface);
@@ -24,16 +25,31 @@ const App: React.FC = () => {
     loadConfig();
   }, [loadConfig]);
 
+  const mdTheme = createTheme({
+    palette: {
+      secondary: {
+        main: "#444444"
+      }
+    },
+    components: {
+      MuiTextField: { defaultProps: { margin: "normal" } },
+      MuiFormControl: { defaultProps: { margin: "normal" } }
+    }
+  });
+
   if (config.keyName === undefined) return <LoadingPage config={config} />
   else return (
     <UserProvider>
       <CookiesProvider>
-        <Theme />
-        <Router>
-          <Routes>
-            <Route path="/*" element={<ControlPanel />} />
-          </Routes>
-        </Router>
+        <ThemeProvider theme={mdTheme}>
+          <CssBaseline />
+          <Theme />
+          <Router>
+            <Routes>
+              <Route path="/*" element={<ControlPanel />} />
+            </Routes>
+          </Router>
+        </ThemeProvider>
       </CookiesProvider>
     </UserProvider>
   );

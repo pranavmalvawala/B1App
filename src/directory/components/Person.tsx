@@ -1,8 +1,8 @@
 import React from "react";
 import { ApiHelper, DisplayBox, PersonHelper } from "../../components";
-import { Row, Col } from "react-bootstrap"
 import { PersonInterface } from "../../appBase/interfaces"
 import { Household } from "./Household";
+import { Grid } from "@mui/material";
 
 interface Props { backHandler: () => void, personId: string, selectedHandler: (personId: string) => void }
 
@@ -35,15 +35,15 @@ export const Person: React.FC<Props> = (props) => {
   return (
     <>
       <DisplayBox id="peopleBox" headerIcon="fas fa-user" headerText="Contact Information">
-        <Row>
-          <Col xs={4}>
+        <Grid container spacing={3}>
+          <Grid item xs={4}>
             <img src={PersonHelper.getPhotoUrl(person)} alt="avatar" className="img-fluid" />
-          </Col>
-          <Col xs={8}>
+          </Grid>
+          <Grid item xs={8}>
             <h2>{person?.name.display}</h2>
             {getContactMethods()}
-          </Col>
-        </Row>
+          </Grid>
+        </Grid>
       </DisplayBox>
       <Household person={person} selectedHandler={props.selectedHandler} />
     </>

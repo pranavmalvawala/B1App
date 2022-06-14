@@ -1,11 +1,11 @@
 import React from "react";
 import { PageInterface, ApiHelper, InputBox, UniqueIdHelper, EnvironmentHelper } from "."
-import { FormGroup } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
+import { TextField } from "@mui/material";
 
 interface Props { page: PageInterface, updatedFunction: () => void }
 
@@ -21,14 +21,14 @@ export const PageEdit: React.FC<Props> = (props) => {
   const checkDelete = () => { if (!UniqueIdHelper.isMissing(page?.id)) return handleDelete; else return null; }
   const handleCancel = () => { props.updatedFunction(); }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const val = e.currentTarget.value;
     let p = { ...page };
     switch (e.currentTarget.name) {
       case "name": p.name = val; break;
-            //case "type": t.tabType = val; break;
-            //case "page": t.tabData = val; break;
-            //case "url": t.url = val; break;
+      //case "type": t.tabType = val; break;
+      //case "page": t.tabData = val; break;
+      //case "url": t.url = val; break;
     }
     setPage(p);
   }
@@ -63,14 +63,9 @@ export const PageEdit: React.FC<Props> = (props) => {
 
   return (
     <InputBox headerIcon="fas fa-code" headerText="Edit Page" saveFunction={handleSave} cancelFunction={handleCancel} deleteFunction={checkDelete()}>
-      <FormGroup>
-        <label>Page Name</label>
-        <input type="text" className="form-control" name="name" value={page?.name} onChange={handleChange} />
-      </FormGroup>
-      <FormGroup>
-        <label>Contents</label>
-        <Editor editorState={editorState} onEditorStateChange={handleEditorChange} editorStyle={{ height: 400 }} />
-      </FormGroup>
+      <TextField fullWidth label="Page Name" name="name" value={page?.name} onChange={handleChange} />
+      <label>Contents</label>
+      <Editor editorState={editorState} onEditorStateChange={handleEditorChange} editorStyle={{ height: 400 }} />
     </InputBox>
   );
 }
