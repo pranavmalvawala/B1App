@@ -622,7 +622,13 @@ button.datetime-local-datepicker-button {
 
 .full-frame {
   width: 100%;
-  height: calc(100vh - 55px);
-  margin-top: -27px;
+  height: calc(100vh - 64px);
+  width: calc(100% + 48px);
+  margin-top: -32px;
+  margin-left: -24px;
   border: none;
+}
+
+button:focus {
+  outline: none;
 }

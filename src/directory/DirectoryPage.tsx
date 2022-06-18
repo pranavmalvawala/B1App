@@ -15,11 +15,10 @@ export const DirectoryPage = () => {
 
   return (
     <>
-      <h1>Member Directory</h1>
       {
         UserHelper.user?.firstName
           ? (getContent())
-          : <h3 className="text-center w-100">Please <Link to="/login/?returnUrl=/directory">Login</Link> to view Directory.</h3>
+          : <><h1>Member Directory</h1><h3 className="text-center w-100">Please <Link to="/login/?returnUrl=/directory">Login</Link> to view Directory.</h3></>
       }
     </>
   );

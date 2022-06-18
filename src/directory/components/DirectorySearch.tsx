@@ -28,7 +28,7 @@ export const DirectorySearch: React.FC<Props> = (props) => {
 
   return (
     <>
-      <h1><i className="fas fa-user"></i> People</h1>
+      <h1><i className="fas fa-user"></i> Member Directory</h1>
       <DisplayBox id="peopleBox" headerIcon="fas fa-user" headerText="Search">
         <TextField fullWidth label="Name" id="searchText" data-cy="search-input" name="searchText" type="text" placeholder="Name" value={searchText} onChange={handleChange} onKeyDown={handleKeyDown}
           InputProps={{ endAdornment: <Button variant="contained" id="searchButton" data-cy="search-button" onClick={handleSubmit}>Search</Button> }}

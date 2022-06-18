@@ -7,7 +7,6 @@ import { ConfigHelper, ConfigurationInterface, LoadingPage, Theme } from "./comp
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Themes } from "./appBase/helpers";
 
-
 const App: React.FC = () => {
   const [config, setConfig] = React.useState<ConfigurationInterface>({} as ConfigurationInterface);
 
@@ -24,7 +23,6 @@ const App: React.FC = () => {
   }, []);
 
   React.useEffect(() => { loadConfig(); }, [loadConfig]);
-
 
   if (config.keyName === undefined) return <LoadingPage config={config} />
   else return (
