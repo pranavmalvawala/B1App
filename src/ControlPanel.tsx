@@ -8,6 +8,7 @@ import { Logout } from "./Logout";
 import { Login } from "./Login";
 import { EnvironmentHelper } from "./helpers"
 import ReactGA from "react-ga";
+import { PersonHelper } from "./helpers";
 
 export const ControlPanel = () => {
   const location = useLocation();
@@ -17,8 +18,8 @@ export const ControlPanel = () => {
   }
   React.useEffect(() => { if (EnvironmentHelper.GoogleAnalyticsTag !== "") ReactGA.pageview(location.pathname + location.search); }, [location]);
 
-  let user = React.useContext(UserContext).user; //to force rerender on login
-  if (user === null) console.log("User is null");
+  let context = React.useContext(UserContext);
+  PersonHelper.person = context.person;
 
   return (
     <Routes>
