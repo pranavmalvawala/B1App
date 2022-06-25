@@ -60,7 +60,7 @@ export const Household: React.FC<Props> = (props) => {
         <Grid container spacing={3}>
           <Grid item xs={1}>{arrow}</Grid>
           <Grid item xs={2}>
-            <img src={EnvironmentHelper.ContentRoot + member.photo} alt="avatar" className="img-fluid" />
+            <img src={EnvironmentHelper.Common.ContentRoot + member.photo} alt="avatar" className="img-fluid" />
           </Grid>
           <Grid item xs={9}>
             {member.name.display}

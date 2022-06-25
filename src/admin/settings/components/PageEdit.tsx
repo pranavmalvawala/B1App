@@ -47,7 +47,7 @@ export const PageEdit: React.FC<Props> = (props) => {
     setPage(props.page);
     if (UniqueIdHelper.isMissing(props.page.id)) setEditorState(EditorState.createWithContent(ContentState.createFromText("")));
     else {
-      const path = `${EnvironmentHelper.ContentRoot}/${props.page.churchId}/pages/${props.page.id}.html?ts=${new Date().getTime().toString()}`;
+      const path = `${EnvironmentHelper.Common.ContentRoot}/${props.page.churchId}/pages/${props.page.id}.html?ts=${new Date().getTime().toString()}`;
       console.log(path);
       fetch(path)
         .then(response => response.text())

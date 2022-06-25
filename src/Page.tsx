@@ -7,7 +7,7 @@ export const Page = () => {
   const [content, setContent] = React.useState("");
 
   const init = React.useCallback(async () => {
-    const path = `${EnvironmentHelper.ContentRoot}/${params.churchId}/pages/${params.id}.html?ts=${new Date().getTime().toString()}`;
+    const path = `${EnvironmentHelper.Common.ContentRoot}/${params.churchId}/pages/${params.id}.html?ts=${new Date().getTime().toString()}`;
     fetch(path)
       .then(response => response.text())
       .then(c => { setContent(c) });

@@ -44,7 +44,7 @@ export const TabEdit: React.FC<Props> = (props) => {
     if (currentTab.linkType !== "url") currentTab.url = "";
     if (currentTab.linkType === "page") {
       const rnd = Math.floor(Math.random() * 999999);
-      currentTab.url = EnvironmentHelper.ContentRoot + "/" + UserHelper.currentChurch.id + "/pages/" + currentTab.linkData + ".html?rnd=" + rnd.toString();
+      currentTab.url = EnvironmentHelper.Common.ContentRoot + "/" + UserHelper.currentChurch.id + "/pages/" + currentTab.linkData + ".html?rnd=" + rnd.toString();
     }
     ApiHelper.post("/links", [currentTab], "B1Api").then(props.updatedFunction);
   }
