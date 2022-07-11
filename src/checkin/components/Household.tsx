@@ -3,7 +3,7 @@ import { CheckinHelper, EnvironmentHelper, ApiHelper, Loading } from "../../comp
 import { GroupInterface, PersonInterface, ServiceTimeInterface, VisitInterface, VisitSessionInterface } from "../../appBase/interfaces";
 import { Groups } from "./Groups";
 import { ArrayHelper } from "../../appBase/helpers";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Icon, Box } from "@mui/material";
 
 interface Props { completeHandler: () => void }
 
@@ -53,14 +53,14 @@ export const Household: React.FC<Props> = (props) => {
   }
 
   const getMember = (member: PersonInterface) => {
-    const arrow = (member === selectedMember) ? (<i className="fas fa-angle-down"></i>) : (<i className="fas fa-angle-right"></i>);
+    const arrow = (member === selectedMember) ? (<Icon>keyboard_arrow_down</Icon>) : (<Icon>keyboard_arrow_right</Icon>);
     const serviceTimeList = (member === selectedMember) ? getMemberServiceTimes() : null;
     return (<>
       <a href="about:blank" className="bigLinkButton checkinPerson" onClick={(e) => { e.preventDefault(); selectMember(member) }}>
         <Grid container spacing={3}>
           <Grid item xs={1}>{arrow}</Grid>
           <Grid item xs={2}>
-            <img src={EnvironmentHelper.Common.ContentRoot + member.photo} alt="avatar" className="img-fluid" />
+            <img src={EnvironmentHelper.Common.ContentRoot + member.photo} alt="avatar" />
           </Grid>
           <Grid item xs={9}>
             {member.name.display}
@@ -100,7 +100,7 @@ export const Household: React.FC<Props> = (props) => {
     return (<div className="checkinServiceTime">
       <Grid container spacing={3}>
         <Grid item xs={4}>
-          <i className="far fa-clock"></i> {st.name}
+          <Box sx={{display: "flex", alignItems: "center"}}><Icon sx={{marginRight: "5px"}}>watch_later</Icon>{st.name}</Box>
         </Grid>
         <Grid item xs={8}>
           <a className="bigLinkButton serviceTimeButton" href="about:blank" onClick={(e) => { e.preventDefault(); selectServiceTime(st) }}>{selectedGroupName}</a>

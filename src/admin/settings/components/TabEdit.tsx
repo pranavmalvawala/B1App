@@ -1,6 +1,7 @@
 import React from "react";
 import { InputBox, LinkInterface, ApiHelper, UniqueIdHelper, ConfigHelper } from "."
 import { PageInterface, UserHelper, EnvironmentHelper } from ".";
+import { FormControl, InputLabel, Select, SelectChangeEvent, TextField, MenuItem, Stack } from "@mui/material";
 
 interface Props { currentTab: LinkInterface, updatedFunction?: () => void }
 
@@ -26,10 +27,10 @@ export const TabEdit: React.FC<Props> = (props) => {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const val = e.currentTarget.value;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => {
+    const val = e.target.value;
     let t = { ...currentTab };
-    switch (e.currentTarget.name) {
+    switch (e.target.name) {
       case "text": t.text = val; break;
       case "type": t.linkType = val; break;
       case "page": t.linkData = val; break;
@@ -48,7 +49,6 @@ export const TabEdit: React.FC<Props> = (props) => {
     }
     ApiHelper.post("/links", [currentTab], "B1Api").then(props.updatedFunction);
   }
-
   const initIcon = (e: React.MouseEvent) => {
     e.preventDefault();
     let target: any = $(e.currentTarget);
@@ -64,10 +64,7 @@ export const TabEdit: React.FC<Props> = (props) => {
   const getUrl = () => {
     if (currentTab?.linkType === "url") {
       return (
-        <div className="form-group">
-          <label>Url</label>
-          <input type="text" className="form-control" name="url" value={currentTab?.url} onChange={handleChange} />
-        </div>
+        <TextField fullWidth label="Url" name="url" type="text" value={currentTab?.url} onChange={handleChange} />
       );
     } else return null;
   }
@@ -78,15 +75,15 @@ export const TabEdit: React.FC<Props> = (props) => {
       if (pages === null) loadPages();
       else {
         options = [];
-        pages.forEach(page => options.push(<option value={page.id} key={page.id}>{page.name}</option>));
+        pages.forEach(page => options.push(<MenuItem value={page.id} key={page.id}>{page.name}</MenuItem>));
       }
       return (
-        <div className="form-group">
-          <label>Page</label>
-          <select className="form-control" name="page" value={currentTab?.linkData} onChange={handleChange}>
+        <FormControl fullWidth>
+          <InputLabel id="page">Page</InputLabel>
+          <Select labelId="page" label="Page" name="page" value={currentTab?.linkData} onChange={handleChange}>
             {options}
-          </select>
-        </div>
+          </Select>
+        </FormControl>
       );
     } else return null;
   }
@@ -102,34 +99,30 @@ export const TabEdit: React.FC<Props> = (props) => {
 
   return (
     <>
-      <InputBox headerIcon="fas fa-folder" headerText="Edit Tab" saveFunction={handleSave} cancelFunction={handleCancel} deleteFunction={checkDelete()}>
-        <div className="form-group">
-          <label>Text</label>
-          <div className="input-group">
-            <input type="text" className="form-control" name="text" value={currentTab?.text} onChange={handleChange} />
-            <div className="input-group-append">
-              <button className="btn btn-secondary iconpicker dropdown-toggle" name="TabIcon" id="TabIcon" data-icon={currentTab?.icon} data-iconset="fontawesome5" onClick={initIcon}>
-                <i className={currentTab?.icon}></i>
-                <span className="caret"></span>
-              </button>
-            </div>
-          </div>
+      <InputBox headerIcon="folder" headerText="Edit Tab" saveFunction={handleSave} cancelFunction={handleCancel} deleteFunction={checkDelete()}>
+        <Stack direction="row" pt={2}>
+          <TextField fullWidth margin="none" label="Text" name="text" type="text" value={currentTab?.text} onChange={handleChange} InputProps={{ endAdornment: <div className="input-group-append">
+            <button className="btn btn-secondary iconpicker dropdown-toggle" name="TabIcon" id="TabIcon" data-icon={currentTab?.icon} data-iconset="fontawesome5" onClick={initIcon}>
+              <i className={currentTab?.icon}></i>
+              <span className="caret"></span>
+            </button>
+          </div> }} />
           <input type="hidden" asp-for="TabId" />
-        </div>
-        <div className="form-group">
-          <label>Type</label>
-          <select className="form-control tab-type-select" name="type" value={currentTab?.linkType} onChange={handleChange}>
-            <option value="bible" disabled={isDisabled("bible")}>Bible</option>
-            <option value="checkin" disabled={isDisabled("checkin")}>Checkin</option>
-            <option value="donation" disabled={isDisabled("donation")}>Donation</option>
-            <option value="directory" disabled={isDisabled("directory")}>Member Directory</option>
-            <option value="stream" disabled={isDisabled("stream")}>Live Stream</option>
-            <option value="lessons" disabled={isDisabled("lessons")}>Lessons.church</option>
-            <option value="votd" disabled={isDisabled("votd")}>Verse of the Day</option>
-            <option value="url">External Url</option>
-            <option value="page">Page</option>
-          </select>
-        </div>
+        </Stack>
+        <FormControl fullWidth>
+          <InputLabel id="type">Type</InputLabel>
+          <Select labelId="type" label="Type" name="type" value={currentTab?.linkType || null} onChange={handleChange}>
+            <MenuItem value="bible" disabled={isDisabled("bible")}>Bible</MenuItem>
+            <MenuItem value="checkin" disabled={isDisabled("checkin")}>Checkin</MenuItem>
+            <MenuItem value="donation" disabled={isDisabled("donation")}>Donation</MenuItem>
+            <MenuItem value="directory" disabled={isDisabled("directory")}>Member Directory</MenuItem>
+            <MenuItem value="stream" disabled={isDisabled("stream")}>Live Stream</MenuItem>
+            <MenuItem value="lessons" disabled={isDisabled("lessons")}>Lessons.church</MenuItem>
+            <MenuItem value="votd" disabled={isDisabled("votd")}>Verse of the Day</MenuItem>
+            <MenuItem value="url">External Url</MenuItem>
+            <MenuItem value="page">Page</MenuItem>
+          </Select>
+        </FormControl>
         {getUrl()}
         {getPage()}
       </InputBox>

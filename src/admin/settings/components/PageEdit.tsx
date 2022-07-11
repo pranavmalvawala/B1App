@@ -62,10 +62,10 @@ export const PageEdit: React.FC<Props> = (props) => {
   React.useEffect(init, [props.page]);
 
   return (
-    <InputBox headerIcon="fas fa-code" headerText="Edit Page" saveFunction={handleSave} cancelFunction={handleCancel} deleteFunction={checkDelete()}>
+    <InputBox headerIcon="code" headerText="Edit Page" saveFunction={handleSave} cancelFunction={handleCancel} deleteFunction={checkDelete()}>
       <TextField fullWidth label="Page Name" name="name" value={page?.name} onChange={handleChange} />
       <label>Contents</label>
-      <Editor editorState={editorState} onEditorStateChange={handleEditorChange} editorStyle={{ height: 400 }} />
+      <Editor editorState={editorState} onEditorStateChange={handleEditorChange} editorStyle={{ height: 200 }} />
     </InputBox>
   );
 }

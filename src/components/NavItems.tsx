@@ -1,6 +1,7 @@
-import * as React from "react"
-import { NavLink } from "react-router-dom"
-import { UserHelper, Permissions, ConfigHelper } from "."
+import * as React from "react";
+import { NavLink } from "react-router-dom";
+import { UserHelper, Permissions, ConfigHelper } from ".";
+import { Icon, Box } from "@mui/material";
 
 interface Props {
   prefix?: string
@@ -17,7 +18,7 @@ export function NavItems({ prefix }: Props) {
   const getTab = ({ key, url, icon, label }: Tab) => (
     <li key={key} className="nav-item" data-toggle={prefix === "main" ? null : "collapse"} data-target={prefix === "main" ? null : "#userMenu"} id={(prefix || "") + key + "Tab"}>
       <NavLink className={prefix === "main" ? "nav-link" : ""} to={url}>
-        <i className={icon}></i> {label}
+        <Box sx={{display: "flex", alignItems: "center"}}><Icon sx={{marginRight: "5px"}}>{icon}</Icon>{label}</Box>
       </NavLink>
     </li>
   )
@@ -59,7 +60,7 @@ export function NavItems({ prefix }: Props) {
       }
     })
 
-    if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(getTab({ key: "Settings", url: "/admin/settings", icon: "fas fa-cog", label: "Settings" }));
+    if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(getTab({ key: "Settings", url: "/admin/settings", icon: "settings", label: "Settings" }));
 
     return tabs
   }

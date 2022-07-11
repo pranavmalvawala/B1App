@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckinHelper } from "../../components";
 import { GroupInterface } from "../../appBase/interfaces";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Icon } from "@mui/material";
 
 interface GroupCategoryInterface { key: number, name: string, items: GroupInterface[] }
 
@@ -39,7 +39,7 @@ export const Groups: React.FC<Props> = (props) => {
   }
 
   const getCategory = (category: GroupCategoryInterface) => {
-    const arrow = (category === selectedCategory) ? (<i className="fas fa-angle-down"></i>) : (<i className="fas fa-angle-right"></i>);
+    const arrow = (category === selectedCategory) ? (<Icon>keyboard_arrow_down</Icon>) : (<Icon>keyboard_arrow_right</Icon>);
     const groupList = (category === selectedCategory) ? getGroups() : null;
     return (<>
       <a href="about:blank" className="bigLinkButton checkinPerson" onClick={(e) => { e.preventDefault(); selectCategory(category) }}>

@@ -1,5 +1,6 @@
 import React from "react";
 import { DisplayBox, TabEdit, LinkInterface, ApiHelper, UserHelper } from ".";
+import { Icon, Box } from "@mui/material";
 
 interface Props { updatedFunction?: () => void }
 export const Tabs: React.FC<Props> = (props) => {
@@ -7,13 +8,13 @@ export const Tabs: React.FC<Props> = (props) => {
   const [currentTab, setCurrentTab] = React.useState<LinkInterface>(null);
 
   const handleUpdated = () => { setCurrentTab(null); loadData(); if (props.updatedFunction !== undefined) props.updatedFunction(); }
-  const getEditContent = () => <a href="about:blank" onClick={handleAdd}><i className="fas fa-plus"></i></a>
+  const getEditContent = () => <a href="about:blank" onClick={handleAdd}><Icon>add</Icon></a>
   const loadData = () => { ApiHelper.get("/links?category=tab", "B1Api").then(data => setTabs(data)); }
   const saveChanges = () => { ApiHelper.post("/links", tabs, "B1Api").then(loadData); }
 
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
-    let tab: LinkInterface = { churchId: UserHelper.currentChurch.id, sort: tabs.length, text: "", url: "", icon: "fas fa-link", linkData: "", linkType: "url", category: "tab" }
+    let tab: LinkInterface = { churchId: UserHelper.currentChurch.id, sort: tabs.length, text: "", url: "", icon: "link", linkData: "", linkType: "url", category: "tab" }
     setCurrentTab(tab);
   }
 
@@ -43,15 +44,15 @@ export const Tabs: React.FC<Props> = (props) => {
     let idx = 0;
     let rows: JSX.Element[] = [];
     tabs.forEach(tab => {
-      const upLink = (idx === 0) ? null : <a href="about:blank" data-idx={idx} onClick={moveUp}><i className="fas fa-arrow-up"></i></a>
-      const downLink = (idx === tabs.length - 1) ? null : <a href="about:blank" data-idx={idx} onClick={moveDown}><i className="fas fa-arrow-down"></i></a>
+      const upLink = (idx === 0) ? null : <a href="about:blank" data-idx={idx} onClick={moveUp}><Icon>arrow_upward</Icon></a>
+      const downLink = (idx === tabs.length - 1) ? null : <a href="about:blank" data-idx={idx} onClick={moveDown}><Icon>arrow_downward</Icon></a>
       rows.push(
         <tr key={idx}>
-          <td><a href={tab.url}><i className={tab.icon} /> {tab.text}</a></td>
-          <td className="text-right">
+          <td><a href={tab.url}><Box sx={{display: "flex", alignItems: "center"}}><Icon sx={{marginRight: "5px"}}>{tab.icon}</Icon>{tab.text}</Box></a></td>
+          <td style={{textAlign: "right"}}>
             {upLink}
             {downLink}
-            <a href="about:blank" onClick={(e: React.MouseEvent) => { e.preventDefault(); setCurrentTab(tab); }}><i className="fas fa-pencil-alt"></i></a>
+            <a href="about:blank" onClick={(e: React.MouseEvent) => { e.preventDefault(); setCurrentTab(tab); }}><Icon>edit</Icon></a>
           </td>
         </tr>
       );
@@ -64,8 +65,8 @@ export const Tabs: React.FC<Props> = (props) => {
 
   if (currentTab !== null) return <TabEdit currentTab={currentTab} updatedFunction={handleUpdated} />;
   else return (
-    <DisplayBox headerIcon="fas fa-folder" headerText="Tabs" editContent={getEditContent()}>
-      <table className="table table-sm">
+    <DisplayBox headerIcon="folder" headerText="Tabs" editContent={getEditContent()}>
+      <table className="table">
         <tbody>
           {getRows()}
         </tbody>

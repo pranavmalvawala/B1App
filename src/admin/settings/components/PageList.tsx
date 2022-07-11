@@ -1,10 +1,11 @@
 import React from "react";
-import { DisplayBox, PageInterface } from "."
+import { DisplayBox, PageInterface } from ".";
+import { Icon } from "@mui/material";
 
 interface Props { pages: PageInterface[], addFunction?: () => void, editFunction?: (page: PageInterface) => void }
 
 export const PageList: React.FC<Props> = (props) => {
-  const getEditContent = () => <a href="about:blank" onClick={handleAdd}><i className="fas fa-plus"></i></a>
+  const getEditContent = () => <a href="about:blank" onClick={handleAdd}><Icon>add</Icon></a>
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
     props.addFunction();
@@ -18,8 +19,8 @@ export const PageList: React.FC<Props> = (props) => {
         rows.push(
           <tr>
             <td>{page.name}</td>
-            <td className="text-right">
-              <a href="about:blank" onClick={(e: React.MouseEvent) => { e.preventDefault(); props.editFunction(page); }}><i className="fas fa-pencil-alt"></i></a>
+            <td style={{textAlign: "right"}}>
+              <a href="about:blank" onClick={(e: React.MouseEvent) => { e.preventDefault(); props.editFunction(page); }}><Icon>edit</Icon></a>
             </td>
           </tr>
         );
@@ -30,8 +31,8 @@ export const PageList: React.FC<Props> = (props) => {
   }
 
   return (
-    <DisplayBox headerIcon="fas fa-code" headerText="Pages" editContent={getEditContent()}>
-      <table className="table table-sm">
+    <DisplayBox headerIcon="code" headerText="Pages" editContent={getEditContent()}>
+      <table className="table">
         {getRows()}
       </table>
     </DisplayBox>

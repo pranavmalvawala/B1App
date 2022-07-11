@@ -6,6 +6,11 @@
 
 a {
   color: #24b8ff;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
 }
 
 h2 {
@@ -14,6 +19,30 @@ h2 {
 
 h2 span {
   color: #24b9ff;
+}
+
+h3 {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0 0 8px 0;
+}
+
+.w-100,
+.table {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-decoration {
+  text-decoration: none;
+}
+
+.text-decoration:hover {
+  text-decoration: underline;
 }
 
 .btn-primary {
