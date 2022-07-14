@@ -5,14 +5,13 @@ import { UserProvider } from "./UserContext"
 import { ControlPanel } from "./ControlPanel"
 import { ConfigHelper, ConfigurationInterface, LoadingPage, Theme } from "./components"
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Themes } from "./appBase/helpers";
+import { Themes, UserHelper } from "./appBase/helpers";
 
 const App: React.FC = () => {
   const [config, setConfig] = React.useState<ConfigurationInterface>({} as ConfigurationInterface);
 
   const loadConfig = React.useCallback(async () => {
     const keyName = window.location.hostname.split(".")[0];
-    console.log(keyName);
     const localThemeConfig = localStorage.getItem(`b1theme_${keyName}`);
     setConfig(JSON.parse(localThemeConfig) || {});
 
@@ -33,7 +32,7 @@ const App: React.FC = () => {
           <Theme />
           <Router>
             <Routes>
-              <Route path="/*" element={<ControlPanel />} />
+              <Route path="/*" element={<ControlPanel currentChurch={config.church || UserHelper.currentChurch} />} />
             </Routes>
           </Router>
         </ThemeProvider>

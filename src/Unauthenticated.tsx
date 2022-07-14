@@ -15,7 +15,8 @@ import { VotdPage } from "./votd/VotdPage";
 import { Wrapper } from "./components/Wrapper";
 import { Box } from "@mui/material";
 export const Unauthenticated = () => {
-  const firstTabRoute = ConfigHelper.getFirstRoute()
+  let firstTabRoute = ConfigHelper.getFirstRoute()
+  if (firstTabRoute === "/") firstTabRoute = "/bible";
 
   return (
     <Box sx={{ display: "flex", backgroundColor: "#EEE" }}>
