@@ -16,7 +16,8 @@ import { Box } from "@mui/material";
 import { Wrapper } from "./components/Wrapper";
 
 export const Authenticated = () => {
-  const firstTabRoute = ConfigHelper.getFirstRoute()
+  let firstTabRoute = ConfigHelper.getFirstRoute();
+  if (firstTabRoute === "/") firstTabRoute = "/bible";
 
   return (
     <Box sx={{ display: "flex", backgroundColor: "#EEE" }}>
