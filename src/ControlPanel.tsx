@@ -30,7 +30,7 @@ export const ControlPanel = (props: Props) => {
       UserHelper.currentChurch = props.currentChurch;
       context.setChurch(props.currentChurch)
     }
-  }, [props.currentChurch])
+  }, [context, props.currentChurch])
 
   return (
     <Routes>
