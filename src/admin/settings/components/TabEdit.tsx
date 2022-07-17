@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { InputBox, LinkInterface, ApiHelper, UniqueIdHelper, ConfigHelper } from "."
 import { PageInterface, UserHelper, EnvironmentHelper } from ".";
 import { FormControl, InputLabel, Select, SelectChangeEvent, TextField, MenuItem, Stack, Icon, Button, Dialog } from "@mui/material";
-import SearchIcons from "../../../appBase/components/material/iconpicker/IconPicker";
+import SearchIcons from "./../../../appBase/components/material/iconpicker/IconPicker";
 import SvgIcon from "@mui/material/SvgIcon";
 import * as muiIcons from "@mui/icons-material";
 
