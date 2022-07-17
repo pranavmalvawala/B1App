@@ -1,6 +1,8 @@
 import React from "react";
 import { DisplayBox, TabEdit, LinkInterface, ApiHelper, UserHelper } from ".";
 import { Icon, Box } from "@mui/material";
+import SvgIcon from "@mui/material/SvgIcon";
+import * as muiIcons from "@mui/icons-material";
 
 interface Props { updatedFunction?: () => void }
 export const Tabs: React.FC<Props> = (props) => {
@@ -48,7 +50,7 @@ export const Tabs: React.FC<Props> = (props) => {
       const downLink = (idx === tabs.length - 1) ? null : <a href="about:blank" data-idx={idx} onClick={moveDown}><Icon>arrow_downward</Icon></a>
       rows.push(
         <tr key={idx}>
-          <td><a href={tab.url}><Box sx={{display: "flex", alignItems: "center"}}><Icon sx={{marginRight: "5px"}}>{tab.icon}</Icon>{tab.text}</Box></a></td>
+          <td><a href={tab.url}><Box sx={{display: "flex", alignItems: "center"}}><SvgIcon sx={{marginRight: "5px"}} component={(muiIcons as any)[tab.icon]}></SvgIcon>{tab.text}</Box></a></td>
           <td style={{textAlign: "right"}}>
             {upLink}
             {downLink}
