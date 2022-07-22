@@ -22,7 +22,6 @@ export const ControlPanel = (props: Props) => {
   React.useEffect(() => { if (EnvironmentHelper.GoogleAnalyticsTag !== "") ReactGA.pageview(location.pathname + location.search); }, [location]);
 
   let context = React.useContext(UserContext);
-  console.log("Current church is: " + context.church);
   PersonHelper.person = context.person;
 
   React.useEffect(() => {
@@ -35,7 +34,7 @@ export const ControlPanel = (props: Props) => {
   return (
     <Routes>
       <Route path="/logout" element={<Logout />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login/*" element={<Login />} />
       {getAuth()}
     </Routes>
   );

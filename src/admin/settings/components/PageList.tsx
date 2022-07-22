@@ -15,9 +15,9 @@ export const PageList: React.FC<Props> = (props) => {
     if (props.pages.length === 0) return (<tr><td>Pages are small pieces of information that you can include add as a tab in the B1 app.  Click the plus icon to add a page.</td></tr>);
     else {
       let rows: JSX.Element[] = [];
-      props.pages.forEach(page => {
+      props.pages.forEach((page, i) => {
         rows.push(
-          <tr>
+          <tr key={i}>
             <td>{page.name}</td>
             <td style={{textAlign: "right"}}>
               <a href="about:blank" onClick={(e: React.MouseEvent) => { e.preventDefault(); props.editFunction(page); }}><Icon>edit</Icon></a>
@@ -33,7 +33,9 @@ export const PageList: React.FC<Props> = (props) => {
   return (
     <DisplayBox headerIcon="code" headerText="Pages" editContent={getEditContent()}>
       <table className="table">
-        {getRows()}
+        <tbody>
+          {getRows()}
+        </tbody>
       </table>
     </DisplayBox>
   );

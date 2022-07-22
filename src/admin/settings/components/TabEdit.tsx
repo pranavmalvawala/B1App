@@ -73,7 +73,7 @@ export const TabEdit: React.FC<Props> = (props) => {
   const getUrl = () => {
     if (currentTab?.linkType === "url") {
       return (
-        <TextField fullWidth label="Url" name="url" type="text" value={currentTab?.url} onChange={handleChange} />
+        <TextField fullWidth label="Url" name="url" type="text" value={currentTab?.url || ""} onChange={handleChange} />
       );
     } else return null;
   }
@@ -89,7 +89,7 @@ export const TabEdit: React.FC<Props> = (props) => {
       return (
         <FormControl fullWidth>
           <InputLabel id="page">Page</InputLabel>
-          <Select labelId="page" label="Page" name="page" value={currentTab?.linkData} onChange={handleChange}>
+          <Select labelId="page" label="Page" name="page" value={currentTab?.linkData || ""} onChange={handleChange}>
             {options}
           </Select>
         </FormControl>
@@ -120,7 +120,7 @@ export const TabEdit: React.FC<Props> = (props) => {
     <>
       <InputBox headerIcon="folder" headerText="Edit Tab" saveFunction={handleSave} cancelFunction={handleCancel} deleteFunction={checkDelete()}>
         <Stack direction="row" pt={2}>
-          <TextField fullWidth margin="none" label="Text" name="text" type="text" value={currentTab?.text} onChange={handleChange} InputProps={{ endAdornment: <div className="input-group-append">
+          <TextField fullWidth margin="none" label="Text" name="text" type="text" value={currentTab?.text || ""} onChange={handleChange} InputProps={{ endAdornment: <div className="input-group-append">
             <Button variant="contained" endIcon={<Icon>arrow_drop_down</Icon>} onClick={openModal}>
               <SvgIcon component={(muiIcons as any)[currentTab?.icon]}></SvgIcon>
             </Button>
@@ -129,7 +129,7 @@ export const TabEdit: React.FC<Props> = (props) => {
         </Stack>
         <FormControl fullWidth>
           <InputLabel id="type">Type</InputLabel>
-          <Select labelId="type" label="Type" name="type" value={currentTab?.linkType || null} onChange={handleChange}>
+          <Select labelId="type" label="Type" name="type" value={currentTab?.linkType || ""} onChange={handleChange}>
             <MenuItem value="bible" disabled={isDisabled("bible")}>Bible</MenuItem>
             <MenuItem value="checkin" disabled={isDisabled("checkin")}>Checkin</MenuItem>
             <MenuItem value="donation" disabled={isDisabled("donation")}>Donation</MenuItem>

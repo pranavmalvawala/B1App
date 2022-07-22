@@ -48,11 +48,9 @@ export const PageEdit: React.FC<Props> = (props) => {
     if (UniqueIdHelper.isMissing(props.page.id)) setEditorState(EditorState.createWithContent(ContentState.createFromText("")));
     else {
       const path = `${EnvironmentHelper.Common.ContentRoot}/${props.page.churchId}/pages/${props.page.id}.html?ts=${new Date().getTime().toString()}`;
-      console.log(path);
       fetch(path)
         .then(response => response.text())
         .then(content => {
-          console.log(content);
           const draft = htmlToDraft(content)
           setEditorState(EditorState.createWithContent(ContentState.createFromBlockArray(draft.contentBlocks)));
         })
@@ -63,7 +61,7 @@ export const PageEdit: React.FC<Props> = (props) => {
 
   return (
     <InputBox headerIcon="code" headerText="Edit Page" saveFunction={handleSave} cancelFunction={handleCancel} deleteFunction={checkDelete()}>
-      <TextField fullWidth label="Page Name" name="name" value={page?.name} onChange={handleChange} />
+      <TextField fullWidth label="Page Name" name="name" value={page?.name || ""} onChange={handleChange} />
       <label>Contents</label>
       <Editor editorState={editorState} onEditorStateChange={handleEditorChange} editorStyle={{ height: 200 }} />
     </InputBox>
