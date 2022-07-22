@@ -146,7 +146,7 @@ export const TabEdit: React.FC<Props> = (props) => {
         <Typography sx={{ marginTop: 2, marginBottom: 1 }}>Tab Image:- </Typography>
         <img
           src={imageUrl}
-          alt="Tab Image"
+          alt="tab"
           style={{ cursor: "pointer" }}
           onClick={() => { setShowImageEditor(true) }}
         />
