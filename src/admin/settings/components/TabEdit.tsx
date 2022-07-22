@@ -1,7 +1,7 @@
-import React, { useCallback } from "react";
-import { InputBox, LinkInterface, ApiHelper, UniqueIdHelper, ConfigHelper } from "."
+import React, { useCallback, useState } from "react";
+import { InputBox, LinkInterface, ApiHelper, UniqueIdHelper, ConfigHelper, ImageEditor } from "."
 import { PageInterface, UserHelper, EnvironmentHelper } from ".";
-import { FormControl, InputLabel, Select, SelectChangeEvent, TextField, MenuItem, Stack, Icon, Button, Dialog } from "@mui/material";
+import { FormControl, InputLabel, Select, SelectChangeEvent, TextField, MenuItem, Stack, Icon, Button, Dialog, Typography } from "@mui/material";
 import SearchIcons from "./../../../appBase/components/material/iconpicker/IconPicker";
 import SvgIcon from "@mui/material/SvgIcon";
 import * as muiIcons from "@mui/icons-material";
@@ -14,6 +14,7 @@ export const TabEdit: React.FC<Props> = (props) => {
   const checkDelete = () => { if (!UniqueIdHelper.isMissing(currentTab?.id)) return handleDelete; else return null; }
   const handleCancel = () => { props.updatedFunction(); }
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [showImageEditor, setShowImageEditor] = useState<boolean>(false);
   const onSelect = useCallback((iconName: string) => {
     let t = { ...currentTab };
     t.icon = iconName;
@@ -103,7 +104,17 @@ export const TabEdit: React.FC<Props> = (props) => {
     return false
   }
 
+  const handleOnUpdate = (dataUrl: string) => {
+    const updatedTab = { ...currentTab };
+    updatedTab.photo = dataUrl;
+
+    setCurrentTab(updatedTab);
+    setShowImageEditor(false);
+  }
+
   React.useEffect(() => { setCurrentTab(props.currentTab); }, [props.currentTab]);
+
+  const imageUrl = currentTab?.photo ? currentTab?.photo.startsWith("data:image/png;base64,") ? currentTab?.photo : EnvironmentHelper.Common.ContentRoot + currentTab?.photo : "/images/dashboard/storm.png";
 
   return (
     <>
@@ -132,11 +143,25 @@ export const TabEdit: React.FC<Props> = (props) => {
         </FormControl>
         {getUrl()}
         {getPage()}
-
+        <Typography sx={{ marginTop: 2, marginBottom: 1 }}>Tab Image:- </Typography>
+        <img
+          src={imageUrl}
+          alt="Tab Image"
+          style={{ cursor: "pointer" }}
+          onClick={() => { setShowImageEditor(true) }}
+        />
         <Dialog open={isModalOpen}>
           <SearchIcons onSelect={onSelect} />
         </Dialog>
       </InputBox>
+      {showImageEditor && (
+        <ImageEditor
+          aspectRatio={4}
+          photoUrl={imageUrl}
+          onUpdate={handleOnUpdate}
+          onCancel={() => setShowImageEditor(false)}
+        />
+      )}
     </>
   );
 }
