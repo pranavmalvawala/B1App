@@ -1,8 +1,6 @@
 import React from "react";
 import { DisplayBox, TabEdit, LinkInterface, ApiHelper, UserHelper } from ".";
 import { Icon, Box } from "@mui/material";
-import SvgIcon from "@mui/material/SvgIcon";
-import * as muiIcons from "@mui/icons-material";
 
 interface Props { updatedFunction?: () => void }
 export const Tabs: React.FC<Props> = (props) => {

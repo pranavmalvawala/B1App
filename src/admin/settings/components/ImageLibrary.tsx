@@ -1,8 +1,7 @@
-import React, { useCallback, useState } from "react";
-import { InputBox, LinkInterface, ApiHelper, UniqueIdHelper, ConfigHelper, ImageEditor, DisplayBox } from "."
-import { PageInterface, UserHelper, EnvironmentHelper } from ".";
-import { FormControl, InputLabel, Select, SelectChangeEvent, TextField, MenuItem, Stack, Icon, Button, Dialog, Typography } from "@mui/material";
-import SearchIcons from "./../../../appBase/components/material/iconpicker/IconPicker";
+import React, { useState } from "react";
+import { ImageEditor, DisplayBox } from "."
+import { UserHelper, EnvironmentHelper } from ".";
+import { Button } from "@mui/material";
 
 interface Props {
   onUpdate: (dataUrl?: string) => void;
@@ -11,14 +10,8 @@ interface Props {
 }
 
 export const ImageLibrary: React.FC<Props> = (props) => {
-  const [currentTab, setCurrentTab] = React.useState<LinkInterface>(null);
-  const [pages, setPages] = React.useState<PageInterface[]>(null);
   const [showImageEditor, setShowImageEditor] = useState<boolean>(false);
   const images = ["baptize", "baptize2", "bible", "bible2", "bible3", "checkin", "comfort", "directory", "hands", "hands2", "lessons", "storm", "url", "votd", "worship", "worship2"];
-
-  const handleSave = () => {
-
-  }
 
   const getImages = () => {
     const result: JSX.Element[] = [];
@@ -26,7 +19,7 @@ export const ImageLibrary: React.FC<Props> = (props) => {
       console.log(EnvironmentHelper.Common.B1Root)
       const fullPath = EnvironmentHelper.Common.B1Root.replace("{key}", UserHelper.currentChurch.subDomain) + "/images/dashboard/" + img + ".png";
       result.push(<a href="about:blank" onClick={(e) => { e.preventDefault(); props.onUpdate(fullPath) }}>
-        <img src={fullPath} />
+        <img src={fullPath} alt="library" />
       </a>);
     })
     return result;
@@ -35,7 +28,7 @@ export const ImageLibrary: React.FC<Props> = (props) => {
   if (showImageEditor) return (<ImageEditor aspectRatio={4} photoUrl={props.imageUrl} onUpdate={props.onUpdate} onCancel={() => setShowImageEditor(false)} />)
   else return (
     <>
-      <DisplayBox id="cropperBox" headerIcon="" headerText="Select Image" >
+      <DisplayBox id="cropperBox" headerIcon="" headerText="Select Image">
         <div><Button variant="outlined" onClick={() => { setShowImageEditor(true) }}>Upload Your Own Image</Button></div>
         <br />
         <b>Select from Library</b>
