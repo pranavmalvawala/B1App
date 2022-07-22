@@ -3,8 +3,7 @@ import { InputBox, LinkInterface, ApiHelper, UniqueIdHelper, ConfigHelper, Image
 import { PageInterface, UserHelper, EnvironmentHelper } from ".";
 import { FormControl, InputLabel, Select, SelectChangeEvent, TextField, MenuItem, Stack, Icon, Button, Dialog, Typography } from "@mui/material";
 import SearchIcons from "./../../../appBase/components/material/iconpicker/IconPicker";
-import SvgIcon from "@mui/material/SvgIcon";
-import * as muiIcons from "@mui/icons-material";
+import { ImageLibrary } from "./ImageLibrary";
 
 interface Props { currentTab: LinkInterface, updatedFunction?: () => void }
 
@@ -14,7 +13,8 @@ export const TabEdit: React.FC<Props> = (props) => {
   const checkDelete = () => { if (!UniqueIdHelper.isMissing(currentTab?.id)) return handleDelete; else return null; }
   const handleCancel = () => { props.updatedFunction(); }
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [showImageEditor, setShowImageEditor] = useState<boolean>(false);
+  const [showLibrary, setShowLibrary] = useState<boolean>(false);
+
   const onSelect = useCallback((iconName: string) => {
     let t = { ...currentTab };
     t.icon = iconName;
@@ -109,12 +109,12 @@ export const TabEdit: React.FC<Props> = (props) => {
     updatedTab.photo = dataUrl;
 
     setCurrentTab(updatedTab);
-    setShowImageEditor(false);
+    setShowLibrary(false);
   }
 
   React.useEffect(() => { setCurrentTab(props.currentTab); }, [props.currentTab]);
 
-  const imageUrl = currentTab?.photo ? currentTab?.photo.startsWith("data:image/png;base64,") ? currentTab?.photo : EnvironmentHelper.Common.ContentRoot + currentTab?.photo : "/images/dashboard/storm.png";
+  const imageUrl = currentTab?.photo || "/images/dashboard/storm.png";
 
   const getPreview = () => {
     const el = document.getElementById("tabType");
@@ -124,9 +124,9 @@ export const TabEdit: React.FC<Props> = (props) => {
 
     return (<div style={{ backgroundColor: "#000000", width: width, height: height, marginBottom: 10 }}>
       <div style={{ textAlign: "center", position: "absolute", zIndex: 9999, width: width, height: height, paddingTop: (height - 38) / 2 }}>
-        <Typography sx={{ fontSize: 34, color: "#FFFFFF" }} style={{ color: "#FFF" }} >{currentTab?.text}</Typography>
+        <Typography sx={{ fontSize: 34, color: "#FFFFFF" }} style={{ color: "#FFF" }}>{currentTab?.text}</Typography>
       </div>
-      <img id="tabImage" src={imageUrl} alt="tab" style={{ cursor: "pointer", opacity: 0.8 }} />
+      <img id="tabImage" src={imageUrl} alt="tab" style={{ cursor: "pointer", opacity: 0.7 }} />
     </div>)
   }
 
@@ -137,9 +137,7 @@ export const TabEdit: React.FC<Props> = (props) => {
         <Stack direction="row" pt={2}>
           <TextField fullWidth margin="none" label="Text" name="text" type="text" value={currentTab?.text || ""} onChange={handleChange} InputProps={{
             endAdornment: <div className="input-group-append">
-              <Button variant="contained" endIcon={<Icon>arrow_drop_down</Icon>} onClick={openModal}>
-                <Icon>{currentTab?.icon}</Icon>
-              </Button>
+              <Button variant="contained" endIcon={<Icon>arrow_drop_down</Icon>} onClick={openModal}><Icon>{currentTab?.icon}</Icon></Button>
             </div>
           }} />
           <input type="hidden" asp-for="TabId" />
@@ -163,20 +161,14 @@ export const TabEdit: React.FC<Props> = (props) => {
         <Typography sx={{ marginTop: 2, marginBottom: 1 }}>Tab Preview:</Typography>
         <div>
           {getPreview()}
-          <Button onClick={() => { setShowImageEditor(true) }}>Change Image</Button>
+          <Button onClick={() => { setShowLibrary(true) }}>Change Image</Button>
         </div>
         <Dialog open={isModalOpen}>
           <SearchIcons onSelect={onSelect} />
         </Dialog>
       </InputBox>
-      {showImageEditor && (
-        <ImageEditor
-          aspectRatio={4}
-          photoUrl={imageUrl}
-          onUpdate={handleOnUpdate}
-          onCancel={() => setShowImageEditor(false)}
-        />
-      )}
+      {showLibrary && (<ImageLibrary onUpdate={handleOnUpdate} onCancel={() => setShowLibrary(false)} imageUrl={imageUrl} />)}
+
     </>
   );
 }
