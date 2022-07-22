@@ -50,8 +50,10 @@ export const Tabs: React.FC<Props> = (props) => {
       const downLink = (idx === tabs.length - 1) ? null : <a href="about:blank" data-idx={idx} onClick={moveDown}><Icon>arrow_downward</Icon></a>
       rows.push(
         <tr key={idx}>
-          <td><a href={tab.url}><Box sx={{display: "flex", alignItems: "center"}}><SvgIcon sx={{marginRight: "5px"}} component={(muiIcons as any)[tab.icon]}></SvgIcon>{tab.text}</Box></a></td>
-          <td style={{textAlign: "right"}}>
+          <td><a href={tab.url}>
+            <Box sx={{ display: "flex", alignItems: "center" }}><Icon style={{ marginRight: 5 }}>{tab.icon}</Icon> {tab.text}</Box>
+          </a></td>
+          <td style={{ textAlign: "right" }}>
             {upLink}
             {downLink}
             <a href="about:blank" onClick={(e: React.MouseEvent) => { e.preventDefault(); setCurrentTab(tab); }}><Icon>edit</Icon></a>

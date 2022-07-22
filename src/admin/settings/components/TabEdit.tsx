@@ -116,20 +116,37 @@ export const TabEdit: React.FC<Props> = (props) => {
 
   const imageUrl = currentTab?.photo ? currentTab?.photo.startsWith("data:image/png;base64,") ? currentTab?.photo : EnvironmentHelper.Common.ContentRoot + currentTab?.photo : "/images/dashboard/storm.png";
 
-  return (
+  const getPreview = () => {
+    const el = document.getElementById("tabType");
+    let width = el?.offsetWidth || 400;
+    if (width > 400) width = 400;
+    const height = width / 4;
+
+    return (<div style={{ backgroundColor: "#000000", width: width, height: height, marginBottom: 10 }}>
+      <div style={{ textAlign: "center", position: "absolute", zIndex: 9999, width: width, height: height, paddingTop: (height - 38) / 2 }}>
+        <Typography sx={{ fontSize: 34, color: "#FFFFFF" }} style={{ color: "#FFF" }} >{currentTab?.text}</Typography>
+      </div>
+      <img id="tabImage" src={imageUrl} alt="tab" style={{ cursor: "pointer", opacity: 0.8 }} />
+    </div>)
+  }
+
+  if (!currentTab) return <></>
+  else return (
     <>
       <InputBox headerIcon="folder" headerText="Edit Tab" saveFunction={handleSave} cancelFunction={handleCancel} deleteFunction={checkDelete()}>
         <Stack direction="row" pt={2}>
-          <TextField fullWidth margin="none" label="Text" name="text" type="text" value={currentTab?.text || ""} onChange={handleChange} InputProps={{ endAdornment: <div className="input-group-append">
-            <Button variant="contained" endIcon={<Icon>arrow_drop_down</Icon>} onClick={openModal}>
-              <SvgIcon component={(muiIcons as any)[currentTab?.icon]}></SvgIcon>
-            </Button>
-          </div> }} />
+          <TextField fullWidth margin="none" label="Text" name="text" type="text" value={currentTab?.text || ""} onChange={handleChange} InputProps={{
+            endAdornment: <div className="input-group-append">
+              <Button variant="contained" endIcon={<Icon>arrow_drop_down</Icon>} onClick={openModal}>
+                <Icon>{currentTab?.icon}</Icon>
+              </Button>
+            </div>
+          }} />
           <input type="hidden" asp-for="TabId" />
         </Stack>
         <FormControl fullWidth>
           <InputLabel id="type">Type</InputLabel>
-          <Select labelId="type" label="Type" name="type" value={currentTab?.linkType || ""} onChange={handleChange}>
+          <Select labelId="type" label="Type" id="tabType" name="type" value={currentTab?.linkType || ""} onChange={handleChange}>
             <MenuItem value="bible" disabled={isDisabled("bible")}>Bible</MenuItem>
             <MenuItem value="checkin" disabled={isDisabled("checkin")}>Checkin</MenuItem>
             <MenuItem value="donation" disabled={isDisabled("donation")}>Donation</MenuItem>
@@ -143,13 +160,11 @@ export const TabEdit: React.FC<Props> = (props) => {
         </FormControl>
         {getUrl()}
         {getPage()}
-        <Typography sx={{ marginTop: 2, marginBottom: 1 }}>Tab Image:- </Typography>
-        <img
-          src={imageUrl}
-          alt="tab"
-          style={{ cursor: "pointer" }}
-          onClick={() => { setShowImageEditor(true) }}
-        />
+        <Typography sx={{ marginTop: 2, marginBottom: 1 }}>Tab Preview:</Typography>
+        <div>
+          {getPreview()}
+          <Button onClick={() => { setShowImageEditor(true) }}>Change Image</Button>
+        </div>
         <Dialog open={isModalOpen}>
           <SearchIcons onSelect={onSelect} />
         </Dialog>
