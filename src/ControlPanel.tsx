@@ -26,10 +26,19 @@ export const ControlPanel = (props: Props) => {
 
   React.useEffect(() => {
     if (props.currentChurch) {
-      UserHelper.currentChurch = props.currentChurch;
-      context.setChurch(props.currentChurch)
+      if (props?.currentChurch?.id === UserHelper?.currentChurch?.id) {
+        const church = {
+          ...props.currentChurch,
+          ...UserHelper.currentChurch
+        }
+        UserHelper.currentChurch = church;
+        context.setChurch(church);
+      } else {
+        UserHelper.currentChurch = props.currentChurch;
+        context.setChurch(props.currentChurch)
+      }
     }
-  }, [context, props.currentChurch])
+  }, [props.currentChurch])
 
   return (
     <Routes>
