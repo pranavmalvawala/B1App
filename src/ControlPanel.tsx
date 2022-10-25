@@ -38,6 +38,7 @@ export const ControlPanel = (props: Props) => {
         context.setChurch(props.currentChurch)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.currentChurch])
 
   return (
