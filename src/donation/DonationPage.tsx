@@ -2,7 +2,7 @@ import React from "react";
 import { ConfigHelper, PersonHelper } from "../helpers";
 import { DonationPage as BaseDonationPage } from "../appBase/donationComponents/DonationPage";
 import { Link } from "react-router-dom";
-import { OneTimeDonation } from "../appBase/donationComponents/components";
+import { NonAuthDonation } from "../appBase/donationComponents/components";
 import { Grid, Icon, Button, Typography } from "@mui/material";
 
 export const DonationPage = () => (
@@ -16,8 +16,7 @@ export const DonationPage = () => (
         : (<>
           <Grid container spacing={3}>
             <Grid item md={8} xs={12}>
-              <Typography component="h3" sx={{fontSize: "28px", fontWeight: 500, lineHeight: 1.2, margin: "0 0 8px 0"}}>Make a One Time Donation</Typography>
-              <OneTimeDonation churchId={ConfigHelper.churchId} />
+              <NonAuthDonation churchId={ConfigHelper.churchId} />
             </Grid>
             <Grid item md={4} xs={12}>
               <Typography component="h3" sx={{textAlign: "center", fontSize: "28px", fontWeight: 500, lineHeight: 1.2, margin: "0 0 8px 0"}}>Manage Donations</Typography>
