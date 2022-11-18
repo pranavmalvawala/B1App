@@ -64,11 +64,9 @@ export const Household: React.FC<Props> = (props) => {
           </Grid>
           <Grid item xs={9}>
             {member.name.display}
-            {/* // TODO - find out what's need to be done with this getDisplayGroup */}
-            {/* <div>{CheckinHelper.getDisplayGroup}</div> */}
+            {getCondensedGroupList(member)}
           </Grid>
         </Grid>
-        {getCondensedGroupList(member)}
       </a>
       {serviceTimeList}
     </>);
