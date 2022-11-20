@@ -35,6 +35,11 @@ export function DonationLanding() {
             </TabPanel>
           </TabContext>
           <Typography textAlign="center" marginTop={4} marginBottom={6}>
+            <Link href="/login">
+              Already got an account? or create one.
+            </Link>
+          </Typography>
+          <Typography textAlign="center" marginY={6}>
             Online giving powered by{" "}
             <Link href="https://livecs.org" target="_blank">
               Live Church Solutions
