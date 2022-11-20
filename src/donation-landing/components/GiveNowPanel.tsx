@@ -7,7 +7,7 @@ export function GiveNowPanel() {
   return (
     <Box sx={{ paddingX: 5, paddingTop: 3 }}>
       <Typography variant="h5" fontWeight="bold">My Donation</Typography>
-      <NonAuthDonation churchId={ConfigHelper.churchId} /> 
+      <NonAuthDonation churchId={ConfigHelper.churchId} />
     </Box>
   );
 }

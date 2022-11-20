@@ -17,11 +17,11 @@ export function DonationLanding() {
     <Box
       sx={{
         backgroundColor: "#f9f9f9",
-        height: "100vh",
+        height: "100vh"
       }}
     >
       <Box sx={{ maxWidth: "930px", margin: "auto", paddingY: "72px" }}>
-        <Card sx={{}}>
+        <Card>
           <Box sx={{ paddingTop: 8, paddingX: 10, paddingBottom: 3 }}>
             <img src={logoSrc} alt="logo" />
           </Box>
