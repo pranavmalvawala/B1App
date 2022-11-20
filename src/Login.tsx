@@ -9,7 +9,11 @@ import { EnvironmentHelper } from "./helpers";
 import { UserInterface, ChurchInterface } from "./appBase/interfaces";
 import ReactGA from "react-ga";
 
-export const Login: React.FC = (props: any) => {
+interface Props {
+  showLogo?: boolean;
+}
+
+export const Login: React.FC<Props> = ({ showLogo }) => {
   const [cookies] = useCookies(["jwt"]);
 
   const trackChurchRegister = async (church: ChurchInterface) => {
@@ -42,6 +46,7 @@ export const Login: React.FC = (props: any) => {
         logo={AppearanceHelper.getLogoLight(ConfigHelper.current?.appearance, null)}
         appUrl={window.location.href}
         returnUrl={returnUrl}
+        showLogo={showLogo}
       />
     );
   } else {

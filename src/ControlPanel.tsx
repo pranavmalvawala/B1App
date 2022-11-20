@@ -6,6 +6,7 @@ import { Unauthenticated } from "./Unauthenticated"
 import { ApiHelper } from "./components";
 import { Logout } from "./Logout";
 import { Login } from "./Login";
+import { DonationLanding } from "./donation-landing/DonationLanding";
 import { EnvironmentHelper, UserHelper } from "./helpers"
 import ReactGA from "react-ga";
 import { PersonHelper } from "./helpers";
@@ -45,6 +46,7 @@ export const ControlPanel = (props: Props) => {
     <Routes>
       <Route path="/logout" element={<Logout />} />
       <Route path="/login/*" element={<Login />} />
+      <Route path="/donation-landing" element={<DonationLanding />} />
       {getAuth()}
     </Routes>
   );

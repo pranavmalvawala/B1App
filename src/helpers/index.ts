@@ -1,4 +1,4 @@
-export { ApiHelper, UserHelper, UniqueIdHelper } from "../appBase/helpers";
+export { ApiHelper, UserHelper, UniqueIdHelper, AppearanceHelper } from "../appBase/helpers";
 export { FormatHelper } from "./FormatHelper";
 export * from "./ConfigHelper";
 export { EnvironmentHelper } from "./EnvironmentHelper";
