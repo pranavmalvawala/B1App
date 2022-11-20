@@ -3,7 +3,6 @@ import { Box, Card, Tabs, Tab, Typography, Link } from "@mui/material";
 import { AppearanceHelper, ConfigHelper } from "../helpers";
 import { TabPanel, TabContext } from "@mui/lab";
 import { GiveNowPanel } from "./components/GiveNowPanel";
-import { SignInPanel } from "./components/SignInPanel";
 
 export function DonationLanding() {
   const [value, setValue] = useState("0");
@@ -29,14 +28,10 @@ export function DonationLanding() {
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                 <Tab label="Give Now" sx={{ textTransform: "unset" }} aria-controls="give-now" value="0" />
-                <Tab label="Sign in" sx={{ textTransform: "unset" }} aria-controls="sign-in" value="1" />
               </Tabs>
             </Box>
             <TabPanel value="0">
               <GiveNowPanel />
-            </TabPanel>
-            <TabPanel value="1">
-              <SignInPanel />
             </TabPanel>
           </TabContext>
           <Typography textAlign="center" marginTop={4} marginBottom={6}>
