@@ -15,7 +15,7 @@ export function DonationLanding() {
   return (
     <Box
       sx={{
-        backgroundColor: "#f9f9f9",
+        backgroundColor: "#f9f9f9"
       }}
     >
       <Box sx={{ maxWidth: "930px", margin: "auto", paddingY: "72px" }}>
