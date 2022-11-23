@@ -20,7 +20,7 @@ export const DonationPage = () => (
             </Grid>
             <Grid item md={4} xs={12}>
               <Typography component="h3" sx={{textAlign: "center", fontSize: "28px", fontWeight: 500, lineHeight: 1.2, margin: "0 0 8px 0"}}>Manage Donations</Typography>
-              <p style={{marginTop: 0}}>Please login to make a recurring donation or manage donations</p>
+              <p style={{marginTop: 0}}>Please login to manage donations</p>
               <Link to="/login/?returnUrl=/donate">
                 <Button sx={{fontSize: "16px", textTransform: "capitalize"}} fullWidth variant="contained">Login</Button>
               </Link>
