@@ -16,7 +16,7 @@ export class ConfigHelper {
     const churchId = await ConfigHelper.getChurchId(keyName);
     let appearance = await AppearanceHelper.load(churchId);
     const tabs: LinkInterface[] = await ApiHelper.getAnonymous("/links/church/" + churchId + "?category=tab", "B1Api");
-    const church = await ApiHelper.getAnonymous("/churches/lookup/?id=" + churchId, "AccessApi")
+    const church = await ApiHelper.getAnonymous("/churches/lookup/?id=" + churchId, "MembershipApi")
     let result: ConfigurationInterface = { appearance: appearance, church: church, tabs: tabs }
     localStorage.setItem(`b1theme_${keyName}`, JSON.stringify(result));
     result.keyName = keyName;
@@ -26,7 +26,7 @@ export class ConfigHelper {
 
   static async getChurchId(keyName: string) {
     if (ConfigHelper.churchId === "") {
-      const church = await ApiHelper.getAnonymous("/churches/lookup/?subDomain=" + keyName, "AccessApi")
+      const church = await ApiHelper.getAnonymous("/churches/lookup/?subDomain=" + keyName, "MembershipApi")
       ConfigHelper.churchId = church.id;
     }
     return ConfigHelper.churchId;

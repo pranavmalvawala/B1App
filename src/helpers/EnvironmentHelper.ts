@@ -16,7 +16,7 @@ export class EnvironmentHelper {
     EnvironmentHelper.Common.init(stage)
 
     ApiHelper.apiConfigs = [
-      { keyName: "AccessApi", url: EnvironmentHelper.Common.AccessApi, jwt: "", permisssions: [] },
+      { keyName: "MembershipApi", url: EnvironmentHelper.Common.MembershipApi, jwt: "", permisssions: [] },
       { keyName: "AttendanceApi", url: EnvironmentHelper.Common.AttendanceApi, jwt: "", permisssions: [] },
       { keyName: "MembershipApi", url: EnvironmentHelper.Common.MembershipApi, jwt: "", permisssions: [] },
       { keyName: "B1Api", url: EnvironmentHelper.B1Api, jwt: "", permisssions: [] },
