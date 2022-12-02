@@ -10,9 +10,9 @@ import { DonationLanding } from "./donation-landing/DonationLanding";
 import { EnvironmentHelper, UserHelper } from "./helpers"
 import ReactGA from "react-ga";
 import { PersonHelper } from "./helpers";
-import { ChurchInterface } from "./appBase/interfaces";
+import { LoginUserChurchInterface } from "./appBase/interfaces";
 
-interface Props { currentChurch: ChurchInterface }
+interface Props { currentUserChurch: LoginUserChurchInterface }
 
 export const ControlPanel = (props: Props) => {
   const location = useLocation();
@@ -26,21 +26,21 @@ export const ControlPanel = (props: Props) => {
   PersonHelper.person = context.person;
 
   React.useEffect(() => {
-    if (props.currentChurch) {
-      if (props?.currentChurch?.id === UserHelper?.currentChurch?.id) {
+    if (props.currentUserChurch) {
+      if (props?.currentUserChurch?.church?.id === UserHelper?.currentUserChurch?.church?.id) {
         const church = {
-          ...props.currentChurch,
-          ...UserHelper.currentChurch
+          ...props.currentUserChurch,
+          ...UserHelper.currentUserChurch
         }
-        UserHelper.currentChurch = church;
-        context.setChurch(church);
+        UserHelper.currentUserChurch = church;
+        context.setUserChurch(church);
       } else {
-        UserHelper.currentChurch = props.currentChurch;
-        context.setChurch(props.currentChurch)
+        UserHelper.currentUserChurch = props.currentUserChurch;
+        context.setUserChurch(props.currentUserChurch)
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.currentChurch])
+  }, [props.currentUserChurch])
 
   return (
     <Routes>

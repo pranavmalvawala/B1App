@@ -14,7 +14,7 @@ export const Tabs: React.FC<Props> = (props) => {
 
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
-    let tab: LinkInterface = { churchId: UserHelper.currentChurch.id, sort: tabs.length, text: "", url: "", icon: "link", linkData: "", linkType: "url", category: "tab" }
+    let tab: LinkInterface = { churchId: UserHelper.currentUserChurch.church.id, sort: tabs.length, text: "", url: "", icon: "link", linkData: "", linkType: "url", category: "tab" }
     setCurrentTab(tab);
   }
 

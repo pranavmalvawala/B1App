@@ -32,7 +32,7 @@ const App: React.FC = () => {
           <Theme />
           <Router>
             <Routes>
-              <Route path="/*" element={<ControlPanel currentChurch={config.church || UserHelper.currentChurch} />} />
+              <Route path="/*" element={<ControlPanel currentUserChurch={UserHelper.currentUserChurch} />} />
             </Routes>
           </Router>
         </ThemeProvider>

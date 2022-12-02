@@ -17,7 +17,7 @@ export const ImageLibrary: React.FC<Props> = (props) => {
     const result: JSX.Element[] = [];
     images.forEach(img => {
       console.log(EnvironmentHelper.Common.B1Root)
-      const fullPath = EnvironmentHelper.Common.B1Root.replace("{key}", UserHelper.currentChurch.subDomain) + "/images/dashboard/" + img + ".png";
+      const fullPath = EnvironmentHelper.Common.B1Root.replace("{key}", UserHelper.currentUserChurch.church.subDomain) + "/images/dashboard/" + img + ".png";
       result.push(<a href="about:blank" onClick={(e) => { e.preventDefault(); props.onUpdate(fullPath) }}>
         <img src={fullPath} alt="library" />
       </a>);

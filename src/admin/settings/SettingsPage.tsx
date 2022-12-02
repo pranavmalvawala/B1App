@@ -19,7 +19,7 @@ export const SettingsPage = () => {
       context.setUser({ ...context.user }); // hacky stuff to create navbar re-render.
     })
   }
-  const handleAdd = () => { setCurrentPage({ churchId: UserHelper.currentChurch.id, lastModified: new Date(), name: "" }) }
+  const handleAdd = () => { setCurrentPage({ churchId: UserHelper.currentUserChurch.church.id, lastModified: new Date(), name: "" }) }
   const handleEdit = (page: PageInterface) => { loadPage(page.id); }
 
   React.useEffect(() => { loadData(); }, []);
