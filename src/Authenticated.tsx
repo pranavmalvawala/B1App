@@ -12,6 +12,7 @@ import { BiblePage } from "./bible/BiblePage"
 import { FormPage } from "./form/FormPage";
 import { LessonsPage } from "./lessons/LessonsPage";
 import { VotdPage } from "./votd/VotdPage";
+import { GroupsPage } from "./groups/GroupsPage";
 import { Box } from "@mui/material";
 import { Wrapper } from "./components/Wrapper";
 
@@ -35,6 +36,7 @@ export const Authenticated = () => {
           <Route path="/votd" element={<VotdPage />} />
           <Route path="/url/:id" element={<UrlPage />} />
           <Route path="/forms/:id" element={<FormPage />} />
+          <Route path="/groups" element={<GroupsPage />} />
           <Route path="/" element={<Navigate to={firstTabRoute} />} />
         </Routes>
       </Wrapper>

@@ -14,6 +14,7 @@ import { LessonsPage } from "./lessons/LessonsPage";
 import { VotdPage } from "./votd/VotdPage";
 import { Wrapper } from "./components/Wrapper";
 import { Box } from "@mui/material";
+import { GroupsPage } from "./groups/GroupsPage";
 export const Unauthenticated = () => {
   let firstTabRoute = ConfigHelper.getFirstRoute()
   if (firstTabRoute === "/") firstTabRoute = "/bible";
@@ -33,6 +34,7 @@ export const Unauthenticated = () => {
           <Route path="/votd" element={<VotdPage />} />
           <Route path="/url/:id" element={<UrlPage />} />
           <Route path="/forms/:id" element={<FormPage />} />
+          <Route path="/groups" element={<GroupsPage />} />
           <Route path="/" element={<Navigate to={firstTabRoute} />} />
         </Routes>
       </Wrapper>

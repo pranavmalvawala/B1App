@@ -63,6 +63,8 @@ export const Wrapper: React.FC<Props> = props => {
     }
   })
 
+  //tabs.push(<NavItem key="/groups" url="/groups" label="My Groups" icon="groups" selected={selectedTab === "groups"} />)
+
   if (UserHelper.checkAccess(Permissions.b1Api.settings.edit)) tabs.push(<NavItem key="/admin/settings" url="/admin/settings" label="Settings" icon="settings" />)
 
   const navContent = <><List component="nav" sx={Themes.NavBarStyle}>{tabs}</List></>
