@@ -15,6 +15,7 @@ import { VotdPage } from "./votd/VotdPage";
 import { GroupsPage } from "./groups/GroupsPage";
 import { Box } from "@mui/material";
 import { Wrapper } from "./components/Wrapper";
+import { GroupPage } from "./groups/GroupPage";
 
 export const Authenticated = () => {
   let firstTabRoute = ConfigHelper.getFirstRoute();
@@ -37,6 +38,7 @@ export const Authenticated = () => {
           <Route path="/url/:id" element={<UrlPage />} />
           <Route path="/forms/:id" element={<FormPage />} />
           <Route path="/groups" element={<GroupsPage />} />
+          <Route path="/groups/:id" element={<GroupPage />} />
           <Route path="/" element={<Navigate to={firstTabRoute} />} />
         </Routes>
       </Wrapper>
