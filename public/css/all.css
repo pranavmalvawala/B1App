@@ -602,6 +602,20 @@ button.datetime-local-datepicker-button {
   border-radius: 5px;
 }
 
+#smallPeopleTable img {
+  width: 48px;
+  height: 36px;
+  border-radius: 3px;
+}
+
+#smallPeopleTable td {
+  vertical-align: middle;
+}
+
+#smallPeopleTable td:nth-child(2) {
+  width: 80%;
+}
+
 #peopleTable img {
   width: 60px;
   height: 45px;
