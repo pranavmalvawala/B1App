@@ -48,7 +48,9 @@ export const TabEdit: React.FC<Props> = (props) => {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => {
+    console.log("handlechange")
     const val = e.target.value;
+    console.log(val);
     let t = { ...currentTab };
     switch (e.target.name) {
       case "text": t.text = val; break;
@@ -134,6 +136,11 @@ export const TabEdit: React.FC<Props> = (props) => {
   else return (
     <>
       <InputBox headerIcon="folder" headerText="Edit Tab" saveFunction={handleSave} cancelFunction={handleCancel} deleteFunction={checkDelete()}>
+        <Typography sx={{ marginTop: 2, marginBottom: 1 }}>Tab Preview:</Typography>
+        <div>
+          {getPreview()}
+          <Button onClick={() => { setShowLibrary(true) }}>Change Image</Button>
+        </div>
         <Stack direction="row" pt={2}>
           <TextField fullWidth margin="none" label="Text" name="text" type="text" value={currentTab?.text || ""} onChange={handleChange} InputProps={{
             endAdornment: <div className="input-group-append">
@@ -152,17 +159,14 @@ export const TabEdit: React.FC<Props> = (props) => {
             <MenuItem value="stream" disabled={isDisabled("stream")}>Live Stream</MenuItem>
             <MenuItem value="lessons" disabled={isDisabled("lessons")}>Lessons.church</MenuItem>
             <MenuItem value="votd" disabled={isDisabled("votd")}>Verse of the Day</MenuItem>
+            <MenuItem value="groups" disabled={isDisabled("groups")}>My Groups</MenuItem>
             <MenuItem value="url">External Url</MenuItem>
             <MenuItem value="page">Page</MenuItem>
           </Select>
         </FormControl>
         {getUrl()}
         {getPage()}
-        <Typography sx={{ marginTop: 2, marginBottom: 1 }}>Tab Preview:</Typography>
-        <div>
-          {getPreview()}
-          <Button onClick={() => { setShowLibrary(true) }}>Change Image</Button>
-        </div>
+
         <Dialog open={isModalOpen}>
           <SearchIcons onSelect={onSelect} />
         </Dialog>
