@@ -4,6 +4,7 @@ import { PageInterface, UserHelper, EnvironmentHelper } from ".";
 import { FormControl, InputLabel, Select, SelectChangeEvent, TextField, MenuItem, Stack, Icon, Button, Dialog, Typography } from "@mui/material";
 import SearchIcons from "./../../../appBase/components/material/iconpicker/IconPicker";
 import { ImageLibrary } from "./ImageLibrary";
+import { GalleryModal } from "../../../appBase/components/gallery/GalleryModal";
 
 interface Props { currentTab: LinkInterface, updatedFunction?: () => void }
 
@@ -106,13 +107,15 @@ export const TabEdit: React.FC<Props> = (props) => {
     return false
   }
 
-  const handleOnUpdate = (dataUrl: string) => {
+  const handlePhotoSelected = (image: string) => {
     const updatedTab = { ...currentTab };
-    updatedTab.photo = dataUrl;
+    updatedTab.photo = image;
 
     setCurrentTab(updatedTab);
     setShowLibrary(false);
   }
+
+
 
   React.useEffect(() => { setCurrentTab(props.currentTab); }, [props.currentTab]);
 
@@ -171,7 +174,7 @@ export const TabEdit: React.FC<Props> = (props) => {
           <SearchIcons onSelect={onSelect} />
         </Dialog>
       </InputBox>
-      {showLibrary && (<ImageLibrary onUpdate={handleOnUpdate} onCancel={() => setShowLibrary(false)} imageUrl={imageUrl} />)}
+      {showLibrary && (<GalleryModal onClose={() => setShowLibrary(false)} onSelect={handlePhotoSelected} aspectRatio={4} />)}
 
     </>
   );

@@ -12,27 +12,20 @@ export function GroupsPage() {
     ApiHelper.get("/groups/my", "MembershipApi").then(data => setGroups(data));
   }
 
-  const getGroupButton = (group: GroupInterface) => {
-    //const el = document.getElementById("tabType");
-    //let width = el?.offsetWidth || 400;
-    //if (width > 400) width = 400;
-    //const height = width / 4;
-
-    return (
-      <Grid item md={4} xs={12}>
-        <Link to={"/groups/" + group.id}>
-          <div style={{ backgroundColor: "#000000", width: "100%", aspectRatio: "2" }}>
-            <div style={{ position: "relative" }}>
-              <div style={{ textAlign: "center", position: "absolute", zIndex: 9999, width: "100%", aspectRatio: "2", paddingTop: 60 }}>
-                <Typography sx={{ fontSize: 34, color: "#FFFFFF" }} style={{ color: "#FFF" }}>{group.name}</Typography>
-              </div>
+  const getGroupButton = (group: GroupInterface) => (
+    <Grid item md={4} xs={12}>
+      <Link to={"/groups/" + group.id}>
+        <div style={{ backgroundColor: "#000000", width: "100%", aspectRatio: "4" }}>
+          <div style={{ position: "relative" }}>
+            <div style={{ textAlign: "center", position: "absolute", zIndex: 9999, width: "100%", aspectRatio: "4", paddingTop: 30 }}>
+              <Typography sx={{ fontSize: 34, color: "#FFFFFF" }} style={{ color: "#FFF" }}>{group.name}</Typography>
             </div>
-            {group.photoUrl && <img id="tabImage" src={group.photoUrl} alt="tab" style={{ cursor: "pointer", opacity: 0.7 }} />}
           </div>
-        </Link>
-      </Grid>
-    )
-  }
+          {group.photoUrl && <img id="tabImage" src={group.photoUrl} alt="tab" style={{ cursor: "pointer", opacity: 0.7, width: "100%" }} />}
+        </div>
+      </Link>
+    </Grid>
+  )
 
   const getGroups = () => {
     if (!groups) return <Loading />
