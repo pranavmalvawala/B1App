@@ -3,7 +3,6 @@ import { InputBox, LinkInterface, ApiHelper, UniqueIdHelper, ConfigHelper } from
 import { PageInterface, UserHelper, EnvironmentHelper } from ".";
 import { FormControl, InputLabel, Select, SelectChangeEvent, TextField, MenuItem, Stack, Icon, Button, Dialog, Typography } from "@mui/material";
 import SearchIcons from "./../../../appBase/components/material/iconpicker/IconPicker";
-import { ImageLibrary } from "./ImageLibrary";
 import { GalleryModal } from "../../../appBase/components/gallery/GalleryModal";
 
 interface Props { currentTab: LinkInterface, updatedFunction?: () => void }
@@ -114,8 +113,6 @@ export const TabEdit: React.FC<Props> = (props) => {
     setCurrentTab(updatedTab);
     setShowLibrary(false);
   }
-
-
 
   React.useEffect(() => { setCurrentTab(props.currentTab); }, [props.currentTab]);
 
