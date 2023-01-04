@@ -5,10 +5,12 @@ import { Conversations } from "../appBase/components/notes/Conversations";
 import { GroupInterface } from "../appBase/interfaces";
 import { Loading } from "../components";
 import { ApiHelper, UserHelper } from "../helpers";
+import UserContext from "../UserContext";
 
 export function GroupPage() {
   const params = useParams();
   const [group, setGroup] = React.useState<GroupInterface>(null);
+  const context = React.useContext(UserContext);
 
   const loadData = () => {
     ApiHelper.get("/groups/" + params.id, "MembershipApi").then(data => setGroup(data));
@@ -23,7 +25,7 @@ export function GroupPage() {
       <h1>{group.name}</h1>
       {group.photoUrl && <img id="tabImage" src={group.photoUrl} alt={group.name} style={{ maxHeight: 300 }} />}
       <MarkdownPreview value={group.about} />
-      <Conversations contentType="group" contentId={group.id} groupId={group.id} />
+      <Conversations context={context} contentType="group" contentId={group.id} groupId={group.id} />
     </>
   )
 }
